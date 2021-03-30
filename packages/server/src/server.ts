@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
                 'object-src': ["'none'"],
                 'style-src': ["'self'", 'fonts.googleapis.com'],
                 'style-src-elem': ["'self'", 'fonts.googleapis.com'],
-                'connect-src': ["'self'", "https://*"],
+                'connect-src': ["'self'", 'https://*'],
             },
         },
     })
@@ -48,7 +48,7 @@ fastify.get('/api/v1/update', async (req, res) => {
     const client = await fastify.pg.connect()
 
     let sortBy: string
-    switch(req.query.sort) {
+    switch (req.query.sort) {
         case 'day': {
             sortBy = 'daily_experience'
             break
@@ -68,7 +68,7 @@ fastify.get('/api/v1/update', async (req, res) => {
     }
 
     let sortAsc: string
-    switch(req.query.asc) {
+    switch (req.query.asc) {
         case 'true': {
             sortAsc = 'ASC'
             break

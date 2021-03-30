@@ -2,7 +2,6 @@ import { Pool } from 'pg'
 const types = require('pg').types
 require('dotenv').config()
 
-
 export const pool: Pool = new Pool({
     user: process.env.NODE_ENV === 'production' ? process.env.PGUSER : 'postgres',
     host: process.env.NODE_ENV === 'production' ? process.env.PGHOST : 'localhost',

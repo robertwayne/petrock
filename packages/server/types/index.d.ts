@@ -4,6 +4,6 @@ type Player = {
 }
 
 type RawPlayerData = {
-    username: string,
+    username: string
     experience: number
 }

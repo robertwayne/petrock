@@ -25,5 +25,5 @@
         // "allowSyntheticDefaultImports": true,
         // "importsNotUsedAsValues": "error"
     },
-    "extends": "../../tsconfig.json", 
+    "extends": "../../tsconfig.json"
 }

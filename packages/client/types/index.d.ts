@@ -3,7 +3,7 @@ interface Player extends RawPlayerData {
 }
 
 type RawPlayerData = {
-    username: string,
+    username: string
     total_experience: number
     daily_experience: number
     weekly_experience: number
