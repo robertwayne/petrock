@@ -7,6 +7,7 @@ import * as fastifyPostgres from 'fastify-postgres'
 import * as path from 'path'
 import { DB_CONNECTION_STRING } from './db'
 
+// @ts-ignore
 const app = fastify({ logger: true })
 
 app.register(fastifyStatic, {
