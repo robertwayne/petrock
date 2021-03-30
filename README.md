@@ -1,5 +1,4 @@
-# PetRock.gg
-## [Website](https://petrock.gg)
+# PetRock.gg(https://petrock.gg)
 
 Leaderboard analytics for [https://retro-mmo.com](https://retro-mmo.com). See various
 current and historical data points such as:
@@ -8,13 +7,6 @@ current and historical data points such as:
 - Experience gains per day/week/month
 - Highest historial movement amounts
 - Quick view how much until next place
-  
-
-## Todo
-
-- Design a header/logo
-- Add dark/light swappable themes (default to system theme)
-- Add hover to show player details (recent gains, losses, records)
 
 
 ## Tech Stack
