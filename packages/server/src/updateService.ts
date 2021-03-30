@@ -45,19 +45,6 @@ const updater = async (): Promise<void> => {
 
             current_leaderboards[index] = _player
 
-            // const row = await pool.query(
-            //     `
-            //     DO $$
-            //     BEGIN
-            //         IF NOT EXISTS (SELECT '${_player.username}' FROM players) THEN
-            //             INSERT INTO players (username)
-            //             VALUES ('${_player.username}');
-            //         END IF;
-            //     END $$;
-            
-            //     `
-            // )
-
             const row = await pool.query(
                 `
                 
@@ -83,50 +70,7 @@ const updater = async (): Promise<void> => {
 }
 
 const resetDaily = async (pool: Pool): Promise<void> => {
-    console.log('Undefined.')
-}
-
-const updaterv2 = async (): Promise<void> => {
-    pool.connect()
-
-    const response = await nodeFetch('https://play.retro-mmo.com/leaderboards.json', {})
-    const data: Array<RawPlayerData> = await response.json()
-
-    let rows = []
-
-    for (const [index, player] of Object.entries(data)) {
-        let _player: Player = {
-            username: player.username,
-            experience: Number(player.experience),
-        }
-
-        let experience_diff: number = 0
-        if (current_leaderboards[index] != null) {
-            let tmp_player: Player = current_leaderboards[index]
-            experience_diff = _player.experience - tmp_player.experience
-            if (experience_diff !== 0) {
-                console.log(`${_player.username} gained ${experience_diff} experience.`)
-            }
-        }
-
-        current_leaderboards[index] = _player
-
-        const row = await pool.query(
-            `
-                DO
-                $do$
-                BEGIN
-                    IF NOT EXISTS (SELECT '${_player.username}' FROM players) THEN
-                        INSERT INTO players (username)
-                        VALUES ('${_player.username}');
-                    END IF;
-                END
-                $do$
-                `
-        )
-
-        rows.push(row)
-    }
+    console.log('Not implemented.')
 }
 
 updater()
