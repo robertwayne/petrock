@@ -162,10 +162,6 @@
         padding: 3% 0;
     }
 
-    #top-scores > span {
-        padding: 0 7%;
-    }
-
     #place-1 {
         font-weight: bold;
         color: #d8b041;
