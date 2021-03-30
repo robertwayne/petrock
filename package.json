@@ -1,15 +1,15 @@
 {
-    "name": "petrockgg",
+    "name": "petrock",
     "version": "0.1.0",
-    "description": "Monorepo for the PetRock client & server.",
+    "description": "Leaderboard analytics & game database for RetroMMO.",
     "author": "Rob Wagner <rob@robwagner.dev",
     "license": "MIT",
     "private": true,
     "scripts": {
-        "start": "yarn workspace @petrockgg/client start",
-        "build": "yarn workspace @petrockgg/client build",
-        "serve": "yarn workspace @petrockgg/server dev",
-        "updater-service": "yarn workspace @petrockgg/server update-service",
+        "start": "yarn workspace @petrock/client start",
+        "build": "yarn workspace @petrock/client build",
+        "serve": "yarn workspace @petrock/server dev",
+        "updater-service": "yarn workspace @petrock/server update-service",
         "boostrap": "lerna bootstrap",
         "update": "yarn upgrade-interactive",
         "format": "prettier --write packages/"

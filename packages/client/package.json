@@ -1,7 +1,7 @@
 {
-    "name": "@petrockgg/client",
+    "name": "@petrock/client",
     "version": "0.1.0",
-    "description": "Leaderboard analytics for RetroMMO.",
+    "description": "Leaderboard analytics & game database for RetroMMO.",
     "author": "Rob Wagner <rob@robwagner.dev>",
     "license": "MIT",
     "private": true,
