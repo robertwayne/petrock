@@ -64,7 +64,7 @@ const updater = async (): Promise<void> => {
 
             rows.push(row)
         }
-    }, 10000)
+    }, Number(process.env.TICK_RATE))
 }
 
 updater()
