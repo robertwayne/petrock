@@ -2,7 +2,7 @@
 
 ### This is a work in progress. Code is a bit messy and there will be a lot of refactoring
 
-Leaderboard analytics & game database for [https://retro-mmo.com](https://retro-mmo.com). See various
+Leaderboard analytics & game database for **[https://retro-mmo.com](https://retro-mmo.com)**. See various
 current and historical data points such as:
 
 - Current standings with latest player movement (increasess/decreases)
