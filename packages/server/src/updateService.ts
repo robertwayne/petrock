@@ -1,5 +1,4 @@
 import nodeFetch from 'node-fetch'
-import { Pool } from 'pg'
 import { pool } from './db'
 
 // TODO: figure out why index.d.ts isn't being read from here
@@ -13,7 +12,7 @@ type RawPlayerData = {
     experience: number
 }
 
-let current_leaderboards: Array<Player> = []
+const current_leaderboards: Array<Player> = []
 
 const updater = async (): Promise<void> => {
     pool.connect()
@@ -22,18 +21,18 @@ const updater = async (): Promise<void> => {
         const response = await nodeFetch('https://play.retro-mmo.com/leaderboards.json', {})
         const data: Array<RawPlayerData> = await response.json()
 
-        let rows = []
+        const rows = []
 
         for (const [index, player] of Object.entries(data)) {
-            let _player: Player = {
+            const _player: Player = {
                 username: player.username,
                 experience: Number(player.experience),
             }
 
-            let experience_diff: number = 0
+            let experience_diff = 0
             if (current_leaderboards[index] != null) {
-                let tmp_player: Player = current_leaderboards[index]
-                let time = new Date().toLocaleTimeString([], {
+                const tmp_player: Player = current_leaderboards[index]
+                const time = new Date().toLocaleTimeString([], {
                     hour: '2-digit',
                     minute: '2-digit',
                 })
@@ -47,7 +46,6 @@ const updater = async (): Promise<void> => {
 
             const row = await pool.query(
                 `
-                
                 INSERT INTO players (username)
                 VALUES ('${_player.username}')
                 ON CONFLICT ON CONSTRAINT players_pkey
@@ -67,10 +65,6 @@ const updater = async (): Promise<void> => {
             rows.push(row)
         }
     }, 10000)
-}
-
-const resetDaily = async (pool: Pool): Promise<void> => {
-    console.log('Not implemented.')
 }
 
 updater()

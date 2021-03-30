@@ -1,16 +1,20 @@
-const fastify = require('fastify')({ logger: true })
-const path = require('path')
-const db = require('./db')
-const nodeFetch = require('node-fetch')
+import * as fastify from 'fastify'
+import { FastifyReply, FastifyRequest } from 'fastify'
+import * as fastifyStatic from 'fastify-static'
+import * as fastifyCors from 'fastify-cors'
+import * as fastifyHelmet from 'fastify-helmet'
+import * as fastifyPostgres from 'fastify-postgres'
+import * as path from 'path'
+import { DB_CONNECTION_STRING } from './db'
 
-let current_standings = []
+const app = fastify({ logger: true })
 
-fastify.register(require('fastify-static'), {
+app.register(fastifyStatic, {
     root: path.resolve('../client/build'),
 })
 
 if (process.env.NODE_ENV === 'development') {
-    fastify.register(require('fastify-helmet'), {
+    app.register(fastifyHelmet, {
         contentSecurityPolicy: {
             directives: {
                 'default-src': '*',
@@ -18,7 +22,7 @@ if (process.env.NODE_ENV === 'development') {
         },
     })
 } else {
-    fastify.register(require('fastify-helmet'), {
+    app.register(fastifyHelmet, {
         contentSecurityPolicy: {
             directives: {
                 'default-src': ["'self'"],
@@ -32,73 +36,79 @@ if (process.env.NODE_ENV === 'development') {
     })
 }
 
-fastify.register(require('fastify-cors'), {
+app.register(fastifyCors, {
     origin: 'https://petrock.gg',
 })
 
-fastify.register(require('fastify-postgres'), {
-    connectionString: db.DB_CONNECTION_STRING,
+app.register(fastifyPostgres, {
+    connectionString: DB_CONNECTION_STRING,
 })
 
-fastify.get('/', async (req, res) => {
-    return res.sendFile('index.html')
-})
-
-fastify.get('/api/v1/update', async (req, res) => {
-    const client = await fastify.pg.connect()
-
-    let sortBy: string
-    switch (req.query.sort) {
-        case 'day': {
-            sortBy = 'daily_experience'
-            break
-        }
-        case 'week': {
-            sortBy = 'weekly_experience'
-            break
-        }
-        case 'month': {
-            sortBy = 'monthly_experience'
-            break
-        }
-        default: {
-            sortBy = 'total_experience'
-            break
-        }
+app.get(
+    '/',
+    async (_: FastifyRequest, res: FastifyReply): Promise<FastifyReply> => {
+        return res.sendFile('index.html')
     }
+)
 
-    let sortAsc: string
-    switch (req.query.asc) {
-        case 'true': {
-            sortAsc = 'ASC'
-            break
-        }
-        default: {
-            sortAsc = 'DESC'
-            break
-        }
-    }
+app.get(
+    '/api/v1/update',
+    async (req: FastifyRequest, _: FastifyReply): Promise<FastifyReply> => {
+        const client = await app.pg.connect()
 
-    const { rows } = await client.query(
-        `
+        let sortBy: string
+        switch (req.query.sort) {
+            case 'day': {
+                sortBy = 'daily_experience'
+                break
+            }
+            case 'week': {
+                sortBy = 'weekly_experience'
+                break
+            }
+            case 'month': {
+                sortBy = 'monthly_experience'
+                break
+            }
+            default: {
+                sortBy = 'total_experience'
+                break
+            }
+        }
+
+        let sortAsc: string
+        switch (req.query.asc) {
+            case 'true': {
+                sortAsc = 'ASC'
+                break
+            }
+            default: {
+                sortAsc = 'DESC'
+                break
+            }
+        }
+
+        const { rows } = await client.query(
+            `
         SELECT p.username, lb.total_experience, lb.daily_experience, lb.weekly_experience, lb.monthly_experience
         FROM leaderboards lb
         INNER JOIN players p ON (lb.player = p.username)
         ORDER BY lb.${sortBy} ${sortAsc};
         `
-    )
+        )
 
-    client.release()
+        client.release()
 
-    return rows
-})
+        return rows
+    }
+)
 
 const start = async () => {
     try {
-        await fastify.listen(3000)
-        fastify.log.info(`Server listening on ${fastify.server.address().port}`)
+        await app.listen(3000)
+        app.log.info(`Server listening on ${app.server.address().port}`)
     } catch (err) {
-        fastify.log.error(err)
+        app.log.error(err)
         process.exit(1)
     }
 }

@@ -1,6 +1,6 @@
 import { Pool } from 'pg'
-const types = require('pg').types
-require('dotenv').config()
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 export const pool: Pool = new Pool({
     user: process.env.NODE_ENV === 'production' ? process.env.PGUSER : 'postgres',
@@ -10,4 +10,4 @@ export const pool: Pool = new Pool({
     port: process.env.NODE_ENV === 'production' ? Number(process.env.PGPORT) : 5432,
 })
 
-export const DB_CONNECTION_STRING: string = `postgresql://postgres:postgres@localhost:5432/postgres`
+export const DB_CONNECTION_STRING = `postgresql://postgres:postgres@localhost:5432/postgres`
