@@ -82,7 +82,7 @@ fastify.get('/api/v1/update', async (req, res) => {
     const { rows } = await client.query(
         `
         SELECT p.username, lb.total_experience, lb.daily_experience, lb.weekly_experience, lb.monthly_experience
-        FROM leaderboardsv2 lb
+        FROM leaderboards lb
         INNER JOIN players p ON (lb.player = p.username)
         ORDER BY lb.${sortBy} ${sortAsc};
         `

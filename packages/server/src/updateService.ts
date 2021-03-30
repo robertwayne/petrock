@@ -66,14 +66,14 @@ const updater = async (): Promise<void> => {
                 ON CONFLICT ON CONSTRAINT players_pkey
                 DO NOTHING;
 
-                INSERT INTO leaderboardsv2 (player, total_experience, daily_experience, weekly_experience, monthly_experience)
+                INSERT INTO leaderboards (player, total_experience, daily_experience, weekly_experience, monthly_experience)
                 VALUES ('${_player.username}', '${_player.experience}', 0, 0, 0)
-                ON CONFLICT ON CONSTRAINT leaderboardsv2_player_key
+                ON CONFLICT ON CONSTRAINT leaderboards_player_key
                 DO UPDATE 
                 SET
                     total_experience = '${_player.experience}',
-                    daily_experience = COALESCE(leaderboardsv2.daily_experience + '${experience_diff}')
-                WHERE leaderboardsv2.player = '${_player.username}';
+                    daily_experience = COALESCE(leaderboards.daily_experience + '${experience_diff}')
+                WHERE leaderboards.player = '${_player.username}';
                 `
             )
 
