@@ -6,19 +6,23 @@
 </script>
 
 <div class="container">
-    <Nav />
+    <nav>
+        <Nav />
+    </nav>
     <header />
     <main>
         <Leaderboard />
     </main>
-    <Footer />
+    <footer>
+        <Footer />
+    </footer>
 </div>
 
 <style>
     :global(*, html, body) {
         margin: 0;
         box-sizing: border-box;
-        height: 100%;
+        overflow-x: hidden;
     }
 
     :global(body) {
@@ -35,15 +39,12 @@
         flex-direction: column;
         justify-content: center;
         height: max-content;
-        width: 100%;
-        overflow-x: auto;
-        overflow-y: auto;
+        width: 100vw;
     }
 
     @media (min-width: 720px) {
         :global(main) {
             padding: 0 10%;
-            overflow-x: hidden;
         }
     }
 

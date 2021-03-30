@@ -1,23 +1,15 @@
-<footer>
-    <div id="wrapper">
-        <div>
-            <a href="https://github.com/robertwayne/petrock">GitHub</a>
-            -
-            <a href="https://retro-mmo.com">RetroMMO</a>
-        </div>
-        <div>(c) 2021 <span id="name">&nbsp;Rob Wagner</span></div>
-        <div id="notice">petrock.gg is not affiliated with RetroMMO.</div>
+<div id="wrapper">
+    <div>
+        <a href="https://github.com/robertwayne/petrock">GitHub</a>
+        -
+        <a href="https://retro-mmo.com">RetroMMO</a>
     </div>
-</footer>
+    <div>(c) 2021 <span id="name">&nbsp;Rob Wagner</span></div>
+    <div id="notice">petrock.gg is not affiliated with RetroMMO.</div>
+</div>
 
 <style>
-    footer {
-        background-color: var(--theme-primary-shadow);
-    }
-
-
-
-    footer div {
+    #wrapper div {
         display: flex;
         justify-content: center;
     }
@@ -34,8 +26,11 @@
     }
 
     #wrapper {
+        grid-area: footer;
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        background-color: var(--theme-primary-shadow);
         padding: 20px 0;
     }
 
