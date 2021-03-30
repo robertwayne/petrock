@@ -1,4 +1,4 @@
-# PetRock.gg(https://petrock.gg)
+# [PetRock.gg](https://petrock.gg)
 
 Leaderboard analytics for [https://retro-mmo.com](https://retro-mmo.com). See various
 current and historical data points such as:
