@@ -26,14 +26,14 @@ if (process.env.NODE_ENV === 'development') {
                 'object-src': ["'none'"],
                 'style-src': ["'self'", 'fonts.googleapis.com'],
                 'style-src-elem': ["'self'", 'fonts.googleapis.com'],
-                'connect-src': ["'self'"],
+                'connect-src': ["'self'", "https://*"],
             },
         },
     })
 }
 
 fastify.register(require('fastify-cors'), {
-    origin: '*',
+    origin: 'https://petrock.gg',
 })
 
 fastify.register(require('fastify-postgres'), {
