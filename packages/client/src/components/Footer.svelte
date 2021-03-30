@@ -1,7 +1,7 @@
 <footer>
     <div id="wrapper">
         <div>
-            <a href="https://github.com/robertwayne/petrockgg">GitHub</a>
+            <a href="https://github.com/robertwayne/petrock">GitHub</a>
             -
             <a href="https://retro-mmo.com">RetroMMO</a>
         </div>
