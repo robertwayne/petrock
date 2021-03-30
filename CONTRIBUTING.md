@@ -1,4 +1,4 @@
-# Contributing to PetRockGG
+# Contributing to PetRock
 I'm open to all input and help! Please open an issue to discuss any changes to the codebase beforehand. This includes
 bugs, general refactoring, performance changes, documentation updates, new examples, etc.
 
@@ -8,7 +8,7 @@ bugs, general refactoring, performance changes, documentation updates, new examp
 3. Code should formatted with `yarn format`.
 4. Open your PR!
 
-## Report bugs using Github's [issues](https://github.com/robertwayne/petrockgg/issues)
+## Report bugs using Github's [issues](https://github.com/robertwayne/petrock/issues)
 Please include, when you can:
 - A quick summary
 - Specific steps to reproduce
