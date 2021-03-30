@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<defs>
+<font id="icofont" horiz-adv-x="1000" >
+<font-face font-family="IcoFont" font-weight="400" font-style="Regular" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="caret-down" horiz-adv-x="1000" unicode="&#xea67;" d="M534 213l255 254c19 19 13 35-14 35h-550c-27 0-33-16-14-35l255-254c19-19 49-19 68 0z" />
+<glyph glyph-name="caret-up" horiz-adv-x="1000" unicode="&#xea6a;" d="M534 487l255-255c19-18 13-34-14-34h-550c-27 0-33 15-14 34l255 255c19 19 49 19 68 0z" />
+</font>
+</defs>
+</svg>

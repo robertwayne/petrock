@@ -1,0 +1,33 @@
+{
+    "name": "@petrockgg/server",
+    "version": "0.1.0",
+    "description": "Leaderboard analytics for RetroMMO.",
+    "author": "Rob Wagner <rob@robwagner.dev>",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "dev": "tsnd --respawn ./src/server.ts",
+        "start": "tsnd ./src/server.ts",
+        "update-service": "tsnd ./src/updateService.ts"
+    },
+    "dependencies": {
+        "@types/node-fetch": "^2.5.8",
+        "@types/pg": "^7.14.11",
+        "dotenv": "^8.2.0",
+        "fastify": "3.14.1",
+        "fastify-cors": "5.2.0",
+        "fastify-esso": "1.2.2",
+        "fastify-formbody": "5.0.0",
+        "fastify-helmet": "5.3.1",
+        "fastify-postgres": "3.5.0",
+        "fastify-static": "4.0.1",
+        "node-fetch": "^2.6.1",
+        "node-postgres": "^0.6.2",
+        "pg": "8.5.1"
+    },
+    "devDependencies": {
+        "@types/node": "14.14.37",
+        "ts-node-dev": "1.1.6",
+        "typescript": "4.2.3"
+    }
+}

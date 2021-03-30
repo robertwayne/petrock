@@ -1,0 +1,25 @@
+{
+    "name": "petrockgg",
+    "version": "0.1.0",
+    "description": "Monorepo for the PetRock client & server.",
+    "author": "Rob Wagner <rob@robwagner.dev",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "start": "yarn workspace @petrockgg/client start",
+        "build": "yarn workspace @petrockgg/client build",
+        "serve": "yarn workspace @petrockgg/server dev",
+        "updater-service": "yarn workspace @petrockgg/server update-service",
+        "boostrap": "lerna bootstrap",
+        "update": "yarn upgrade-interactive",
+        "format": "prettier --write packages/"
+    },
+    "devDependencies": {
+        "@types/prettier": "^2.2.1",
+        "lerna": "4.0.0",
+        "prettier": "^2.2.1"
+    },
+    "workspaces": [
+        "packages/*"
+    ]
+}
