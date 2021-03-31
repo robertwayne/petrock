@@ -9,7 +9,7 @@ import { DB_CONNECTION_STRING } from './db'
 import type { Query } from '../../shared/types'
 
 // @ts-ignore
-const app = fastify({ logger: true })
+const app: FastifyInstance = fastify.fastify({ logger: true })
 
 app.register(fastifyStatic, {
     root: path.resolve('../client/build'),
