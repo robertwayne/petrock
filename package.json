@@ -10,6 +10,7 @@
         "build": "yarn workspace @petrock/client build",
         "serve": "yarn workspace @petrock/server dev",
         "updater-service": "yarn workspace @petrock/server update-service",
+        "lint": "yarn workspace @petrock/client lint && yarn workspace @petrock/server lint",
         "boostrap": "lerna bootstrap",
         "update": "yarn upgrade-interactive",
         "format": "prettier --write packages/"
