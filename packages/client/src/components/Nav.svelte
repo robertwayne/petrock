@@ -3,8 +3,8 @@
 
 <nav>
     <div id="wrapper">
-        <div id="first">Pet<span class="logo-highlight">Rock</span></div>
-        <div id="second">
+        <div id="left"><a href="/">Pet<span class="logo-highlight">Rock</span></a></div>
+        <div id="right">
             <ul id="main-menu">
                 <li class="menu">
                     <a href="#">Tools<i class="icofont-caret-down" /></a>
@@ -31,7 +31,7 @@
 
 <style>
     #main-menu {
-        padding-right: 2%;
+        padding-right: 20px;
     }
 
     .menu {
@@ -74,7 +74,7 @@
             background: linear-gradient(15deg, var(--theme-primary) 28%, var(--theme-primary-shadow) 0);
         }
 
-        #first {
+        #left {
             font-size: 34pt;
             position: absolute;
             top: -3px;
@@ -86,7 +86,7 @@
             background: linear-gradient(15deg, var(--theme-primary) 22%, var(--theme-primary-shadow) 0);
         }
 
-        #first {
+        #left {
             font-size: 34pt;
             position: absolute;
             top: -3px;
@@ -98,7 +98,7 @@
             background: linear-gradient(15deg, var(--theme-primary) 15%, var(--theme-primary-shadow) 0);
         }
 
-        #first {
+        #left {
             font-size: 34pt;
             position: absolute;
             top: -3px;
@@ -111,7 +111,7 @@
         font-size: 14pt;
     }
 
-    #first {
+    #left {
         flex: 1;
         font-weight: bold;
         font-size: 22pt;
@@ -120,7 +120,11 @@
         height: max-content;
     }
 
-    #second {
+    #left a:hover {
+        color: inherit;
+    }
+
+    #right {
         display: flex;
         flex: 1;
         align-content: center;
@@ -143,12 +147,12 @@
     }
 
     a:hover i {
-        font-weight: bold;
+        /* font-weight: bold; */
         color: var(--theme-primary-accent);
     }
 
     i {
-        position: absolute;
+        position: inline-block;
         height: max-content;
         padding: 6px 3px;
         font-size: 14pt;
