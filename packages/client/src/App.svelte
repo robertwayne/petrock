@@ -22,6 +22,7 @@
     :global(*, html, body) {
         margin: 0;
         box-sizing: border-box;
+        overflow-y: auto;
         overflow-x: hidden;
     }
 
@@ -39,7 +40,6 @@
         flex-direction: column;
         justify-content: center;
         height: max-content;
-        width: 100vw;
     }
 
     @media (min-width: 720px) {

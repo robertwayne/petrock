@@ -152,7 +152,7 @@
     }
 
     .headers {
-        position: absolute;
+        position: relative;
         padding: 6px 4px;
     }
 
