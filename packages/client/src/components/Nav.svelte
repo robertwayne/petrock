@@ -30,12 +30,14 @@
 </nav>
 
 <style>
+
     #main-menu {
         padding-right: 20px;
     }
 
     .menu {
         padding: 0 30px;
+        overflow: hidden;
     }
 
     .dropdown {
@@ -58,12 +60,13 @@
 
     .menu:hover .dropdown {
         visibility: visible;
+        border: none;
     }
 
     nav {
         grid-area: nav;
         overflow: hidden;
-        visibility: hidden;
+        visibility: visible;
         padding: 3px 1%;
         background-color: var(--theme-primary-shadow);
     }
@@ -162,4 +165,5 @@
     a {
         text-decoration: none;
     }
+
 </style>
