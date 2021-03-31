@@ -1,8 +1,8 @@
 <div id="wrapper">
     <div>
-        <a href="https://github.com/robertwayne/petrock">GitHub</a>
+        <a href="https://github.com/robertwayne/petrock" target="_blank" rel="noopener">GitHub</a>
         -
-        <a href="https://retro-mmo.com">RetroMMO</a>
+        <a href="https://retro-mmo.com" target="_blank" rel=noopener>RetroMMO</a>
     </div>
     <div>(c) 2021 <span id="name">&nbsp;Rob Wagner</span></div>
     <div id="notice">petrock.gg is not affiliated with RetroMMO.</div>
