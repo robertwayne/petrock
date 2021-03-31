@@ -1,16 +1,6 @@
 import nodeFetch from 'node-fetch'
 import { pool } from './db'
-
-// TODO: figure out why index.d.ts isn't being read from here
-type Player = {
-    username: string
-    experience: number
-}
-
-type RawPlayerData = {
-    username: string
-    experience: number
-}
+import type { Player } from '../../shared/types'
 
 const current_leaderboards: Array<Player> = []
 
@@ -19,14 +9,14 @@ const updater = async (): Promise<void> => {
 
     setInterval(async () => {
         const response = await nodeFetch('https://play.retro-mmo.com/leaderboards.json', {})
-        const data: Array<RawPlayerData> = await response.json()
+        const data: Array<Player> = await response.json()
 
         const rows = []
 
         for (const [index, player] of Object.entries(data)) {
             const _player: Player = {
                 username: player.username,
-                experience: Number(player.experience),
+                total_experience: Number(player.total_experience),
             }
 
             let experience_diff = 0
@@ -36,7 +26,7 @@ const updater = async (): Promise<void> => {
                     hour: '2-digit',
                     minute: '2-digit',
                 })
-                experience_diff = _player.experience - tmp_player.experience
+                experience_diff = _player.total_experience - tmp_player.total_experience
                 if (experience_diff !== 0) {
                     console.log(`[${time}] ${_player.username} gained ${experience_diff} experience.`)
                 }
@@ -52,11 +42,11 @@ const updater = async (): Promise<void> => {
                 DO NOTHING;
 
                 INSERT INTO leaderboards (player, total_experience, daily_experience, weekly_experience, monthly_experience)
-                VALUES ('${_player.username}', '${_player.experience}', 0, 0, 0)
+                VALUES ('${_player.username}', '${_player.total_experience}', 0, 0, 0)
                 ON CONFLICT ON CONSTRAINT leaderboards_player_key
                 DO UPDATE 
                 SET
-                    total_experience = '${_player.experience}',
+                    total_experience = '${_player.total_experience}',
                     daily_experience = COALESCE(leaderboards.daily_experience + '${experience_diff}')
                 WHERE leaderboards.player = '${_player.username}';
                 `

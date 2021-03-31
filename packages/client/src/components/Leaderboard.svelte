@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
     import { leaderboard, sortBy, sortAsc, updateTimer } from '../stores'
     import { preloadData } from '../preload'
+    import type { RawPlayerData, Player } from '../../../shared/types'
 
     // we do this to avoid large CLS (Cumulative Layout Shift) issues on initial page load
     $leaderboard = preloadData

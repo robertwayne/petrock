@@ -6,7 +6,7 @@ import fastifyHelmet from 'fastify-helmet'
 import fastifyPostgres from 'fastify-postgres'
 import * as path from 'path'
 import { DB_CONNECTION_STRING } from './db'
-import { Query } from 'types'
+import type { Query } from '../../shared/types'
 
 // @ts-ignore
 const app = fastify({ logger: true })
