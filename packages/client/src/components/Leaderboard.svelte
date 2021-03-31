@@ -2,15 +2,16 @@
     import { onMount } from 'svelte'
     import { leaderboard, sortBy, sortAsc, updateTimer } from '../stores'
     import { preloadData } from '../preload'
-    import type { RawPlayerData, Player } from '../../../shared/types'
+    import type { Player } from '../../../shared/types'
+    import { tickRate, url } from '../constants'
 
     // we do this to avoid large CLS (Cumulative Layout Shift) issues on initial page load
     $leaderboard = preloadData
     $sortBy = 'total_experience'
 
     async function getLeaderboardData() {
-        const response: Response = await fetch(`http://localhost:3000/api/v1/update?sort=${$sortBy}&asc=${$sortAsc}`)
-        const data: Array<RawPlayerData> = await response.json()
+        const response: Response = await fetch(`${url}/api/v1/update?sort=${$sortBy}&asc=${$sortAsc}`)
+        const data: Array<Player> = await response.json()
 
         let _leaderboard: Array<Player> = []
         for (let i = 0; i < 100; i++) {
@@ -30,7 +31,7 @@
     onMount(
         async (): Promise<void> => {
             await getLeaderboardData()
-            $updateTimer = setInterval(getLeaderboardData, 1000)
+            $updateTimer = setInterval(getLeaderboardData, tickRate)
         }
     )
 
@@ -86,7 +87,7 @@
         $sortBy = column
         $sortAsc = !$sortAsc
         await getLeaderboardData()
-        $updateTimer = setInterval(getLeaderboardData, 1000)
+        $updateTimer = setInterval(getLeaderboardData, tickRate)
     }
 </script>
 
@@ -108,10 +109,10 @@
             <tr id="place-{String(player.place)}">
                 <td>{player.place}</td>
                 <td>{player.username}</td>
-                <td>{player.total_experience.toLocaleString()}</td>
-                <td>{player.daily_experience.toLocaleString()}</td>
-                <td>{player.weekly_experience.toLocaleString()}</td>
-                <td>{player.monthly_experience.toLocaleString()}</td>
+                <td>{player.total_experience?.toLocaleString()}</td>
+                <td>{player.daily_experience?.toLocaleString()}</td>
+                <td>{player.weekly_experience?.toLocaleString()}</td>
+                <td>{player.monthly_experience?.toLocaleString()}</td>
             </tr>
         {/each}
     </table>
