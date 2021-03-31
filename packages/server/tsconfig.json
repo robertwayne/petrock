@@ -6,7 +6,7 @@
         // "target": "esnext",
         // "moduleResolution": "node",
         // "jsx": "preserve",
-        "baseUrl": "./"
+        "baseUrl": "./",
         // /* paths - import rewriting/resolving */
         // "paths": {
         //     // If you configured any Snowpack aliases, add them here.
@@ -24,6 +24,7 @@
         // "useDefineForClassFields": true,
         // "allowSyntheticDefaultImports": true,
         // "importsNotUsedAsValues": "error"
+        "esModuleInterop": true
     },
     "extends": "../../tsconfig.json"
 }
