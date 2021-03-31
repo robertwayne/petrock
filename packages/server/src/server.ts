@@ -6,6 +6,7 @@ import * as fastifyHelmet from 'fastify-helmet'
 import * as fastifyPostgres from 'fastify-postgres'
 import * as path from 'path'
 import { DB_CONNECTION_STRING } from './db'
+import { Query } from 'types'
 
 // @ts-ignore
 const app = fastify({ logger: true })
@@ -45,6 +46,22 @@ app.register(fastifyPostgres, {
     connectionString: DB_CONNECTION_STRING,
 })
 
+const options: fastify.RouteShorthandOptions = {
+    schema: {
+        querystring: {
+            type: 'object',
+            properties: {
+                sort: {
+                    type: 'string',
+                },
+                asc: {
+                    type: 'string',
+                },
+            },
+        },
+    },
+}
+
 app.get(
     '/',
     async (_: FastifyRequest, res: FastifyReply): Promise<FastifyReply> => {
@@ -52,57 +69,54 @@ app.get(
     }
 )
 
-app.get(
-    '/api/v1/update',
-    async (req: FastifyRequest, _: FastifyReply): Promise<FastifyReply> => {
-        const client = await app.pg.connect()
+app.get<Query>('/api/v1/update', options, async (request, _) => {
+    const client = await app.pg.connect()
 
-        let sortBy: string
-        switch (req.query.sort) {
-            case 'day': {
-                sortBy = 'daily_experience'
-                break
-            }
-            case 'week': {
-                sortBy = 'weekly_experience'
-                break
-            }
-            case 'month': {
-                sortBy = 'monthly_experience'
-                break
-            }
-            default: {
-                sortBy = 'total_experience'
-                break
-            }
+    let sortBy: string
+    switch (request.query.sort) {
+        case 'day': {
+            sortBy = 'daily_experience'
+            break
         }
-
-        let sortAsc: string
-        switch (req.query.asc) {
-            case 'true': {
-                sortAsc = 'ASC'
-                break
-            }
-            default: {
-                sortAsc = 'DESC'
-                break
-            }
+        case 'week': {
+            sortBy = 'weekly_experience'
+            break
         }
+        case 'month': {
+            sortBy = 'monthly_experience'
+            break
+        }
+        default: {
+            sortBy = 'total_experience'
+            break
+        }
+    }
 
-        const { rows } = await client.query(
-            `
+    let sortAsc: string
+    switch (request.query.asc) {
+        case 'true': {
+            sortAsc = 'ASC'
+            break
+        }
+        default: {
+            sortAsc = 'DESC'
+            break
+        }
+    }
+
+    const { rows } = await client.query(
+        `
         SELECT p.username, lb.total_experience, lb.daily_experience, lb.weekly_experience, lb.monthly_experience
         FROM leaderboards lb
         INNER JOIN players p ON (lb.player = p.username)
         ORDER BY lb.${sortBy} ${sortAsc};
         `
-        )
+    )
 
-        client.release()
+    client.release()
 
-        return rows
-    }
-)
+    return rows
+})
 
 const start = async () => {
     try {

@@ -1,9 +1,16 @@
-type Player = {
+import { FastifyRequest } from 'fastify'
+
+export type Player = {
     username: string
     experience: number
 }
 
-type RawPlayerData = {
+export type RawPlayerData = {
     username: string
     experience: number
+}
+
+export interface Query {
+    sort?: string
+    asc?: string
 }
