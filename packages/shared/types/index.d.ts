@@ -11,3 +11,8 @@ interface Player {
     weekly_experience?: number
     monthly_experience?: number
 }
+
+interface RawPlayerData {
+    username: string
+    experience: number
+}

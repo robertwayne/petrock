@@ -1,6 +1,6 @@
 import nodeFetch from 'node-fetch'
 import { pool } from './db'
-import type { Player } from '../../shared/types'
+import type { Player, RawPlayerData } from '../../shared/types'
 
 const current_leaderboards: Array<Player> = []
 
@@ -9,14 +9,14 @@ const updater = async (): Promise<void> => {
 
     setInterval(async () => {
         const response = await nodeFetch('https://play.retro-mmo.com/leaderboards.json', {})
-        const data: Array<Player> = await response.json()
+        const data: Array<RawPlayerData> = await response.json()
 
         const rows = []
 
         for (const [index, player] of Object.entries(data)) {
             const _player: Player = {
                 username: player.username,
-                total_experience: Number(player.total_experience),
+                total_experience: Number(player.experience),
             }
 
             let experience_diff = 0
