@@ -7,9 +7,13 @@ import fastifyPostgres from 'fastify-postgres'
 import * as path from 'path'
 import { DB_CONNECTION_STRING } from './db'
 import type { Query } from '../../shared/types'
+import * as pino from 'pino'
+import { logOptions } from '../../shared/logging'
+
+const logger = pino.pino(logOptions)
 
 // @ts-ignore
-const app: FastifyInstance = fastify.fastify({ logger: true })
+const app: FastifyInstance = fastify.fastify({ logger })
 
 app.register(fastifyStatic, {
     root: path.resolve('../client/build'),
@@ -120,8 +124,7 @@ app.get<Query>('/api/v1/update', options, async (request, _) => {
 
 const start = async () => {
     try {
-        await app.listen(3000)
-        app.log.info(`Server listening on ${app.server.address().port}`)
+        await app.listen(process.env.SERVER_PORT)
     } catch (err) {
         app.log.error(err)
         process.exit(1)

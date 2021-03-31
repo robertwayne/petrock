@@ -13,4 +13,8 @@ module.exports = {
         target: 'es2020',
         entrypoints: 'auto',
     },
+    env: {
+        API_BASE_URL: 'https://petrock.gg',
+        TICK_RATE: 5000,
+    },
 }
