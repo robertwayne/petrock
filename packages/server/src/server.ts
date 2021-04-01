@@ -10,6 +10,10 @@ import type { Query } from '../../shared/types'
 import * as pino from 'pino'
 import { logOptions } from '../../shared/logging'
 
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 const logger = pino.pino(logOptions)
 
 // @ts-ignore

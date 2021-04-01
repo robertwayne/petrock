@@ -3,6 +3,9 @@ import { pool } from './db'
 import * as pino from 'pino'
 import { logOptions } from '../../shared/logging'
 import type { Player, RawPlayerData } from '../../shared/types'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const logger = pino.pino(logOptions)
 
