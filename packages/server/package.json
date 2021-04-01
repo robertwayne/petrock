@@ -7,7 +7,7 @@
     "private": true,
     "scripts": {
         "dev": "tsnd --respawn ./src/server.ts",
-        "start": "tsnd ./src/server.ts",
+        "start": "ts-node ./src/server.ts --transpile-only",
         "update-service": "tsnd ./src/updateService.ts",
         "lint": "eslint src/"
     },
