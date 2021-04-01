@@ -1,0 +1,1 @@
+ALTER TABLE history DROP place;

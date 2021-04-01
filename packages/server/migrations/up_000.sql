@@ -23,8 +23,7 @@ CREATE TABLE IF NOT EXISTS leaderboards
     last_modified TIMESTAMP DEFAULT now() NOT NULL
 );
 
-/* History represents a series of leaderboard experience data. Each row is constrained
-   to a player and contains time and the experience earned that day.*/
+/* History represents a series of leaderboard experience data. Each row is constrained to a player and contains time and the experience earned that day.*/
 CREATE TABLE IF NOT EXISTS history
 (
     id uuid DEFAULT uuid_generate_v4(),
@@ -32,7 +31,6 @@ CREATE TABLE IF NOT EXISTS history
     CONSTRAINT fk_player FOREIGN KEY (player) REFERENCES players (username),
 
     experience INT NOT NULL,
-    place INT NOT NULL,
 
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL
