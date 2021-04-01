@@ -30,7 +30,6 @@
 </nav>
 
 <style>
-
     #main-menu {
         padding-right: 20px;
     }
@@ -150,7 +149,7 @@
     }
 
     a:hover i {
-        /* font-weight: bold; */
+        font-weight: bold;
         color: var(--theme-primary-accent);
     }
 
@@ -165,5 +164,4 @@
     a {
         text-decoration: none;
     }
-
 </style>
