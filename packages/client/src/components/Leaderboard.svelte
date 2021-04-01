@@ -95,17 +95,21 @@
     <h1>Leaderboards</h1>
     <span id="subheader">This page updates in real time.</span>
     <table id="leaderboard">
-        <tr>
-            <th>Rank</th>
-            <th>Player</th>
-            <th on:click={(e) => sort('exp')}>Experience<i id="default-header" class="headers icofont-caret-down" /></th
-            >
-            <th on:click={(e) => sort('day')}>Today<i id="day-header" class="headers icofont-caret-down" /></th>
-            <th on:click={(e) => sort('week')}>This Week<i id="week-header" class="headers icofont-caret-down" /></th>
-            <th on:click={(e) => sort('month')}>This Month<i id="month-header" class="headers icofont-caret-down" /></th
-            >
-        </tr>
-        {#each $leaderboard as player}
+        <thead>
+            <tr>
+            
+                <th>Rank</th>
+                <th>Player</th>
+                <th on:click={(e) => sort('exp')}>Experience<i id="default-header" class="headers icofont-caret-down" /></th
+                >
+                <th on:click={(e) => sort('day')}>Today<i id="day-header" class="headers icofont-caret-down" /></th>
+                <th on:click={(e) => sort('week')}>This Week<i id="week-header" class="headers icofont-caret-down" /></th>
+                <th on:click={(e) => sort('month')}>This Month<i id="month-header" class="headers icofont-caret-down" /></th
+                >
+            </tr>
+        </thead>
+        <tbody>
+            {#each $leaderboard as player}
             <tr id="place-{String(player.place)}">
                 <td>{player.place}</td>
                 <td>{player.username}</td>
@@ -115,6 +119,7 @@
                 <td>{player.monthly_experience?.toLocaleString()}</td>
             </tr>
         {/each}
+        </tbody>
     </table>
 </div>
 
@@ -182,6 +187,46 @@
     table {
         font-size: 14pt;
         border-spacing: 0;
+        border-collapse: collapse;
+    }
+
+    @media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+        table, thead, tbody, th, td, tr {
+            display :block
+        }
+
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr {
+            border: 1px solid #000;
+        }
+
+        td {
+            border: none;
+            border-bottom: 1px solid ;
+            position: relative;
+            padding-left: 50%;
+        }
+
+        td:before {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+
+        td:nth-of-type(1):before { content: "Rank" }
+        td:nth-of-type(2):before { content: "Player" }
+        td:nth-of-type(3):before { content: "Total Experience" }
+        td:nth-of-type(4):before { content: "Daily Experience" }
+        td:nth-of-type(5):before { content: "Weekly Experience" }
+        td:nth-of-type(6):before { content: "Monthly Experience" }
     }
 
     th {
