@@ -60,6 +60,14 @@ const fetchData = async () => {
                 total_experience = '${_player.total_experience}',
                 daily_experience = COALESCE(leaderboards.daily_experience + '${experience_diff}')
             WHERE leaderboards.player = '${_player.username}';
+
+            INSERT INTO history (player, experience)
+            VALUES ('${_player.username}', '${experience_diff}')
+            ON CONFLICT ON CONSTRAINT leaderboards_player_key
+            DO UPDATE
+            SET
+                experience = COALESCE(experience + '${experience_diff}')
+            WHERE history.player = '${_player.username}';
             `
         )
 
