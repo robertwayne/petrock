@@ -94,6 +94,7 @@
 <div id="wrapper">
     <h1>Leaderboards</h1>
     <span id="subheader">This page updates in real time.</span>
+    <span id="subheader-2">Beta: Daily/Weekly/Monthly values may not be 100% accurate<br>as I am currently modifying database queries often.</span>
     <table id="leaderboard">
         <thead>
             <tr>
@@ -128,8 +129,16 @@
         font-style: italic;
         color: var(--theme-primary-text);
         opacity: 0.6;
+        margin-top: -4px;
+    }
+
+    #subheader-2 {
+        font-style: italic;
+        color: var(--theme-primary-text);
+        opacity: 0.6;
         padding: 0 0 4% 0;
         margin-top: -4px;
+        text-align: center;
     }
 
     #wrapper {
