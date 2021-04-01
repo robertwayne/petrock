@@ -63,10 +63,10 @@ const fetchData = async () => {
 
             INSERT INTO history (player, experience)
             VALUES ('${_player.username}', '${experience_diff}')
-            ON CONFLICT ON CONSTRAINT leaderboards_player_key
+            ON CONFLICT ON CONSTRAINT history_player_key
             DO UPDATE
             SET
-                experience = COALESCE(experience + '${experience_diff}')
+                experience = COALESCE(history.experience + '${experience_diff}')
             WHERE history.player = '${_player.username}';
             `
         )
