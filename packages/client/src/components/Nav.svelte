@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { link } from 'svelte-spa-router'
 </script>
 
 <nav>
@@ -18,7 +19,7 @@
                     <ul class="dropdown">
                         <li><a href="#/">Classes</a></li>
                         <li><a href="#/">Events</a></li>
-                        <li><a href="#/">Items</a></li>
+                        <li><a href='/items' use:link>Items</a></li>
                         <li><a href="#/">Monsters</a></li>
                         <li><a href="#/">Skills</a></li>
                         <li><a href="#/">Zones</a></li>
