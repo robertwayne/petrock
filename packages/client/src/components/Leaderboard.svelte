@@ -127,7 +127,9 @@
             <tr id="place-{String(player.place)}">
                 <td>{player.place}</td>
                 <td id={player.online ? 'username' : ''}>
-                    <span class='{player.online ? ' online-marker' : ''}' />{player.username}</td>
+                    <span class='{player.online ? ' online-marker' : ''}'>
+                        <span class='tooltip'>{player.username} is online!</span>
+                    </span>{player.username}</td>
                 <td>{player.total_experience?.toLocaleString()}</td>
                 <td>{player.daily_experience?.toLocaleString()}</td>
                 <td>{player.weekly_experience?.toLocaleString()}</td>
@@ -157,6 +159,24 @@
         border-radius: 50%;
         display: inline-block;
         margin: 0 8px 2px 0;
+    }
+
+    .tooltip {
+        visibility: hidden;
+        width: 132px;
+        background-color: var(--theme-primary-accent);
+        color: var(--theme-primary-shadow);
+        font-weight: bold;
+        font-size: 12pt;
+        text-align: center;
+        padding: 2px;
+        border-radius: 6px;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .online-marker:hover .tooltip {
+        visibility: visible;
     }
 
     #username {
