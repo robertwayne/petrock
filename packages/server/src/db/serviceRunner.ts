@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import { pool } from './connection'
 import { logOptions } from '../../../shared/logging'
 import type { Player, RawPlayerData } from '../../../shared/types'
+import { PoolClient } from 'node-postgres'
 
 dotenv.config()
 
@@ -11,7 +12,13 @@ const logger = pino.pino(logOptions)
 
 const current_leaderboards: Array<Player> = []
 
-const fetchData = async () => {
+const runner = async (): Promise<void> => {
+    const client: PoolClient = await pool.connect()
+    await fetchData(client)
+    setInterval(fetchData, Number(process.env.TICK_RATE), client)
+}
+
+const fetchData = async (client: PoolClient) => {
     logger.info('Checking for updates...')
 
     let response = undefined
@@ -42,51 +49,51 @@ const fetchData = async () => {
         }
 
         current_leaderboards[index] = _player
+        try {
+            await client.query('BEGIN')
+            await client.query({
+                name: 'add-user',
+                text: `INSERT INTO players (username) 
+                VALUES ($1) 
+                ON CONFLICT ON CONSTRAINT players_pkey 
+                DO NOTHING;`,
+                values: [_player.username],
+            })
 
-        await pool.query({
-            name: 'add-user',
-            text: `INSERT INTO players (username) 
-            VALUES ($1) 
-            ON CONFLICT ON CONSTRAINT players_pkey 
-            DO NOTHING;`,
-            values: [_player.username],
-        })
+            await client.query({
+                name: 'update-leaderboards-tmp',
+                text: `
+                INSERT INTO leaderboards (player, total_experience, daily_experience, weekly_experience, monthly_experience)
+                VALUES ($1, $3, 0, 0, 0)
+                ON CONFLICT ON CONSTRAINT leaderboards_player_key
+                DO UPDATE 
+                SET
+                    total_experience = $2,
+                    daily_experience = COALESCE(leaderboards.daily_experience + $3)
+                WHERE leaderboards.player = $1;`,
+                values: [_player.username, _player.total_experience, experience_diff],
+            })
 
-        await pool.query({
-            name: 'update-leaderboards-tmp',
-            text: `
-            INSERT INTO leaderboards (player, total_experience, daily_experience, weekly_experience, monthly_experience)
-            VALUES ($1, $3, 0, 0, 0)
-            ON CONFLICT ON CONSTRAINT leaderboards_player_key
-            DO UPDATE 
-            SET
-                total_experience = $2,
-                daily_experience = COALESCE(leaderboards.daily_experience + $3)
-            WHERE leaderboards.player = $1;`,
-            values: [_player.username, _player.total_experience, experience_diff],
-        })
+            await client.query({
+                name: 'update-history',
+                text: `
+                INSERT INTO history (player, experience)
+                VALUES ($1, $2)
+                ON CONFLICT ON CONSTRAINT history_player_key
+                DO UPDATE
+                SET
+                    experience = COALESCE(history.experience + $2)
+                WHERE history.player = $1;
+                `,
+                values: [_player.username, experience_diff],
+            })
 
-        await pool.query({
-            name: 'update-history',
-            text: `
-            INSERT INTO history (player, experience)
-            VALUES ($1, $2)
-            ON CONFLICT ON CONSTRAINT history_player_key
-            DO UPDATE
-            SET
-                experience = COALESCE(history.experience + $2)
-            WHERE history.player = $1;
-            `,
-            values: [_player.username, experience_diff],
-        })
+            await client.query('COMMIT')
+        } catch (err) {
+            await client.query('ROLLBACK')
+            throw err
+        }
     }
-}
-
-const runner = async (): Promise<void> => {
-    pool.connect()
-
-    await fetchData()
-    setInterval(fetchData, Number(process.env.TICK_RATE))
 }
 
 runner()
