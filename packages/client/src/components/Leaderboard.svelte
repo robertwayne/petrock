@@ -28,8 +28,6 @@
         $leaderboard = _leaderboard
     }
 
-    console.log($leaderboard)
-
     onMount(
         async (): Promise<void> => {
             await getLeaderboardData()
