@@ -25,8 +25,6 @@ const fetchData = async () => {
 
     const data: Array<RawPlayerData> = await response.json()
 
-    const rows = []
-
     for (const [index, player] of Object.entries(data)) {
         const _player: Player = {
             username: player.username,
@@ -45,13 +43,18 @@ const fetchData = async () => {
 
         current_leaderboards[index] = _player
 
-        const row = await pool.query(
-            `
-            INSERT INTO players (username)
-            VALUES ($1)
-            ON CONFLICT ON CONSTRAINT players_pkey
-            DO NOTHING;
+        await pool.query({
+            name: 'add-user',
+            text: `INSERT INTO players (username) 
+            VALUES ($1) 
+            ON CONFLICT ON CONSTRAINT players_pkey 
+            DO NOTHING;`,
+            values: [_player.username]
+        })
 
+        await pool.query({
+            name: 'update-leaderboards-tmp',
+            text: `
             INSERT INTO leaderboards (player, total_experience, daily_experience, weekly_experience, monthly_experience)
             VALUES ($1, $3, 0, 0, 0)
             ON CONFLICT ON CONSTRAINT leaderboards_player_key
@@ -59,19 +62,23 @@ const fetchData = async () => {
             SET
                 total_experience = $2,
                 daily_experience = COALESCE(leaderboards.daily_experience + $3)
-            WHERE leaderboards.player = $1;
+            WHERE leaderboards.player = $1;`,
+            values: [_player.username, _player.total_experience, experience_diff]
+        })
 
+        await pool.query({
+            name: 'update-history',
+            text: `
             INSERT INTO history (player, experience)
             VALUES ($1, $3)
             ON CONFLICT ON CONSTRAINT history_player_key
             DO UPDATE
             SET
-                experience = COALESCE(history.experience + $3)
+                experience = COALESCE(history.experience + $2)
             WHERE history.player = $1;
-            `, [_player.username, _player.total_experience, experience_diff]
-        )
-
-        rows.push(row)
+            `,
+            values: [_player.username, _player.total_experience, experience_diff]
+        })
     }
 }
 
