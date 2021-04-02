@@ -48,27 +48,27 @@ const fetchData = async () => {
         const row = await pool.query(
             `
             INSERT INTO players (username)
-            VALUES ('${_player.username}')
+            VALUES ($1)
             ON CONFLICT ON CONSTRAINT players_pkey
             DO NOTHING;
 
             INSERT INTO leaderboards (player, total_experience, daily_experience, weekly_experience, monthly_experience)
-            VALUES ('${_player.username}', '${_player.total_experience}', 0, 0, 0)
+            VALUES ($1, $3, 0, 0, 0)
             ON CONFLICT ON CONSTRAINT leaderboards_player_key
             DO UPDATE 
             SET
-                total_experience = '${_player.total_experience}',
-                daily_experience = COALESCE(leaderboards.daily_experience + '${experience_diff}')
-            WHERE leaderboards.player = '${_player.username}';
+                total_experience = $2,
+                daily_experience = COALESCE(leaderboards.daily_experience + $3)
+            WHERE leaderboards.player = $1;
 
             INSERT INTO history (player, experience)
-            VALUES ('${_player.username}', '${experience_diff}')
+            VALUES ($1, $3)
             ON CONFLICT ON CONSTRAINT history_player_key
             DO UPDATE
             SET
-                experience = COALESCE(history.experience + '${experience_diff}')
-            WHERE history.player = '${_player.username}';
-            `
+                experience = COALESCE(history.experience + $3)
+            WHERE history.player = $1;
+            `, [_player.username, _player.total_experience, experience_diff]
         )
 
         rows.push(row)

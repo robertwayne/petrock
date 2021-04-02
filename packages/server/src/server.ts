@@ -117,8 +117,8 @@ app.get<Query>('/api/v1/update', options, async (request, _) => {
         SELECT p.username, lb.total_experience, lb.daily_experience, lb.weekly_experience, lb.monthly_experience
         FROM leaderboards lb
         INNER JOIN players p ON (lb.player = p.username)
-        ORDER BY lb.${sortBy} ${sortAsc};
-        `
+        ORDER BY lb $1 $2;
+        `, [sortBy, sortAsc]
     )
 
     client.release()
