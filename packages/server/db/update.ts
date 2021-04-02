@@ -1,5 +1,5 @@
 import nodeFetch from 'node-fetch'
-import { pool } from './db'
+import { pool } from './connection'
 import * as pino from 'pino'
 import { logOptions } from '../../shared/logging'
 import type { Player, RawPlayerData } from '../../shared/types'
@@ -49,7 +49,7 @@ const fetchData = async () => {
             VALUES ($1) 
             ON CONFLICT ON CONSTRAINT players_pkey 
             DO NOTHING;`,
-            values: [_player.username]
+            values: [_player.username],
         })
 
         await pool.query({
@@ -63,7 +63,7 @@ const fetchData = async () => {
                 total_experience = $2,
                 daily_experience = COALESCE(leaderboards.daily_experience + $3)
             WHERE leaderboards.player = $1;`,
-            values: [_player.username, _player.total_experience, experience_diff]
+            values: [_player.username, _player.total_experience, experience_diff],
         })
 
         await pool.query({
@@ -77,7 +77,7 @@ const fetchData = async () => {
                 experience = COALESCE(history.experience + $2)
             WHERE history.player = $1;
             `,
-            values: [_player.username, _player.total_experience, experience_diff]
+            values: [_player.username, _player.total_experience, experience_diff],
         })
     }
 }

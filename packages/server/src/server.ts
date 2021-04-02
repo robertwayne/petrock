@@ -5,7 +5,7 @@ import fastifyCors from 'fastify-cors'
 import fastifyHelmet from 'fastify-helmet'
 import fastifyPostgres from 'fastify-postgres'
 import * as path from 'path'
-import { DB_CONNECTION_STRING } from './db'
+import { DB_CONNECTION_STRING } from '../db/connection'
 import type { Query } from '../../shared/types'
 import * as pino from 'pino'
 import { logOptions } from '../../shared/logging'
@@ -118,7 +118,8 @@ app.get<Query>('/api/v1/update', options, async (request, _) => {
         FROM leaderboards lb
         INNER JOIN players p ON (lb.player = p.username)
         ORDER BY lb $1 $2;
-        `, [sortBy, sortAsc]
+        `,
+        [sortBy, sortAsc]
     )
 
     client.release()
