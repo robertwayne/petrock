@@ -8,7 +8,7 @@
     "scripts": {
         "dev": "tsnd --respawn ./src/server.ts",
         "start": "ts-node ./src/server.ts --transpile-only",
-        "update-service": "tsnd ./src/updateService.ts",
+        "update-service": "ts-node ./src/db/serviceRunner.ts --transpile-only",
         "lint": "eslint src/"
     },
     "dependencies": {

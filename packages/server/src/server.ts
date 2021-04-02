@@ -7,7 +7,7 @@ import fastifyHelmet from 'fastify-helmet'
 import fastifyPostgres from 'fastify-postgres'
 import dotenv from 'dotenv'
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { DB_CONNECTION_STRING } from '../db/connection'
+import { DB_CONNECTION_STRING } from './db/connection'
 import { logOptions } from '../../shared/logging'
 import { routeLeaderboard } from './routes/leaderboard'
 

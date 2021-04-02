@@ -1,9 +1,9 @@
-import nodeFetch from 'node-fetch'
-import { pool } from './connection'
 import * as pino from 'pino'
-import { logOptions } from '../../shared/logging'
-import type { Player, RawPlayerData } from '../../shared/types'
+import nodeFetch from 'node-fetch'
 import dotenv from 'dotenv'
+import { pool } from './connection'
+import { logOptions } from '../../../shared/logging'
+import type { Player, RawPlayerData } from '../../../shared/types'
 
 dotenv.config()
 
@@ -82,11 +82,11 @@ const fetchData = async () => {
     }
 }
 
-const updater = async (): Promise<void> => {
+const runner = async (): Promise<void> => {
     pool.connect()
 
     await fetchData()
     setInterval(fetchData, Number(process.env.TICK_RATE))
 }
 
-updater()
+runner()
