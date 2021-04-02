@@ -17,6 +17,7 @@
             let _player: Player = {
                 place: i + 1,
                 username: data[i].username,
+                online: data[i].online,
                 total_experience: data[i].total_experience,
                 daily_experience: data[i].daily_experience,
                 weekly_experience: data[i].weekly_experience,
@@ -26,6 +27,8 @@
         }
         $leaderboard = _leaderboard
     }
+
+    console.log($leaderboard)
 
     onMount(
         async (): Promise<void> => {
@@ -112,7 +115,8 @@
             {#each $leaderboard as player}
             <tr id="place-{String(player.place)}">
                 <td>{player.place}</td>
-                <td>{player.username}</td>
+                <td id={player.online ? 'username' : ''}>
+                    <span class='{player.online ? ' online-marker' : ''}' />{player.username}</td>
                 <td>{player.total_experience?.toLocaleString()}</td>
                 <td>{player.daily_experience?.toLocaleString()}</td>
                 <td>{player.weekly_experience?.toLocaleString()}</td>
@@ -124,6 +128,20 @@
 </div>
 
 <style>
+
+    .online-marker {
+        height: 7px;
+        width: 7px;
+        background-color: rgb(80, 177, 80);
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 8px 2px 0;
+    }
+
+    #username {
+        padding-right: 14px;
+    }
+
     #subheader {
         font-style: italic;
         color: var(--theme-primary-text);
