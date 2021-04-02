@@ -19,7 +19,7 @@
     p {
         display: flex;
         justify-content: center;
-        font-size: 14pt;
+        font-size: 16pt;
     }
 
     p > a {

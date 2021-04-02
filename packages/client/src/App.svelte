@@ -33,21 +33,14 @@
 
     :global(main) {
         grid-area: main;
-        display: flex;
         padding: 0;
-        flex-direction: column;
-        justify-content: center;
-        height: max-content;
+        height: 100%;
     }
 
     @media (min-width: 720px) {
         :global(main) {
             padding: 0 10% 5% 10%;
         }
-    }
-
-    nav, main, footer {
-        overflow: hidden;
     }
 
     :global(#logo-highlight) {
@@ -73,5 +66,15 @@
             'footer';
         height: 100vh;
         overflow: none;
+    }
+
+    :global(nav) {
+        grid-area: nav;
+        max-height: 35px;
+    }
+
+    :global(footer) {
+        grid-area: footer;
+        max-height: 100px;
     }
 </style>
