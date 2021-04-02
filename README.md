@@ -10,15 +10,11 @@ current and historical data points such as:
 - Highest historial movement amounts
 - Quick view how much until next place
 
-## TODO
-- Fix type defs
-- Clean up the CSS in the Svelte files (Leaderboard, Nav)
-- Set up database weekly/monthly functionality (and reset daily w/ server reboots)
-- Add in general database functionality (items, mobs, zones, etc.)
-- Add search
+In addition, a comprehensive database of all game content for easy searching and viewing.
+
 
 ## Tech Stack
-**Project & Build:** Yarn, Lerna, Snowpack, Prettier
+**Project & Build:** Yarn, Lerna, Snowpack, Prettier, ESLint
 
 **Client:** TypeScript w/ Svelte
 
