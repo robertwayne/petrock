@@ -9,7 +9,19 @@
     $leaderboard = preloadData
 
     async function getLeaderboardData() {
-        const response: Response = await fetch(`${url}/api/v1/leaderboards?sort=${$sortBy}&order=${$orderBy ? 'desc' : 'asc'}`)
+        let response: Response | undefined;
+
+        try {
+            response = await fetch(`${url}/api/v1/leaderboards?sort=${$sortBy}&order=${$orderBy ? 'desc' : 'asc'}`)
+        } catch (err) {
+            const subheader: HTMLElement = document.getElementById('disconnect-error') as HTMLElement
+            subheader.classList.remove('hidden')
+            clearInterval($updateTimer)
+            return
+        }
+
+        if (!response) return 
+        
         const data: Array<Player> = await response.json()
 
         let _leaderboard: Array<Player> = []
@@ -93,6 +105,7 @@
 
 <div id="wrapper">
     <h1>Leaderboards</h1>
+    <div id='disconnect-error' class='hidden'>LOST CONNECTION<br>Please reload the page to reconnect.</div>
     <span id="subheader">This page updates in real time.</span>
     <span id="subheader-2">Beta: Daily/Weekly/Monthly values may not be 100% accurate<br>as I am currently modifying database queries often.</span>
     <table id="leaderboard">
@@ -126,6 +139,16 @@
 </div>
 
 <style>
+    #disconnect-error {
+        color: rgb(199, 45, 45);
+        font-weight: bold;
+        font-size: 18pt;
+        text-align: center;
+    }
+
+    .hidden {
+        display: none;
+    }
 
     .online-marker {
         height: 7px;
