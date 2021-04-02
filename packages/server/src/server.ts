@@ -1,23 +1,22 @@
 import * as fastify from 'fastify'
-import { FastifyReply, FastifyRequest } from 'fastify'
+import * as path from 'path'
+import * as pino from 'pino'
 import fastifyStatic from 'fastify-static'
 import fastifyCors from 'fastify-cors'
 import fastifyHelmet from 'fastify-helmet'
 import fastifyPostgres from 'fastify-postgres'
-import * as path from 'path'
-import { DB_CONNECTION_STRING } from '../db/connection'
-import type { Query } from '../../shared/types'
-import * as pino from 'pino'
-import { logOptions } from '../../shared/logging'
-
 import dotenv from 'dotenv'
+import { FastifyReply, FastifyRequest } from 'fastify'
+import { DB_CONNECTION_STRING } from '../db/connection'
+import { logOptions } from '../../shared/logging'
+import { routeLeaderboard } from './routes/leaderboard'
 
 dotenv.config()
 
 const logger = pino.pino(logOptions)
 
 // @ts-ignore
-const app: FastifyInstance = fastify.fastify({ logger })
+export const app: FastifyInstance = fastify.fastify({ logger })
 
 app.register(fastifyStatic, {
     root: path.resolve('../client/build'),
@@ -54,21 +53,7 @@ app.register(fastifyPostgres, {
     connectionString: DB_CONNECTION_STRING,
 })
 
-const options: fastify.RouteShorthandOptions = {
-    schema: {
-        querystring: {
-            type: 'object',
-            properties: {
-                sort: {
-                    type: 'string',
-                },
-                asc: {
-                    type: 'string',
-                },
-            },
-        },
-    },
-}
+app.register(routeLeaderboard, { prefix: '/api/v1' })
 
 app.get(
     '/',
@@ -76,56 +61,6 @@ app.get(
         return res.sendFile('index.html')
     }
 )
-
-app.get<Query>('/api/v1/update', options, async (request, _) => {
-    const client = await app.pg.connect()
-
-    let sortBy: string
-    switch (request.query.sort) {
-        case 'day': {
-            sortBy = 'daily_experience'
-            break
-        }
-        case 'week': {
-            sortBy = 'weekly_experience'
-            break
-        }
-        case 'month': {
-            sortBy = 'monthly_experience'
-            break
-        }
-        default: {
-            sortBy = 'total_experience'
-            break
-        }
-    }
-
-    let sortAsc: string
-    switch (request.query.asc) {
-        case 'true': {
-            sortAsc = 'ASC'
-            break
-        }
-        default: {
-            sortAsc = 'DESC'
-            break
-        }
-    }
-
-    const { rows } = await client.query(
-        `
-        SELECT p.username, lb.total_experience, lb.daily_experience, lb.weekly_experience, lb.monthly_experience
-        FROM leaderboards lb
-        INNER JOIN players p ON (lb.player = p.username)
-        ORDER BY lb $1 $2;
-        `,
-        [sortBy, sortAsc]
-    )
-
-    client.release()
-
-    return rows
-})
 
 const start = async () => {
     try {

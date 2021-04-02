@@ -1,16 +1,15 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { leaderboard, sortBy, sortAsc, updateTimer } from '../stores'
+    import { leaderboard, sortBy, orderBy, updateTimer } from '../stores'
     import { preloadData } from '../preload'
     import type { Player } from '../../../shared/types'
     import { tickRate, url } from '../constants'
 
     // we do this to avoid large CLS (Cumulative Layout Shift) issues on initial page load
     $leaderboard = preloadData
-    $sortBy = 'total_experience'
 
     async function getLeaderboardData() {
-        const response: Response = await fetch(`${url}/api/v1/update?sort=${$sortBy}&asc=${$sortAsc}`)
+        const response: Response = await fetch(`${url}/api/v1/leaderboards?sort=${$sortBy}&order=${$orderBy ? 'desc' : 'asc'}`)
         const data: Array<Player> = await response.json()
 
         let _leaderboard: Array<Player> = []
@@ -85,7 +84,7 @@
             }
         }
         $sortBy = column
-        $sortAsc = !$sortAsc
+        $orderBy = !$orderBy
         await getLeaderboardData()
         $updateTimer = setInterval(getLeaderboardData, tickRate)
     }

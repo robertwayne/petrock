@@ -1,9 +1,4 @@
-export interface Query {
-    sort?: string
-    asc?: string
-}
-
-interface Player {
+export interface Player {
     username: string
     place?: number
     total_experience?: number
@@ -12,7 +7,7 @@ interface Player {
     monthly_experience?: number
 }
 
-interface RawPlayerData {
+export interface RawPlayerData {
     username: string
     experience: number
 }
