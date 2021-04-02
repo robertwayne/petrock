@@ -3,25 +3,25 @@
 
 <nav>
     <div id="wrapper">
-        <div id="left"><a href="/">Pet<span class="logo-highlight">Rock</span></a></div>
+        <div id="left"><a href="#/">Pet<span class="logo-highlight">Rock</span></a></div>
         <div id="right">
             <ul id="main-menu">
                 <li class="menu">
-                    <a href="#">Tools<i class="icofont-caret-down" /></a>
+                    <span id="header">Tools<i class="icofont-caret-down" /></span>
                     <ul class="dropdown">
-                        <li><a href="/">Leaderboards</a></li>
-                        <li><a href="#">XP Tracker</a></li>
+                        <li><a href="#/">Leaderboards</a></li>
+                        <li><a href="#/">XP Tracker</a></li>
                     </ul>
                 </li>
                 <li class="menu">
-                    <a href="#">Database<i class="icofont-caret-down" /></a>
+                    <span id="header" href="#/">Database<i class="icofont-caret-down" /></span>
                     <ul class="dropdown">
-                        <li><a href="#">Classes</a></li>
-                        <li><a href="#">Events</a></li>
-                        <li><a href="#">Items</a></li>
-                        <li><a href="#">Monsters</a></li>
-                        <li><a href="#">Skills</a></li>
-                        <li><a href="#">Zones</a></li>
+                        <li><a href="#/">Classes</a></li>
+                        <li><a href="#/">Events</a></li>
+                        <li><a href="#/">Items</a></li>
+                        <li><a href="#/">Monsters</a></li>
+                        <li><a href="#/">Skills</a></li>
+                        <li><a href="#/">Zones</a></li>
                     </ul>
                 </li>
             </ul>
@@ -30,6 +30,19 @@
 </nav>
 
 <style>
+    #header {
+        font-size: 100%;
+        font-family: inherit;
+        border: 0;
+        padding: 0;
+    }
+
+    #header:hover {
+        cursor: default;
+        font-weight: bold;
+        color: var(--theme-primary-accent)
+    }
+
     #main-menu {
         padding-right: 20px;
     }
@@ -148,7 +161,7 @@
         list-style: none;
     }
 
-    a:hover i {
+    #header:hover i {
         font-weight: bold;
         color: var(--theme-primary-accent);
     }
