@@ -1,6 +1,6 @@
 import * as fastify from 'fastify'
 import * as path from 'path'
-import * as pino from 'pino'
+import pino from 'pino'
 import fastifyStatic from 'fastify-static'
 import fastifyCors from 'fastify-cors'
 import fastifyHelmet from 'fastify-helmet'
@@ -13,7 +13,7 @@ import { routeLeaderboard } from './routes/leaderboard'
 
 dotenv.config()
 
-const logger = pino.pino(logOptions)
+const logger = pino(logOptions)
 
 // @ts-ignore
 export const app: FastifyInstance = fastify.fastify({ logger })

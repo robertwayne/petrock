@@ -24,5 +24,8 @@
     },
     "workspaces": [
         "packages/*"
-    ]
+    ],
+    "dependencies": {
+        "@types/pino": "^6.3.6"
+    }
 }

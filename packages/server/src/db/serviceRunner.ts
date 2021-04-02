@@ -1,4 +1,4 @@
-import * as pino from 'pino'
+import pino from 'pino'
 import nodeFetch from 'node-fetch'
 import dotenv from 'dotenv'
 import { pool } from './connection'
@@ -8,8 +8,7 @@ import { PoolClient } from 'node-postgres'
 
 dotenv.config()
 
-const logger = pino.pino(logOptions)
-
+const logger = pino(logOptions)
 const current_leaderboards: Array<Player> = []
 
 const runner = async (): Promise<void> => {
