@@ -195,6 +195,7 @@
         color: var(--theme-primary-text);
         opacity: 0.6;
         margin-top: -4px;
+        height: max-content;
     }
 
     #subheader-2 {
@@ -204,6 +205,7 @@
         padding: 0 0 4% 0;
         margin-top: -4px;
         text-align: center;
+        height: max-content;
     }
 
     #wrapper {
@@ -212,6 +214,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+        overflow: hidden;
     }
 
     h1 {
@@ -219,6 +222,7 @@
         justify-content: center;
         font-size: 36pt;
         padding: 1% 0 0 0;
+        height: max-content;
     }
 
     #leaderboard {
@@ -262,6 +266,7 @@
         font-size: 14pt;
         border-spacing: 0;
         border-collapse: collapse;
+        overflow: hidden;
     }
 
     @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {

@@ -12,6 +12,7 @@
     #wrapper div {
         display: flex;
         justify-content: center;
+        overflow: hidden;
     }
 
     div a {

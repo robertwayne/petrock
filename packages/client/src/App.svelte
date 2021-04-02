@@ -1,17 +1,17 @@
 <script>
     import '/static/css/themes.css'
+    import Router from 'svelte-spa-router'
     import Nav from './components/Nav.svelte'
-    import Leaderboard from './components/Leaderboard.svelte'
     import Footer from './components/Footer.svelte'
+    import { routes } from './routeHandler'
 </script>
 
 <div class="container">
     <nav>
         <Nav />
     </nav>
-    <header />
     <main>
-        <Leaderboard />
+        <Router {routes} />
     </main>
     <footer>
         <Footer />
@@ -22,8 +22,6 @@
     :global(*, html, body) {
         margin: 0;
         box-sizing: border-box;
-        overflow-y: auto;
-        overflow-x: hidden;
     }
 
     :global(body) {
@@ -44,8 +42,12 @@
 
     @media (min-width: 720px) {
         :global(main) {
-            padding: 0 10%;
+            padding: 0 10% 5% 10%;
         }
+    }
+
+    nav, main, footer {
+        overflow: hidden;
     }
 
     :global(#logo-highlight) {
@@ -69,5 +71,7 @@
             'nav'
             'main'
             'footer';
+        height: 100vh;
+        overflow: none;
     }
 </style>
