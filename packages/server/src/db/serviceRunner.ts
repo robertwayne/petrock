@@ -21,19 +21,23 @@ const fetchData = async (client: PoolClient) => {
     logger.info('Checking for updates...')
 
     let response = undefined
+    let online = undefined
 
     try {
-        response = await nodeFetch('https://play.retro-mmo.com/leaderboards.json', {})
+        response = await nodeFetch('https://play.retro-mmo.com/leaderboards.json')
+        online = await nodeFetch('https://play.retro-mmo.com/players.json')
     } catch (err) {
         logger.error(`Error fetching data from RetroMMO API.\n${err}`)
         return
     }
 
     const data: Array<RawPlayerData> = await response.json()
+    const onlineData: Array<string> = await online.json()
 
     for (const [index, player] of Object.entries(data)) {
         const _player: Player = {
             username: player.username,
+            online: onlineData.some((s) => s === player.username),
             total_experience: Number(player.experience),
         }
 
@@ -52,11 +56,13 @@ const fetchData = async (client: PoolClient) => {
             await client.query('BEGIN')
             await client.query({
                 name: 'add-user',
-                text: `INSERT INTO players (username) 
-                VALUES ($1) 
+                text: `INSERT INTO players (username, online)
+                VALUES ($1, $2) 
                 ON CONFLICT ON CONSTRAINT players_pkey 
-                DO NOTHING;`,
-                values: [_player.username],
+                DO UPDATE
+                SET
+                    online = $2;`,
+                values: [_player.username, _player.online],
             })
 
             await client.query({

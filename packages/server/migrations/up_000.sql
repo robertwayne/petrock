@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS players
 (
     id uuid DEFAULT uuid_generate_v4 (),
     username VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL
+        online BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS leaderboards
