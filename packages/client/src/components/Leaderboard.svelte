@@ -166,11 +166,12 @@
         border-radius: 50%;
         display: inline-block;
         margin: 0 8px 2px 0;
+        position: relative;
     }
 
     .tooltip {
         visibility: hidden;
-        width: 132px;
+        width: 120px;
         background-color: var(--theme-primary-accent);
         color: var(--theme-primary-shadow);
         font-weight: bold;
@@ -180,9 +181,15 @@
         border-radius: 6px;
         position: absolute;
         z-index: 2;
+        top: -20px;
+        right: 0px;
+        opacity: 0;
+        overflow: hidden;
     }
 
     .online-marker:hover .tooltip {
+        transition: 0.15s ease-in-out;
+        opacity: 1;
         visibility: visible;
     }
 
