@@ -70,14 +70,14 @@ const fetchData = async () => {
             name: 'update-history',
             text: `
             INSERT INTO history (player, experience)
-            VALUES ($1, $3)
+            VALUES ($1, $2)
             ON CONFLICT ON CONSTRAINT history_player_key
             DO UPDATE
             SET
                 experience = COALESCE(history.experience + $2)
             WHERE history.player = $1;
             `,
-            values: [_player.username, _player.total_experience, experience_diff],
+            values: [_player.username, experience_diff],
         })
     }
 }
