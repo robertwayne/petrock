@@ -9,7 +9,7 @@
     $leaderboard = preloadData
 
     async function getLeaderboardData() {
-        let response: Response | undefined;
+        let response: Response | undefined
 
         try {
             response = await fetch(`${url}/api/v1/leaderboards?sort=${$sortBy}&order=${$orderBy ? 'desc' : 'asc'}`)
@@ -20,8 +20,8 @@
             return
         }
 
-        if (!response) return 
-        
+        if (!response) return
+
         const data: Array<Player> = await response.json()
 
         let _leaderboard: Array<Player> = []
@@ -105,37 +105,44 @@
 
 <div id="wrapper">
     <h1>Leaderboards</h1>
-    <div id='disconnect-error' class='hidden'>LOST CONNECTION<br>Please reload the page to reconnect.</div>
+    <div id="disconnect-error" class="hidden">LOST CONNECTION<br />Please reload the page to reconnect.</div>
     <span id="subheader">This page updates in real time.</span>
-    <span id="subheader-2">Beta: Daily/Weekly/Monthly values may not be 100% accurate<br>as I am currently modifying database queries often.</span>
+    <span id="subheader-2"
+        >Beta: Daily/Weekly/Monthly values may not be 100% accurate<br />as I am currently modifying database queries
+        often.</span
+    >
     <table id="leaderboard">
         <thead>
             <tr>
-            
                 <th>Rank</th>
                 <th>Player</th>
-                <th on:click={(e) => sort('exp')}>Experience<i id="default-header" class="headers icofont-caret-down" /></th
+                <th on:click={(e) => sort('exp')}
+                    >Experience<i id="default-header" class="headers icofont-caret-down" /></th
                 >
                 <th on:click={(e) => sort('day')}>Today<i id="day-header" class="headers icofont-caret-down" /></th>
-                <th on:click={(e) => sort('week')}>This Week<i id="week-header" class="headers icofont-caret-down" /></th>
-                <th on:click={(e) => sort('month')}>This Month<i id="month-header" class="headers icofont-caret-down" /></th
+                <th on:click={(e) => sort('week')}
+                    >This Week<i id="week-header" class="headers icofont-caret-down" /></th
+                >
+                <th on:click={(e) => sort('month')}
+                    >This Month<i id="month-header" class="headers icofont-caret-down" /></th
                 >
             </tr>
         </thead>
         <tbody>
             {#each $leaderboard as player}
-            <tr id="place-{String(player.place)}">
-                <td>{player.place}</td>
-                <td id={player.online ? 'username' : ''}>
-                    <span class='{player.online ? ' online-marker' : ''}'>
-                        <span class='tooltip'>{player.username} is online!</span>
-                    </span>{player.username}</td>
-                <td>{player.total_experience?.toLocaleString()}</td>
-                <td>{player.daily_experience?.toLocaleString()}</td>
-                <td>{player.weekly_experience?.toLocaleString()}</td>
-                <td>{player.monthly_experience?.toLocaleString()}</td>
-            </tr>
-        {/each}
+                <tr id="place-{String(player.place)}">
+                    <td>{player.place}</td>
+                    <td id={player.online ? 'username' : ''}>
+                        <span class={player.online ? ' online-marker' : ''}>
+                            <span class="tooltip">{player.username} is online!</span>
+                        </span>{player.username}</td
+                    >
+                    <td>{player.total_experience?.toLocaleString()}</td>
+                    <td>{player.daily_experience?.toLocaleString()}</td>
+                    <td>{player.weekly_experience?.toLocaleString()}</td>
+                    <td>{player.monthly_experience?.toLocaleString()}</td>
+                </tr>
+            {/each}
         </tbody>
     </table>
 </div>
@@ -257,10 +264,14 @@
         border-collapse: collapse;
     }
 
-    @media only screen and (max-width: 760px),
-    (min-device-width: 768px) and (max-device-width: 1024px) {
-        table, thead, tbody, th, td, tr {
-            display :block;
+    @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+            display: block;
             overflow: hidden;
         }
 
@@ -276,7 +287,7 @@
 
         td {
             border: none;
-            border-bottom: 1px solid ;
+            border-bottom: 1px solid;
             position: relative;
             padding-left: 50%;
         }
@@ -289,12 +300,24 @@
             white-space: nowrap;
         }
 
-        td:nth-of-type(1):before { content: "Rank" }
-        td:nth-of-type(2):before { content: "Player" }
-        td:nth-of-type(3):before { content: "Total Experience" }
-        td:nth-of-type(4):before { content: "Daily Experience" }
-        td:nth-of-type(5):before { content: "Weekly Experience" }
-        td:nth-of-type(6):before { content: "Monthly Experience" }
+        td:nth-of-type(1):before {
+            content: 'Rank';
+        }
+        td:nth-of-type(2):before {
+            content: 'Player';
+        }
+        td:nth-of-type(3):before {
+            content: 'Total Experience';
+        }
+        td:nth-of-type(4):before {
+            content: 'Daily Experience';
+        }
+        td:nth-of-type(5):before {
+            content: 'Weekly Experience';
+        }
+        td:nth-of-type(6):before {
+            content: 'Monthly Experience';
+        }
     }
 
     th {
