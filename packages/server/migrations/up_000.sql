@@ -1,4 +1,4 @@
-CREATE EXTENSION pg_cron;
+CREATE EXTENSION IF NOT EXISTS pg_cron;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS players
@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS history
     CONSTRAINT fk_player FOREIGN KEY (player) REFERENCES players (username),
 
     experience INT NOT NULL,
-    place INT NOT NULL,
 
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL
