@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.register(fastifyCors, {
-    origin: 'https://petrock.gg',
+    origin: process.env.NODE_ENV === 'production' ? 'https://petrock.gg' : '*',
 })
 
 app.register(fastifyPostgres, {
