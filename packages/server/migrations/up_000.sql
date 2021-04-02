@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS history
     CONSTRAINT fk_player FOREIGN KEY (player) REFERENCES players (username),
 
     experience INT NOT NULL,
+    place INT NOT NULL,
 
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL
