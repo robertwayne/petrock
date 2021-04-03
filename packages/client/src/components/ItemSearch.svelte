@@ -3,6 +3,7 @@
 
 <div id="wrapper">
     <h1>Items</h1>
+    <div id='not-implemented-warning'>This page is incomplete and not working fully. Please check back later.</div>
     <form>
         <div id='name'>
             <label for='search-name'>Name: </label>
@@ -21,6 +22,11 @@
 </div>
 
 <style>
+    #not-implemented-warning {
+        color: rgb(199, 45, 45);
+        font-weight: bold;
+    }
+
     #wrapper {
         display: flex;
         flex-direction: column;
