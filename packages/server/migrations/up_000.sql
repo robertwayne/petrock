@@ -38,9 +38,15 @@ CREATE TABLE IF NOT EXISTS history
     created_on TIMESTAMP DEFAULT now() NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS types
+(
+    id INT UNIQUE PRIMARY KEY NOT NULL,
+    name VARCHAR(16) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS slots
 (
-    id SERIAL2 UNIQUE PRIMARY KEY NOT NULL,
+    id INT UNIQUE PRIMARY KEY NOT NULL,
     name VARCHAR(16) NOT NULL
 );
 
@@ -54,21 +60,51 @@ CREATE TABLE IF NOT EXISTS items
 (
     id uuid DEFAULT uuid_generate_v4(),
     name VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL,
+    description TEXT NOT NULL,
     level INT NOT NULL,
-    slot SMALLINT NOT NULL,
-    classes VARCHAR(255) NOT NULL,
-    strength INT NOT NULL,
-    intelligence INT NOT NULL,
-    agility INT NOT NULL,
-    defense INT NOT NULL,
-    wisdom INT NOT NULL,
-    luck INT NOT NULL,
+    slot INT,
+    classes VARCHAR(255),
+    type INT NOT NULL,
+    consumable BOOLEAN,
+    strength INT,
+    intelligence INT,
+    agility INT,
+    defense INT,
+    wisdom INT,
+    luck INT,
+    can_sell BOOLEAN NOT NULL,
+    sell_price INT,
     icon VARCHAR(255) DEFAULT 'notFound.png' NOT NULL,
 
     /* Foreign Keys */
     CONSTRAINT fk_slot FOREIGN KEY (slot) REFERENCES slots (id),
     CONSTRAINT fk_classes FOREIGN KEY (classes) REFERENCES classes (classifier),
+    CONSTRAINT fk_type FOREIGN KEY (type) REFERENCES types (id),
 
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL
 );
+
+INSERT INTO types (id, name)
+VALUES
+(1, 'Equipment'),
+(2, 'Cosmetic'),
+(3, 'Consumable'),
+(4, 'Misc');
+
+INSERT INTO slots (id, name)
+VALUES
+(1, 'Head'),
+(2, 'Body'),
+(3, 'Main Hand'),
+(4, 'Off Hand'),
+(5, 'Mask'),
+(6, 'Outfit'),
+(7, 'Clothes Dye'),
+(8, 'Hair Dye');
+
+INSERT INTO classes (id, classifier)
+VALUES
+('WR', 'Warrior'),
+('WZ', 'Wizard'),
+('CL', 'Cleric');
