@@ -2,8 +2,61 @@
     import { onMount } from 'svelte'
     import { url } from '../constants'
     import type { Item } from '../../../shared/types'
+    import { ItemSlot, ItemType } from '../enums'
     import { items } from '../stores'
-    
+
+    const getSlot = (slot: number) => {
+        switch (slot) {
+            case ItemSlot.HEAD: {
+                return 'Head'
+            }
+            case ItemSlot.BODY: {
+                return 'Body'
+            }
+            case ItemSlot.MAIN_HAND: {
+                return 'Main-Hand'
+            }
+            case ItemSlot.OFF_HAND: {
+                return 'Off-Hand'
+            }
+            case ItemSlot.MASK: {
+                return 'Mask'
+            }
+            case ItemSlot.OUTFIT: {
+                return 'Outfit'
+            }
+            case ItemSlot.CLOTHES_DYE: {
+                return 'Clothes Dye'
+            }
+            case ItemSlot.HAIR_DYE: {
+                return 'Hair Dye'
+            }
+            default: {
+                return 'Unknown'
+            }
+        }
+    }
+
+    const getType = (itemType: number) => {
+        switch (itemType) {
+            case ItemType.EQUIPMENT: {
+                return 'Equipment'
+            }
+            case ItemType.COSMETIC: {
+                return 'Cosmetic'
+            }
+            case ItemType.CONSUMABLE: {
+                return 'Consumable'
+            }
+            case ItemType.MISC: {
+                return 'Misc'
+            }
+            default: {
+                return 'Unknown'
+            }
+        }
+    }
+
     async function getItemList() {
         let response: Response | undefined
 
@@ -19,14 +72,16 @@
 
         const data: Array<Item> = await response.json()
         let _items: Array<Item> = []
-        
+
         for (const [index, item] of Object.entries(data)) {
+            let str
             let _item: Item = {
                 name: item.name,
-                slot: item.slot,
+                slot: getSlot(Number(item.slot)),
+                type: getType(Number(item.type)),
                 usable_by: item.usable_by,
                 level: item.level,
-                icon: item.icon
+                icon: item.icon,
             }
 
             _items.push(_item)
@@ -58,6 +113,7 @@
                     >
                     <td>{item.level}</td>
                     <td>{item.slot}</td>
+                    <td>{item.type}</td>
                 </tr>
             {/each}
         </tbody>
@@ -92,6 +148,6 @@
 
     td a {
         text-decoration: none;
-        color: var(--theme-primary-accent)
+        color: var(--theme-primary-accent);
     }
 </style>
