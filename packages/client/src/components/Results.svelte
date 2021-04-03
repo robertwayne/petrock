@@ -1,25 +1,30 @@
-<script lang='ts'>
+<script lang="ts">
+    import { onMount } from 'svelte'
+    import { url } from '../constants'
+    import type { Item } from '../../../shared/types'
 
+    $: items = []
+    
+    async function getItemList() {
+        let response: Response | undefined
 
-    // test code; will use database shortly
-    $: items = [
-        {name: 'Leather Armor', level: 2, slot: 'Body', 
-        classes: 'WZ, CL', icon: 'leatherArmor.png'},
-        {name: 'Padded Garb', level: 2, slot: 'Body', 
-        classes: 'CL', icon: 'paddedGarb.png'},
-        {name: 'Tattered Cloak', level: 2, slot: 'Body', 
-        classes: 'WZ, CL', icon: 'tatteredCloak.png'},
-        {name: 'Leather Cap', level: 1, slot: 'Head', 
-        classes: 'WR, WZ, CL', icon: 'leatherCap.png'},
-        {name: 'Training Sword', level: 4, slot: 'Main Hand', 
-        classes: 'WR', icon: 'trainingSword.png'},
-        {name: 'Training Wand', level: 4, slot: 'Main Hand', 
-        classes: 'WZ, CL', icon: 'trainingWand.png'},
-        {name: 'Oaken Club', level: 2, slot: 'Main Hand', 
-        classes: 'WR, CL', icon: 'oakenClub.png'},
-        {name: 'Cypress Stick', level: 1, slot: 'Main Hand', 
-        classes: 'WZ, CL', icon: 'cypressStick.png'},
-    ]
+        try {
+            response = await fetch(`${url}/api/v1/items`)
+        } catch (err) {
+            const subheader: HTMLElement = document.getElementById('disconnect-error') as HTMLElement
+            subheader.classList.remove('hidden')
+            return
+        }
+
+        if (!response) return
+
+        const data: Array<Item> = await response.json()
+        console.log(data)
+    }
+
+    onMount(async () => {
+        await getItemList()
+    })
 </script>
 
 <div id="wrapper">
@@ -37,7 +42,8 @@
                 <tr>
                     <td>
                         <span>{item.icon}</span>
-                        {item.name}</td>
+                        {item.name}</td
+                    >
                     <td>{item.level}</td>
                     <td>{item.slot}</td>
                     <td>{item.classes}</td>
