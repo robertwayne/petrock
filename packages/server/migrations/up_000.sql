@@ -60,8 +60,8 @@ CREATE TABLE IF NOT EXISTS items
 (
     id uuid DEFAULT uuid_generate_v4(),
     name VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL,
-    description TEXT NOT NULL,
-    level INT NOT NULL,
+    description TEXT,
+    level INT,
     slot INT,
     classes VARCHAR(255),
     type INT NOT NULL,
