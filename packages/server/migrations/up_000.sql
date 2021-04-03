@@ -38,11 +38,23 @@ CREATE TABLE IF NOT EXISTS history
     created_on TIMESTAMP DEFAULT now() NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS slots
+(
+    id SERIAL2 UNIQUE PRIMARY KEY NOT NULL,
+    name VARCHAR(16) NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS classes
+(
+    classifier VARCHAR(2) PRIMARY KEY NOT NULL,
+    name VARCHAR(16)
+)
+
 CREATE TABLE IF NOT EXISTS items
 (
     id uuid DEFAULT uuid_generate_v4(),
-    "name" VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL,
-    "level" INT NOT NULL,
+    name VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL,
+    level INT NOT NULL,
     slot VARCHAR(255) NOT NULL,
     classes VARCHAR(255) NOT NULL,
     strength INT NOT NULL,
@@ -52,6 +64,10 @@ CREATE TABLE IF NOT EXISTS items
     wisdom INT NOT NULL,
     luck INT NOT NULL,
     icon VARCHAR(255) DEFAULT 'notFound.png' NOT NULL,
+
+    /* Foreign Keys */
+    CONSTRAINT fk_slot FOREIGN KEY (slot) REFERENCES slots (id)
+    CONSTRAINT fk_classes FOREIGN KEY (classes) REFERENCES classes (classifier)
 
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL
