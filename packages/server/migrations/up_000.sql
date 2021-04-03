@@ -41,21 +41,21 @@ CREATE TABLE IF NOT EXISTS history
 CREATE TABLE IF NOT EXISTS slots
 (
     id SERIAL2 UNIQUE PRIMARY KEY NOT NULL,
-    name VARCHAR(16) NOT NULL,
+    name VARCHAR(16) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS classes
 (
     classifier VARCHAR(2) PRIMARY KEY NOT NULL,
     name VARCHAR(16)
-)
+);
 
 CREATE TABLE IF NOT EXISTS items
 (
     id uuid DEFAULT uuid_generate_v4(),
     name VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL,
     level INT NOT NULL,
-    slot VARCHAR(255) NOT NULL,
+    slot SMALLINT NOT NULL,
     classes VARCHAR(255) NOT NULL,
     strength INT NOT NULL,
     intelligence INT NOT NULL,
@@ -71,4 +71,4 @@ CREATE TABLE IF NOT EXISTS items
 
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL
-)
+);
