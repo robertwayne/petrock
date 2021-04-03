@@ -114,6 +114,15 @@ VALUES
 ('Padded Garb', NULL, 3, 2, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
 ('Tattered Cloak', NULL, 2, 3, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
 
-('Health Potion', NULL, 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
-('Mana Potion', NULL, 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
-('Teleport Scroll', NULL, 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0);
+('Health Potion', 'Restores 30 HP to an ally.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Mana Potion', 'Restores 20 MP to an ally.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Teleport Scroll', NULL, 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+
+('Pet Rock', 'It literally does nothing.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Sunglasses', 'Deal with it.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Pink Hair Dye', 'Valentine''s Day hair dye.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Princess Crown', 'Valentine''s Day mask.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Devil Horns', 'Valentine''s Day mask.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Rockstar Hair', 'Valentine''s Day mask.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Messy Hair', 'Just the right amount of messy.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0)
+;
