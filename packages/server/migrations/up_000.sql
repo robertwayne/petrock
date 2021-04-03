@@ -50,10 +50,11 @@ CREATE TABLE IF NOT EXISTS slots
     name VARCHAR(16) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS classes
+CREATE TYPE classes AS
 (
-    classifier VARCHAR(2) PRIMARY KEY NOT NULL,
-    name VARCHAR(16)
+    WR BOOLEAN,
+    WZ BOOLEAN,
+    CL BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS items
@@ -63,9 +64,9 @@ CREATE TABLE IF NOT EXISTS items
     description TEXT,
     level INT,
     slot INT,
-    classes VARCHAR(255),
     type INT NOT NULL,
     consumable BOOLEAN,
+    usable_by classes,
     strength INT,
     intelligence INT,
     agility INT,
@@ -78,7 +79,6 @@ CREATE TABLE IF NOT EXISTS items
 
     /* Foreign Keys */
     CONSTRAINT fk_slot FOREIGN KEY (slot) REFERENCES slots (id),
-    CONSTRAINT fk_classes FOREIGN KEY (classes) REFERENCES classes (classifier),
     CONSTRAINT fk_type FOREIGN KEY (type) REFERENCES types (id),
 
     /* Meta Data */
@@ -102,9 +102,3 @@ VALUES
 (6, 'Outfit'),
 (7, 'Clothes Dye'),
 (8, 'Hair Dye');
-
-INSERT INTO classes (id, classifier)
-VALUES
-('WR', 'Warrior'),
-('WZ', 'Wizard'),
-('CL', 'Cleric');
