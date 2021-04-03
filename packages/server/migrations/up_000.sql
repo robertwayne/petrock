@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS items
     icon VARCHAR(255) DEFAULT 'notFound.png' NOT NULL,
 
     /* Foreign Keys */
-    CONSTRAINT fk_slot FOREIGN KEY (slot) REFERENCES slots (id)
-    CONSTRAINT fk_classes FOREIGN KEY (classes) REFERENCES classes (classifier)
+    CONSTRAINT fk_slot FOREIGN KEY (slot) REFERENCES slots (id),
+    CONSTRAINT fk_classes FOREIGN KEY (classes) REFERENCES classes (classifier),
 
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL
