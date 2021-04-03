@@ -106,17 +106,19 @@ VALUES
 INSERT INTO items (name, description, level, slot, type, consumable, usable_by, strength, intelligence, agility, defense, wisdom, luck, can_sell, sell_price)
 VALUES
 ('Cypress Stick', NULL, 1, 3, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
-('Oaken Club', NULL, 2, 1, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Oaken Club', NULL, 2, 3, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
 ('Leather Cap', NULL, 1, 1, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
 ('Training Sword', NULL, 4, 3, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
 ('Training Wand', NULL, 4, 3, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
 ('Leather Armor', NULL, 3, 2, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
 ('Padded Garb', NULL, 3, 2, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
-('Tattered Cloak', NULL, 2, 3, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Tattered Cloak', NULL, 2, 2, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Wooden Shield', NULL, 2, 4, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Simple Bracelet', NULL, 2, 4, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
 
-('Health Potion', 'Restores 30 HP to an ally.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
-('Mana Potion', 'Restores 20 MP to an ally.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
-('Teleport Scroll', NULL, 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Health Potion', 'Restores 30 HP to an ally.', NULL, NULL, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Mana Potion', 'Restores 20 MP to an ally.', NULL, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Teleport Scroll', 'Return the party to the last visited town.', NULL, NULL, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
 
 ('Pet Rock', 'It literally does nothing.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
 ('Sunglasses', 'Deal with it.', 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
