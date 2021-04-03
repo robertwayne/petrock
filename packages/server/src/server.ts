@@ -9,7 +9,8 @@ import dotenv from 'dotenv'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { DB_CONNECTION_STRING } from './db/connection'
 import { logOptions } from '../../shared/logging'
-import { routeLeaderboard, routeItems } from './routes/leaderboard'
+import { routeLeaderboard } from './routes/leaderboard'
+import { routeItems } from './routes/items'
 
 dotenv.config()
 
