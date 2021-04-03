@@ -9,7 +9,7 @@ import dotenv from 'dotenv'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { DB_CONNECTION_STRING } from './db/connection'
 import { logOptions } from '../../shared/logging'
-import { routeLeaderboard } from './routes/leaderboard'
+import { routeLeaderboard, routeItems } from './routes/leaderboard'
 
 dotenv.config()
 
@@ -53,7 +53,7 @@ app.register(fastifyPostgres, {
     connectionString: DB_CONNECTION_STRING,
 })
 
-app.register(routeLeaderboard, { prefix: '/api/v1' })
+app.register([routeLeaderboard, routeItems], { prefix: '/api/v1' })
 
 app.get(
     '/',
