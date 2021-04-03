@@ -54,7 +54,8 @@ app.register(fastifyPostgres, {
     connectionString: DB_CONNECTION_STRING,
 })
 
-app.register([routeLeaderboard, routeItems], { prefix: '/api/v1' })
+app.register(routeLeaderboard, { prefix: '/api/v1' })
+app.register(routeItems, { prefix: '/api/v1' })
 
 app.get(
     '/',
@@ -65,7 +66,7 @@ app.get(
 
 const start = async () => {
     try {
-        await app.listen(process.env.SERVER_PORT)
+        await app.listen(3000)
     } catch (err) {
         app.log.error(err)
         process.exit(1)

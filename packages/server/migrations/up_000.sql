@@ -102,3 +102,18 @@ VALUES
 (6, 'Outfit'),
 (7, 'Clothes Dye'),
 (8, 'Hair Dye');
+
+INSERT INTO items (name, description, level, slot, type, consumable, usable_by, strength, intelligence, agility, defense, wisdom, luck, can_sell, sell_price)
+VALUES
+('Cypress Stick', NULL, 1, 3, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Oaken Club', NULL, 2, 1, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Leather Cap', NULL, 1, 1, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Training Sword', NULL, 4, 3, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Training Wand', NULL, 4, 3, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Leather Armor', NULL, 3, 2, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Padded Garb', NULL, 3, 2, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Tattered Cloak', NULL, 2, 3, 1, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+
+('Health Potion', NULL, 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Mana Potion', NULL, 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0),
+('Teleport Scroll', NULL, 1, 3, 3, false, (true, true, true), 1, 0, 0, 0, 0, 0, true, 0);

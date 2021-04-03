@@ -8,7 +8,7 @@ import { FastifyInstance, FastifyRequest } from 'fastify'
 //}>
 
 export const routeItems = async (app: FastifyInstance): Promise<void> => {
-    app.get('/leaderboards', {}, async (request: FastifyRequest) => {
+    app.get('/items', {}, async (request: FastifyRequest) => {
         const client = await app.pg.connect()
 
         const { rows } = await client.query(
