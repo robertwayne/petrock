@@ -101,7 +101,7 @@
                 <th>Name</th>
                 <th>Level</th>
                 <th>Slot</th>
-                <th>Classes</th>
+                <th>Type</th>
             </tr>
         </thead>
         <tbody>
@@ -135,10 +135,16 @@
         width: 100%;
         text-align: left;
         padding: 10px;
+        border-spacing: 0;
+        border-collapse:separate;
     }
 
     tr:after {
         border-bottom: 1px solid var(--theme-primary-text);
+    }
+
+    tr:nth-child(even) {
+        background-color: var(--theme-primary);
     }
 
     td {
@@ -148,6 +154,11 @@
 
     td a {
         text-decoration: none;
+        font-weight: bold;
         color: var(--theme-primary-accent);
+    }
+
+    td a:hover {
+        text-decoration: underline;
     }
 </style>

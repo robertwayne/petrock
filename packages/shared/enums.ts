@@ -6,5 +6,5 @@ export enum ItemSlot {
     MASK = 5,
     OUTFIT = 6,
     CLOTHES_DYE = 7,
-    HAIR_DYE = 8
-} 
+    HAIR_DYE = 8,
+}
