@@ -4,8 +4,8 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE IF NOT EXISTS players
 (
     id uuid DEFAULT uuid_generate_v4 (),
-    username VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL
-        online BOOLEAN DEFAULT false NOT NULL
+    username VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL,
+    online BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS leaderboards
@@ -37,3 +37,22 @@ CREATE TABLE IF NOT EXISTS history
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS items
+(
+    id uuid DEFAULT uuid_generate_v4(),
+    "name" VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL,
+    "level" INT NOT NULL,
+    slot VARCHAR(255) NOT NULL,
+    classes VARCHAR(255) NOT NULL,
+    strength INT NOT NULL,
+    intelligence INT NOT NULL,
+    agility INT NOT NULL,
+    defense INT NOT NULL,
+    wisdom INT NOT NULL,
+    luck INT NOT NULL,
+    icon VARCHAR(255) DEFAULT 'notFound.png' NOT NULL,
+
+    /* Meta Data */
+    created_on TIMESTAMP DEFAULT now() NOT NULL
+)
