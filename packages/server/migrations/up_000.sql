@@ -121,11 +121,11 @@ VALUES
 ('Mana Potion', 'Restores 20 MP to an ally.', NULL, 3, 3, true, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 7),
 ('Teleport Scroll', 'Return the party to the last visited town.', NULL, NULL, 3, true, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 10),
 
-('Pet Rock', 'It literally does nothing.', 1, 3, 3, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
-('Sunglasses', 'Deal with it.', 1, 3, 3, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
-('Pink Hair Dye', 'Valentine''s Day hair dye.', 1, 3, 3, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
-('Princess Crown', 'Valentine''s Day mask.', 1, 3, 3, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
-('Devil Horns', 'Valentine''s Day mask.', 1, 3, 3, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
-('Rockstar Hair', 'Valentine''s Day mask.', 1, 3, 3, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
-('Messy Hair', 'Just the right amount of messy.', 1, 3, 3, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1)
+('Pet Rock', 'It literally does nothing.', NULL, NULL, 4, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
+('Sunglasses', 'Deal with it.', NULL, NULL, 2, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
+('Pink Hair Dye', 'Valentine''s Day hair dye.', NULL, NULL, 2, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
+('Princess Crown', 'Valentine''s Day mask.', NULL, NULL, 2, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
+('Devil Horns', 'Valentine''s Day mask.', NULL, NULL, 2, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
+('Rockstar Hair', 'Valentine''s Day mask.', NULL, NULL, 2, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1),
+('Messy Hair', 'Just the right amount of messy.', NULL, NULL, 2, false, (true, true, true), NULL, NULL, NULL, NULL, NULL, NULL, true, 1)
 ;
