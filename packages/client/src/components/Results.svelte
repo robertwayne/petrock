@@ -5,7 +5,7 @@
     import { ItemSlot, ItemType } from '../enums'
     import { items } from '../stores'
 
-    const getSlot = (slot: number) => {
+    const getSlot = (slot: unknown) => {
         switch (slot) {
             case ItemSlot.HEAD: {
                 return 'Head'
@@ -37,7 +37,7 @@
         }
     }
 
-    const getType = (itemType: number) => {
+    const getType = (itemType: unknown) => {
         switch (itemType) {
             case ItemType.EQUIPMENT: {
                 return 'Equipment'
@@ -57,14 +57,24 @@
         }
     }
 
+    const getLevel = (itemLevel: unknown) => {
+        switch (itemLevel) {
+            case null:
+                return ''
+            default:
+                return itemLevel
+        }
+    }
+
     async function getItemList() {
         let response: Response | undefined
 
         try {
-            response = await fetch(`http://localhost:3000/api/v1/items`)
+            response = await fetch(`${url}/api/v1/items`)
         } catch (err) {
             const subheader: HTMLElement = document.getElementById('disconnect-error') as HTMLElement
             subheader.classList.remove('hidden')
+            $items = []
             return
         }
 
@@ -77,8 +87,8 @@
             let str
             let _item: Item = {
                 name: item.name,
-                slot: getSlot(Number(item.slot)),
-                type: getType(Number(item.type)),
+                slot: getSlot(item.slot),
+                type: getType(item.type),
                 usable_by: item.usable_by,
                 level: item.level,
                 icon: item.icon,
@@ -107,7 +117,9 @@
             {/if}
         </thead>
         <tbody>
-            <div id="disconnect-error">There was a problem connecting to the database. Try reloading the page.</div>
+            <div id="disconnect-error" class="hidden">
+                There was a problem connecting to the database. Try reloading the page.
+            </div>
             {#each $items as item}
                 <tr>
                     <td>
@@ -125,8 +137,11 @@
 
 <style>
     #disconnect-error {
-        display: flex;
-        justify-content: center;
+        text-align: center;
+    }
+
+    .hidden {
+        display: none;
     }
 
     #wrapper {
