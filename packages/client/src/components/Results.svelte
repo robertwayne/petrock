@@ -97,14 +97,17 @@
 <div id="wrapper">
     <table>
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Level</th>
-                <th>Slot</th>
-                <th>Type</th>
-            </tr>
+            {#if !$items}
+                <tr>
+                    <th>Name</th>
+                    <th>Level</th>
+                    <th>Slot</th>
+                    <th>Type</th>
+                </tr>
+            {/if}
         </thead>
         <tbody>
+            <div id="disconnect-error">There was a problem connecting to the database. Try reloading the page.</div>
             {#each $items as item}
                 <tr>
                     <td>
@@ -121,6 +124,11 @@
 </div>
 
 <style>
+    #disconnect-error {
+        display: flex;
+        justify-content: center;
+    }
+
     #wrapper {
         display: flex;
         flex-direction: column;
@@ -136,7 +144,7 @@
         text-align: left;
         padding: 10px;
         border-spacing: 0;
-        border-collapse:separate;
+        border-collapse: separate;
     }
 
     tr:after {
