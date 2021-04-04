@@ -17,12 +17,12 @@
                 <li class="menu">
                     <span id="header" href="#/">Database<i class="icofont-caret-down" /></span>
                     <ul class="dropdown">
-                        <li><a href="#/">Classes</a></li>
-                        <li><a href="#/">Events</a></li>
+                        <li><a href="/classes" use:link>Classes</a></li>
+                        <li><a href="/events" use:link>Events</a></li>
                         <li><a href='/items' use:link>Items</a></li>
-                        <li><a href="#/">Monsters</a></li>
-                        <li><a href="#/">Skills</a></li>
-                        <li><a href="#/">Zones</a></li>
+                        <li><a href="/monsters" use:link>Monsters</a></li>
+                        <li><a href="/skills" use:link>Skills</a></li>
+                        <li><a href="/zones" use:link>Zones</a></li>
                     </ul>
                 </li>
             </ul>
