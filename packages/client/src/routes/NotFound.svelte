@@ -1,11 +1,12 @@
 <script>
+    import { pop } from 'svelte-spa-router'
 </script>
 
 <div>
     <h1>Uh oh!</h1>
     <p>That page doesn't seem to exist!</p>
     <br />
-    <p><a href="#/">...return home</a></p>
+    <p><button on:click={pop}>...go back</button></p>
 </div>
 
 <style>
@@ -22,12 +23,20 @@
         font-size: 16pt;
     }
 
-    p > a {
+    button {
+        background: none;
+        border: none;
+        font-size: 16pt;
+    }
+
+    p > button {
         text-decoration: none;
         color: var(--theme-primary-accent);
     }
 
-    p > a:hover {
+    p > button:hover {
         font-weight: bold;
+        cursor: pointer;
+        text-decoration: underline;
     }
 </style>
