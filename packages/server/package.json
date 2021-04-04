@@ -6,9 +6,10 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "dev": "NODE_ENV=development tsnd --respawn ./src/server.ts",
-        "start": "NODE_ENV=prouction ts-node ./src/server.ts --transpile-only",
-        "update-service": "NODE_ENV=production ts-node ./src/db/serviceRunner.ts --transpile-only",
+        "dev": "tsnd --respawn ./src/server.ts",
+        "build": "tsc",
+        "start": "ts-node ./src/server.ts --transpile-only",
+        "service-runner": "ts-node ./src/db/serviceRunner.ts --transpile-only",
         "lint": "eslint src/"
     },
     "dependencies": {

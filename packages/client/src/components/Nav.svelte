@@ -4,8 +4,9 @@
 
 <nav>
     <div id="wrapper">
-        <div id="left"><a href="#/">Pet<span class="logo-highlight">Rock</span></a></div>
-        <div id="right">
+        <div class="left"><a href="#/">Pet<span class="logo-highlight">Rock</span></a></div>
+        <div class="right">
+            <span id="header-small" class="right">Leaderboards</span>
             <ul id="main-menu">
                 <li class="menu">
                     <span id="header">Tools<i class="icofont-caret-down" /></span>
@@ -19,7 +20,7 @@
                     <ul class="dropdown">
                         <li><a href="/classes" use:link>Classes</a></li>
                         <li><a href="/events" use:link>Events</a></li>
-                        <li><a href='/items' use:link>Items</a></li>
+                        <li><a href="/items" use:link>Items</a></li>
                         <li><a href="/monsters" use:link>Monsters</a></li>
                         <li><a href="/skills" use:link>Skills</a></li>
                         <li><a href="/zones" use:link>Zones</a></li>
@@ -41,7 +42,7 @@
     #header:hover {
         cursor: default;
         font-weight: bold;
-        color: var(--theme-primary-accent)
+        color: var(--theme-primary-accent);
     }
 
     #main-menu {
@@ -90,7 +91,7 @@
             background: linear-gradient(15deg, var(--theme-primary) 28%, var(--theme-primary-shadow) 0);
         }
 
-        #left {
+        .left {
             font-size: 34pt;
             position: absolute;
             top: -3px;
@@ -102,7 +103,7 @@
             background: linear-gradient(15deg, var(--theme-primary) 22%, var(--theme-primary-shadow) 0);
         }
 
-        #left {
+        .left {
             font-size: 34pt;
             position: absolute;
             top: -3px;
@@ -114,7 +115,7 @@
             background: linear-gradient(15deg, var(--theme-primary) 15%, var(--theme-primary-shadow) 0);
         }
 
-        #left {
+        .left {
             font-size: 34pt;
             position: absolute;
             top: -3px;
@@ -127,7 +128,7 @@
         font-size: 14pt;
     }
 
-    #left {
+    .left {
         flex: 1;
         font-weight: bold;
         font-size: 22pt;
@@ -136,11 +137,11 @@
         height: max-content;
     }
 
-    #left a:hover {
+    .left a:hover {
         color: inherit;
     }
 
-    #right {
+    .right {
         display: flex;
         flex: 1;
         align-content: center;
@@ -153,7 +154,16 @@
         ul {
             visibility: hidden;
         }
+
+        #header-small {
+            visibility: visible;
+        }
     }
+
+    #header-small {
+            visibility: hidden;
+            background-color: red;
+        }
 
     ul {
         display: flex;

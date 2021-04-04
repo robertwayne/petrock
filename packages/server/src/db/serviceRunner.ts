@@ -24,8 +24,8 @@ const fetchData = async (client: PoolClient) => {
     let online = undefined
 
     try {
-        response = await nodeFetch('https://play.retro-mmo.com/leaderboards.json')
-        online = await nodeFetch('https://play.retro-mmo.com/players.json')
+        online = await nodeFetch(process.env.RETRO_API_ONLINE)
+        response = await nodeFetch(process.env.RETRO_API_LEADERBOARDS)
     } catch (err) {
         logger.error(`Error fetching data from RetroMMO API.\n${err}`)
         return

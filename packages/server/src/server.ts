@@ -7,7 +7,7 @@ import fastifyHelmet from 'fastify-helmet'
 import fastifyPostgres from 'fastify-postgres'
 import dotenv from 'dotenv'
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { DB_CONNECTION_STRING } from './db/connection'
+import { connectionOptions } from './db/connection'
 import { logOptions } from '../../shared/logging'
 import { routeLeaderboard } from './routes/leaderboard'
 import { routeItems } from './routes/items'
@@ -51,7 +51,7 @@ app.register(fastifyCors, {
 })
 
 app.register(fastifyPostgres, {
-    connectionString: DB_CONNECTION_STRING,
+    ...connectionOptions
 })
 
 app.register(routeLeaderboard, { prefix: '/api/v1' })
@@ -66,7 +66,7 @@ app.get(
 
 const start = async () => {
     try {
-        await app.listen(3000)
+        await app.listen(process.env.SERVER_PORT)
     } catch (err) {
         app.log.error(err)
         process.exit(1)
