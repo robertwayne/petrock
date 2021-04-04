@@ -48,10 +48,8 @@ export const routeLeaderboard = async (app: FastifyInstance): Promise<void> => {
         const { rows } = await client.query(
             `
             SELECT 
-            (
                 p.username, p.online, lb.total_experience, lb.daily_experience, lb.weekly_experience, 
                 lb.monthly_experience
-            )
             FROM leaderboards lb
             INNER JOIN players p ON (lb.player = p.username)
             ORDER BY ${sortBy} ${sortAsc}, lb.total_experience DESC, lb.player ASC;

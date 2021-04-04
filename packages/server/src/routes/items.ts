@@ -19,11 +19,9 @@ export const routeItems = async (app: FastifyInstance): Promise<void> => {
         const { rows } = await client.query(
             `
             SELECT 
-            (
                 i.name, i.name, i.description, i.level, i.slot, i.type, i.consumable, i.usable_by,
                 i.strength, i.intelligence, i.agility, i.defense, i.wisdom, i.luck, i.can_sell, i.sell_price,
                 i.icon
-            )
             FROM items i;
             `
         )
