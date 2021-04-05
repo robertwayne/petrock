@@ -1,5 +1,5 @@
 {
-    "include": ["src", "packages/server/types/index.d.ts", "types/index.d.ts"],
+    "include": ["src", "packages/server/types/index.d.ts", "types/index.d.ts", "../tools/populatePlayers.ts"],
     "compilerOptions": {
         // "types": [],
         // "module": "esnext",

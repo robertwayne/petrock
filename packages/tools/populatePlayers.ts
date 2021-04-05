@@ -1,20 +1,13 @@
-import pino from 'pino'
 import nodeFetch from 'node-fetch'
-import dotenv from 'dotenv'
-import { pool } from '../connection'
-import { logOptions } from '../../../../shared/logging'
-import type { Player, RawPlayerData } from '../../../../shared/types'
+import { pool } from '../server/src/db/connection'
+import type { Player, RawPlayerData } from '../shared/types'
 import { PoolClient } from 'node-postgres'
-
-dotenv.config()
-
-const logger = pino(logOptions)
 
 const runner = async (): Promise<void> => {
     const client: PoolClient = await pool.connect()
     await fetchData(client)
     
-    logger.info('Finished ingesting data.')
+    console.info('Finished ingesting data.')
     return
 }
 
@@ -23,9 +16,9 @@ const fetchData = async (client: PoolClient) => {
     for (let i = 1; i < 10000; i++) {
         try {
             response = await nodeFetch(`https://play.retro-mmo.com/leaderboards.json?page=${i}`)
-            logger.info('Got data from page ', i)
+            console.info('Got data from page ', i)
         } catch (err) {
-            logger.info('Out of data.')
+            console.info('Out of data.')
             break
         }
 
