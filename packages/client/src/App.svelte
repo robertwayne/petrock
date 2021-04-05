@@ -4,15 +4,19 @@
     import Nav from './components/Nav.svelte'
     import Footer from './components/Footer.svelte'
     import { routes } from './routeHandler'
+    import BottomNav from './components/BottomNav.svelte'
 </script>
 
 <div class="container">
-    <nav>
+    <nav class="top-nav">
         <Nav />
     </nav>
     <main>
         <Router {routes} />
     </main>
+    <nav class="bottom-nav">
+        <BottomNav />
+    </nav>
     <footer>
         <Footer />
     </footer>
@@ -63,18 +67,43 @@
         grid-template-areas:
             'nav'
             'main'
-            'footer';
+            'bottom-nav';
         height: 100vh;
         overflow: none;
     }
 
-    :global(nav) {
+    .top-nav {
         grid-area: nav;
         max-height: 35px;
     }
 
-    :global(footer) {
-        grid-area: footer;
+    .bottom-nav {
+        grid-area: bottom-nav;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
         max-height: 100px;
+    }
+
+    footer {
+        display: none;
+    }
+
+    @media (min-width: 720px) {
+        .container {
+            grid-template-rows:
+                'nav'
+                'main'
+                'footer';
+        }
+
+        footer {
+            grid-area: footer;
+            max-height: 100px;
+        }
+
+        .bottom-nav {
+            display: none;
+        }
     }
 </style>
