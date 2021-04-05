@@ -4,7 +4,7 @@ export const preloadData = [
     {
         place: 1,
         username: 'Evan',
-        total_experience: 185497,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -12,7 +12,7 @@ export const preloadData = [
     {
         place: 2,
         username: 'fruloo',
-        total_experience: 157833,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -20,7 +20,7 @@ export const preloadData = [
     {
         place: 3,
         username: 'thlurp',
-        total_experience: 155084,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -28,15 +28,15 @@ export const preloadData = [
     {
         place: 4,
         username: 'Gliss',
-        total_experience: 140394,
-        daily_experience: 2811,
+        total_experience: 0,
+        daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
     },
     {
         place: 5,
         username: 'Bandi',
-        total_experience: 121875,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -44,7 +44,7 @@ export const preloadData = [
     {
         place: 6,
         username: 'Deadoom',
-        total_experience: 105707,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -52,23 +52,23 @@ export const preloadData = [
     {
         place: 7,
         username: 'mrbrownies',
-        total_experience: 92702,
-        daily_experience: 378,
+        total_experience: 0,
+        daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
     },
     {
         place: 8,
         username: 'jex',
-        total_experience: 75725,
-        daily_experience: 409,
+        total_experience: 0,
+        daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
     },
     {
         place: 9,
         username: 'RedJaw',
-        total_experience: 69992,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -76,15 +76,15 @@ export const preloadData = [
     {
         place: 10,
         username: 'Juggernaut',
-        total_experience: 68465,
-        daily_experience: 226,
+        total_experience: 0,
+        daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
     },
     {
         place: 11,
         username: 'Odin',
-        total_experience: 56294,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -92,7 +92,7 @@ export const preloadData = [
     {
         place: 12,
         username: 'Cinder',
-        total_experience: 54694,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -100,7 +100,7 @@ export const preloadData = [
     {
         place: 13,
         username: 'Zubashi',
-        total_experience: 54113,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -108,7 +108,7 @@ export const preloadData = [
     {
         place: 14,
         username: 'Cogitabundus',
-        total_experience: 50285,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -116,7 +116,7 @@ export const preloadData = [
     {
         place: 15,
         username: 'choosetheforce',
-        total_experience: 49324,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -124,7 +124,7 @@ export const preloadData = [
     {
         place: 16,
         username: 'jumpyLion',
-        total_experience: 48456,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -132,7 +132,7 @@ export const preloadData = [
     {
         place: 17,
         username: 'TepG',
-        total_experience: 34405,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -140,7 +140,7 @@ export const preloadData = [
     {
         place: 18,
         username: 'KingKirb',
-        total_experience: 33409,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -148,7 +148,7 @@ export const preloadData = [
     {
         place: 19,
         username: 'BigBluePin',
-        total_experience: 32375,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -156,7 +156,7 @@ export const preloadData = [
     {
         place: 20,
         username: 'Beowulf',
-        total_experience: 30960,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -164,7 +164,7 @@ export const preloadData = [
     {
         place: 21,
         username: 'LoveYoSelfPlz',
-        total_experience: 25833,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -172,7 +172,7 @@ export const preloadData = [
     {
         place: 22,
         username: 'Skuzi',
-        total_experience: 24461,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -180,7 +180,7 @@ export const preloadData = [
     {
         place: 23,
         username: 'chase',
-        total_experience: 24056,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -188,7 +188,7 @@ export const preloadData = [
     {
         place: 24,
         username: 'Om1nous',
-        total_experience: 20080,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -196,7 +196,7 @@ export const preloadData = [
     {
         place: 25,
         username: 'God',
-        total_experience: 19278,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -204,7 +204,7 @@ export const preloadData = [
     {
         place: 26,
         username: 'ERmilburn02',
-        total_experience: 18945,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -212,7 +212,7 @@ export const preloadData = [
     {
         place: 27,
         username: 'daneharnett',
-        total_experience: 18699,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -220,7 +220,7 @@ export const preloadData = [
     {
         place: 28,
         username: 'FelixTFD',
-        total_experience: 17895,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -228,7 +228,7 @@ export const preloadData = [
     {
         place: 29,
         username: 'LeafyGreenBoi272',
-        total_experience: 17783,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -236,7 +236,7 @@ export const preloadData = [
     {
         place: 30,
         username: 'Saloman',
-        total_experience: 17731,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -244,7 +244,7 @@ export const preloadData = [
     {
         place: 31,
         username: 'DragonMaster13',
-        total_experience: 16221,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -252,7 +252,7 @@ export const preloadData = [
     {
         place: 32,
         username: 'DialMforMeow',
-        total_experience: 15202,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -260,7 +260,7 @@ export const preloadData = [
     {
         place: 33,
         username: 'Blossom',
-        total_experience: 14640,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -268,7 +268,7 @@ export const preloadData = [
     {
         place: 34,
         username: 'MacieG',
-        total_experience: 14450,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -276,7 +276,7 @@ export const preloadData = [
     {
         place: 35,
         username: 'karamac',
-        total_experience: 14005,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -284,7 +284,7 @@ export const preloadData = [
     {
         place: 36,
         username: 'Cullen',
-        total_experience: 13951,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -292,7 +292,7 @@ export const preloadData = [
     {
         place: 37,
         username: 'Simply_Jxded',
-        total_experience: 13541,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -300,7 +300,7 @@ export const preloadData = [
     {
         place: 38,
         username: 'Silverman830',
-        total_experience: 13295,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -308,7 +308,7 @@ export const preloadData = [
     {
         place: 39,
         username: 'Ely',
-        total_experience: 12882,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -316,7 +316,7 @@ export const preloadData = [
     {
         place: 40,
         username: 'sizzlorr',
-        total_experience: 11695,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -324,7 +324,7 @@ export const preloadData = [
     {
         place: 41,
         username: 'F-I-S-H-Y',
-        total_experience: 11353,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -332,23 +332,23 @@ export const preloadData = [
     {
         place: 42,
         username: 'Jaynerd',
-        total_experience: 10428,
-        daily_experience: 109,
+        total_experience: 0,
+        daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
     },
     {
         place: 43,
         username: 'DarkKnight',
-        total_experience: 10402,
-        daily_experience: 1,
+        total_experience: 0,
+        daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
     },
     {
         place: 44,
         username: 'git',
-        total_experience: 10082,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -356,7 +356,7 @@ export const preloadData = [
     {
         place: 45,
         username: 'Mint_Aldama',
-        total_experience: 9744,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -364,7 +364,7 @@ export const preloadData = [
     {
         place: 46,
         username: 'Ragchomp',
-        total_experience: 9513,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -372,7 +372,7 @@ export const preloadData = [
     {
         place: 47,
         username: 'Pongfee',
-        total_experience: 9358,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -380,7 +380,7 @@ export const preloadData = [
     {
         place: 48,
         username: 'hayjw916',
-        total_experience: 8967,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -388,7 +388,7 @@ export const preloadData = [
     {
         place: 49,
         username: 'horny_paladin',
-        total_experience: 8388,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -396,7 +396,7 @@ export const preloadData = [
     {
         place: 50,
         username: 'AutoTF',
-        total_experience: 8294,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -404,7 +404,7 @@ export const preloadData = [
     {
         place: 51,
         username: 'Amy',
-        total_experience: 8213,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -412,7 +412,7 @@ export const preloadData = [
     {
         place: 52,
         username: 'knap',
-        total_experience: 8208,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -420,7 +420,7 @@ export const preloadData = [
     {
         place: 53,
         username: 'Coty',
-        total_experience: 8142,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -428,7 +428,7 @@ export const preloadData = [
     {
         place: 54,
         username: 'alThesexyoverLord',
-        total_experience: 7922,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -436,7 +436,7 @@ export const preloadData = [
     {
         place: 55,
         username: 'Corukai',
-        total_experience: 7890,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -444,7 +444,7 @@ export const preloadData = [
     {
         place: 56,
         username: 'Mamo',
-        total_experience: 7887,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -452,7 +452,7 @@ export const preloadData = [
     {
         place: 57,
         username: 'Deadman',
-        total_experience: 7233,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -460,7 +460,7 @@ export const preloadData = [
     {
         place: 58,
         username: 'Kredge',
-        total_experience: 7144,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -468,7 +468,7 @@ export const preloadData = [
     {
         place: 59,
         username: 'RyanTFD',
-        total_experience: 6781,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -476,7 +476,7 @@ export const preloadData = [
     {
         place: 60,
         username: 'Peemard',
-        total_experience: 6679,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -484,7 +484,7 @@ export const preloadData = [
     {
         place: 61,
         username: 'iEnvyU',
-        total_experience: 6342,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -492,7 +492,7 @@ export const preloadData = [
     {
         place: 62,
         username: 'ponkotSuzu',
-        total_experience: 6223,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -500,7 +500,7 @@ export const preloadData = [
     {
         place: 63,
         username: 'JamesMMA',
-        total_experience: 6181,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -508,7 +508,7 @@ export const preloadData = [
     {
         place: 64,
         username: 'byFd',
-        total_experience: 5600,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -516,7 +516,7 @@ export const preloadData = [
     {
         place: 65,
         username: 'washi',
-        total_experience: 5244,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -524,7 +524,7 @@ export const preloadData = [
     {
         place: 66,
         username: 'hoby2000',
-        total_experience: 5153,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -532,7 +532,7 @@ export const preloadData = [
     {
         place: 67,
         username: 'Kiree',
-        total_experience: 5096,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -540,7 +540,7 @@ export const preloadData = [
     {
         place: 68,
         username: 'DanoToast',
-        total_experience: 5021,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -548,7 +548,7 @@ export const preloadData = [
     {
         place: 69,
         username: 'kylloren',
-        total_experience: 4969,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -556,7 +556,7 @@ export const preloadData = [
     {
         place: 70,
         username: 'ecoder',
-        total_experience: 4907,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -564,7 +564,7 @@ export const preloadData = [
     {
         place: 71,
         username: 'Connorses',
-        total_experience: 4767,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -572,7 +572,7 @@ export const preloadData = [
     {
         place: 72,
         username: 'enderthree',
-        total_experience: 4347,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -580,7 +580,7 @@ export const preloadData = [
     {
         place: 73,
         username: 'Lufia',
-        total_experience: 4263,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -588,7 +588,7 @@ export const preloadData = [
     {
         place: 74,
         username: 'heilsusafi',
-        total_experience: 4218,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -596,7 +596,7 @@ export const preloadData = [
     {
         place: 75,
         username: 'L-four',
-        total_experience: 4216,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -604,7 +604,7 @@ export const preloadData = [
     {
         place: 76,
         username: 'Elysian',
-        total_experience: 4134,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -612,7 +612,7 @@ export const preloadData = [
     {
         place: 77,
         username: 'Septimus',
-        total_experience: 4082,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -620,7 +620,7 @@ export const preloadData = [
     {
         place: 78,
         username: 'Swemmertje',
-        total_experience: 3976,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -628,7 +628,7 @@ export const preloadData = [
     {
         place: 79,
         username: 'miniboc',
-        total_experience: 3923,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -636,7 +636,7 @@ export const preloadData = [
     {
         place: 80,
         username: 'Carsair',
-        total_experience: 3837,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -644,7 +644,7 @@ export const preloadData = [
     {
         place: 81,
         username: 'soloc',
-        total_experience: 3757,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -652,7 +652,7 @@ export const preloadData = [
     {
         place: 82,
         username: 'GreatGameGal',
-        total_experience: 3740,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -660,7 +660,7 @@ export const preloadData = [
     {
         place: 83,
         username: 'Ewan',
-        total_experience: 3655,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -668,7 +668,7 @@ export const preloadData = [
     {
         place: 84,
         username: 'ColinTFD',
-        total_experience: 3633,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -676,7 +676,7 @@ export const preloadData = [
     {
         place: 85,
         username: 'Saylux',
-        total_experience: 3616,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -684,7 +684,7 @@ export const preloadData = [
     {
         place: 86,
         username: 'the_fat_kid_nick',
-        total_experience: 3537,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -692,7 +692,7 @@ export const preloadData = [
     {
         place: 87,
         username: 'Espeon',
-        total_experience: 3474,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -700,7 +700,7 @@ export const preloadData = [
     {
         place: 88,
         username: 'Pink_Chair',
-        total_experience: 3457,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -708,7 +708,7 @@ export const preloadData = [
     {
         place: 89,
         username: 'AHouse',
-        total_experience: 3441,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -716,7 +716,7 @@ export const preloadData = [
     {
         place: 90,
         username: 'BlackRoseTengu',
-        total_experience: 3425,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -724,7 +724,7 @@ export const preloadData = [
     {
         place: 91,
         username: 'dumpsterfirebrea2o',
-        total_experience: 3391,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -732,7 +732,7 @@ export const preloadData = [
     {
         place: 92,
         username: 'dyne',
-        total_experience: 3385,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -740,7 +740,7 @@ export const preloadData = [
     {
         place: 93,
         username: 'Hokagabe',
-        total_experience: 3303,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -748,7 +748,7 @@ export const preloadData = [
     {
         place: 94,
         username: 'Yellow',
-        total_experience: 3216,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -756,7 +756,7 @@ export const preloadData = [
     {
         place: 95,
         username: 'Scorpi',
-        total_experience: 3216,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -764,7 +764,7 @@ export const preloadData = [
     {
         place: 96,
         username: 'funniecheeseman',
-        total_experience: 3129,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -772,7 +772,7 @@ export const preloadData = [
     {
         place: 97,
         username: 'timefrog',
-        total_experience: 3122,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -780,7 +780,7 @@ export const preloadData = [
     {
         place: 98,
         username: 'tuxun',
-        total_experience: 3101,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -788,7 +788,7 @@ export const preloadData = [
     {
         place: 99,
         username: 'TheLastPogBender',
-        total_experience: 3082,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
@@ -796,7 +796,7 @@ export const preloadData = [
     {
         place: 100,
         username: 'wasbinko',
-        total_experience: 3060,
+        total_experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
