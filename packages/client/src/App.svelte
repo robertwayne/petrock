@@ -86,6 +86,10 @@
     }
 
     footer {
+        grid-area: footer;
+    }
+
+    footer {
         display: none;
     }
 
@@ -95,11 +99,6 @@
                 'nav'
                 'main'
                 'footer';
-        }
-
-        footer {
-            grid-area: footer;
-            max-height: 100px;
         }
 
         .bottom-nav {

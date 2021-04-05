@@ -38,7 +38,8 @@ const fetchData = async (client: PoolClient) => {
                 VALUES ($1, $2) 
                 ON CONFLICT ON CONSTRAINT players_pkey 
                 DO NOTHING
-                `, values: [_player.username, _player.online],
+                `,
+                values: [_player.username, _player.online],
             })
         }
     }

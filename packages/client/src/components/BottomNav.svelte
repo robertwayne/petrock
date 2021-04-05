@@ -22,7 +22,6 @@
     button {
         display: flex;
         flex: 1;
-        justify-content: space-between;
         justify-content: center;
         align-items: center;
         border: 1px solid var(--theme-primary);
