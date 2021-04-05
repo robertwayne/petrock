@@ -1,3 +1,0 @@
-ALTER TABLE history DROP place;
-ALTER TABLE player
-ADD COLUMN online BOOLEAN DEFAULT false NOT NULL;
