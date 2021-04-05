@@ -11,8 +11,8 @@
                 <li class="menu">
                     <span id="header">Tools<i class="icofont-caret-down" /></span>
                     <ul class="dropdown">
-                        <li><a href="#/">Leaderboards</a></li>
-                        <li><a href="#/">XP Tracker</a></li>
+                        <li><a href="/" use:link>Leaderboards</a></li>
+                        <li><a href="/tracker" use:link>XP Tracker</a></li>
                     </ul>
                 </li>
                 <li class="menu">
@@ -80,9 +80,9 @@
     nav {
         grid-area: nav;
         overflow: hidden;
-        visibility: visible;
         padding: 3px 1%;
         background-color: var(--theme-primary-shadow);
+        height: 100%;
     }
 
     @media (min-width: 720px) {
@@ -142,28 +142,20 @@
     }
 
     .right {
-        display: flex;
-        flex: 1;
-        align-content: center;
+        display: none;
     }
 
     .logo-highlight {
         color: var(--theme-primary-accent);
     }
-    @media (max-width: 700px) {
-        ul {
-            visibility: hidden;
-        }
 
-        #header-small {
-            visibility: visible;
+    @media (min-width: 720px) {
+        .right {
+            display: flex;
+            flex: 1;
+            align-content: center;
         }
     }
-
-    #header-small {
-            visibility: hidden;
-            background-color: red;
-        }
 
     ul {
         display: flex;
