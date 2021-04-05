@@ -37,8 +37,8 @@ const fetchData = async (client: PoolClient) => {
                 INSERT INTO players (username, online)
                 VALUES ($1, $2) 
                 ON CONFLICT ON CONSTRAINT players_pkey 
-                DO NOTHING`,
-                values: [_player.username, _player.online],
+                DO NOTHING
+                `, values: [_player.username, _player.online],
             })
         }
     }
