@@ -3,7 +3,6 @@ build
 node_modules
 .idea
 packages/server/.env
-.yarn
 .env
 .venv
 venv/
