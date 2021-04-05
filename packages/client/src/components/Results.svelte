@@ -4,6 +4,7 @@
     import type { Item } from '../../../shared/types'
     import { ItemSlot, ItemType } from '../enums'
     import { items } from '../stores'
+    import Disconnected from './Disconnected.svelte'
 
     const getSlot = (slot: unknown) => {
         switch (slot) {
@@ -117,9 +118,7 @@
             {/if}
         </thead>
         <tbody>
-            <div id="disconnect-error" class="hidden">
-                There was a problem connecting to the database. Try reloading the page.
-            </div>
+            <Disconnected error_label='LOST CONNECTION'/>
             {#each $items as item}
                 <tr>
                     <td>
@@ -136,14 +135,6 @@
 </div>
 
 <style>
-    #disconnect-error {
-        text-align: center;
-    }
-
-    .hidden {
-        display: none;
-    }
-
     #wrapper {
         display: flex;
         flex-direction: column;

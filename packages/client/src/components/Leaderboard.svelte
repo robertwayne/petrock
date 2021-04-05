@@ -4,6 +4,7 @@
     import { preloadData } from '../preload'
     import type { Player } from '../../../shared/types'
     import { tickRate, url } from '../constants'
+    import Disconnected from './Disconnected.svelte'
 
     // we do this to avoid large CLS (Cumulative Layout Shift) issues on initial page load
     $leaderboard = preloadData
@@ -105,7 +106,7 @@
 
 <div id="wrapper">
     <h1>Leaderboards</h1>
-    <div id="disconnect-error" class="hidden">LOST CONNECTION<br />Please reload the page to reconnect.</div>
+    <Disconnected error_label='LOST CONNECTION'/>
     <span id="subheader">This page updates in real time.</span>
     <span id="subheader-2"
         >Beta: Daily/Weekly/Monthly values may not be 100% accurate<br />as I am currently modifying database queries
@@ -148,17 +149,6 @@
 </div>
 
 <style>
-    #disconnect-error {
-        color: rgb(199, 45, 45);
-        font-weight: bold;
-        font-size: 18pt;
-        text-align: center;
-    }
-
-    .hidden {
-        display: none;
-    }
-
     .online-marker {
         height: 7px;
         width: 7px;
