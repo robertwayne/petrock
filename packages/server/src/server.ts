@@ -51,7 +51,7 @@ app.register(fastifyCors, {
 })
 
 app.register(fastifyPostgres, {
-    ...connectionOptions
+    ...connectionOptions,
 })
 
 app.register(routeLeaderboard, { prefix: '/api/v1' })

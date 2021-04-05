@@ -6,7 +6,7 @@ import { PoolClient } from 'node-postgres'
 const runner = async (): Promise<void> => {
     const client: PoolClient = await pool.connect()
     await fetchData(client)
-    
+
     console.info('Finished ingesting data.')
     return
 }
@@ -33,10 +33,11 @@ const fetchData = async (client: PoolClient) => {
 
             await client.query({
                 name: 'add-user',
-                text: `INSERT INTO players (username, online)
-                    VALUES ($1, $2) 
-                    ON CONFLICT ON CONSTRAINT players_pkey 
-                    DO NOTHING`,
+                text: `
+                INSERT INTO players (username, online)
+                VALUES ($1, $2) 
+                ON CONFLICT ON CONSTRAINT players_pkey 
+                DO NOTHING`,
                 values: [_player.username, _player.online],
             })
         }
