@@ -7,3 +7,4 @@ packages/server/.env
 .env
 .venv
 venv/
+logs/
