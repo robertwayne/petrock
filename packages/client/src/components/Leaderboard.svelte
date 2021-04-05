@@ -4,8 +4,7 @@
     import { preloadData } from '../preload'
     import type { Player } from '../../../shared/types'
     import { tickRate, url } from '../constants'
-    import Disconnected from './Disconnected.svelte'
-import PageHeader from './PageHeader.svelte'
+    import PageHeader from './PageHeader.svelte'
 
     // we do this to avoid large CLS (Cumulative Layout Shift) issues on initial page load
     $leaderboard = preloadData
@@ -106,7 +105,7 @@ import PageHeader from './PageHeader.svelte'
 </script>
 
 <div id="wrapper">
-    <PageHeader subheader='This page updates in real-time.' />
+    <PageHeader header='Leaderboards' subheader='This page updates in real-time.' />
     <table id="leaderboard">
         <thead>
             <tr>

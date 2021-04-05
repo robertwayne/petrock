@@ -2,7 +2,6 @@
 </script>
 
 <div id="wrapper">
-    <h1>Items</h1>
     <div id='not-implemented-warning'>This page is incomplete and not working fully. Please check back later.</div>
     <form>
         <div id='name'>

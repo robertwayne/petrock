@@ -3,7 +3,7 @@
 </script>
 
 <div>
-    <PageHeader header='Experience Tracker' subheader='Easily track your experience per hour!' />
+    <PageHeader header='Zones'/>
 </div>
 
 <style>

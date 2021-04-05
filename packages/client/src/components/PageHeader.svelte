@@ -1,10 +1,11 @@
 <script lang="ts">
     import Disconnected from './Disconnected.svelte'
-    export let subheader: string
+    export let header: string
+    export let subheader: string = ''
 </script>
 
 <div>
-    <h1>Leaderboards</h1>
+    <h1>{header}</h1>
     <Disconnected error_label="LOST CONNECTION" />
     <span id="subheader">{subheader}</span>
 </div>
