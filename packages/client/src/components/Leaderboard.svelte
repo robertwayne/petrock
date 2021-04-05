@@ -189,7 +189,6 @@ import PageHeader from './PageHeader.svelte'
         align-items: center;
         width: 100%;
         overflow: hidden;
-        padding-bottom: 100px;
     }
 
     #leaderboard {
