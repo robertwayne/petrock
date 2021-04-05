@@ -14,7 +14,7 @@
     h1 {
         display: flex;
         justify-content: center;
-        font-size: 26pt;
+        font-size: 30pt;
         padding: 1% 0 0 0;
         height: max-content;
     }
