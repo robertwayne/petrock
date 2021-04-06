@@ -91,7 +91,8 @@ const fetchData = async (client: PoolClient) => {
                 SET
                     experience = COALESCE(history.experience + $2)
                 WHERE history.player = $1;
-                `, values: [_player.username, experience_diff],
+                `,
+                values: [_player.username, experience_diff],
             })
 
             await client.query('COMMIT')

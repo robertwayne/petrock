@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { leaderboard, sortBy, orderBy, updateTimer } from '../stores'
     import { preloadData } from '../preload'
     import type { Player } from '../../../shared/types'
@@ -47,6 +47,11 @@
             $updateTimer = setInterval(getLeaderboardData, tickRate)
         }
     )
+
+    onDestroy(async (): Promise<void> => {
+        clearInterval($updateTimer)
+        $updateTimer = 0
+    })
 
     function setCaretState(el: HTMLElement) {
         let cls = el.classList
@@ -105,7 +110,7 @@
 </script>
 
 <div id="wrapper">
-    <PageHeader header='Leaderboards' subheader='This page updates in real-time.' />
+    <PageHeader header="Leaderboards" subheader="This page updates in real-time." />
     <table id="leaderboard">
         <thead>
             <tr>
@@ -146,7 +151,7 @@
     .online-marker {
         height: 7px;
         width: 7px;
-        background-color: rgb(80, 177, 80);
+        background-color: var(--theme-primary-green);
         border-radius: 50%;
         display: inline-block;
         margin: 0 8px 2px 0;

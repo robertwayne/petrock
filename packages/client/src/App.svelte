@@ -1,5 +1,6 @@
 <script>
     import '/static/css/themes.css'
+    import '/static/css/global.css'
     import Router from 'svelte-spa-router'
     import Nav from './components/Nav.svelte'
     import Footer from './components/Footer.svelte'

@@ -7,7 +7,7 @@
 <div>
     <h1>{header}</h1>
     <Disconnected error_label="LOST CONNECTION" />
-    <span id="subheader">{subheader}</span>
+    <span id="page-subheader">{subheader}</span>
 </div>
 
 <style>
@@ -19,7 +19,7 @@
         height: max-content;
     }
 
-    #subheader {
+    #page-subheader {
         display: flex;
         justify-content: center;
         font-style: italic;

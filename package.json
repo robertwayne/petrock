@@ -10,7 +10,7 @@
         "production": "pm2 start ecosystem.config.js --env production",
         "dev": "pm2 start ecosystem.config.js",
         "start": "yarn workspace @petrock/client start",
-        "build": "yarn workspace @petrock/client build && yarn workspace @petrock/server build",
+        "build": "yarn workspace @petrock/client build",
         "start-webserver": "yarn workspace @petrock/server start",
         "start-service-runner": "yarn workspace @petrock/server service-runner",
         "lint": "yarn workspace @petrock/client lint && yarn workspace @petrock/server lint",
