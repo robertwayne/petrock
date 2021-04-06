@@ -62,7 +62,8 @@ const fetchData = async (client: PoolClient) => {
                 DO UPDATE
                 SET
                     online = $2;
-                    `, values: [_player.username, _player.online],
+                    `,
+                values: [_player.username, _player.online],
             })
 
             await client.query({
@@ -76,7 +77,8 @@ const fetchData = async (client: PoolClient) => {
                     total_experience = $2,
                     daily_experience = COALESCE(leaderboards.daily_experience + $3)
                 WHERE leaderboards.player = $1;
-                `, values: [_player.username, _player.total_experience, experience_diff],
+                `,
+                values: [_player.username, _player.total_experience, experience_diff],
             })
 
             await client.query({
@@ -84,7 +86,7 @@ const fetchData = async (client: PoolClient) => {
                 text: `
                 INSERT INTO history (player, experience)
                 VALUES ($1, $2)
-                ON CONFLICT ON CONSTRAINT history_player_key
+                ON CONFLICT (player, created_on)
                 DO UPDATE
                 SET
                     experience = COALESCE(history.experience + $2)
