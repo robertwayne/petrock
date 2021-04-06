@@ -17,7 +17,8 @@ export const routeHistory = async (app: FastifyInstance): Promise<void> => {
             FROM history h
             INNER JOIN players p ON (h.player = p.username)
             WHERE h.player = $1;
-            `, [request.query.username]
+            `,
+            [request.query.username]
         )
 
         client.release()
