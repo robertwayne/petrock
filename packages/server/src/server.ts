@@ -11,6 +11,7 @@ import { connectionOptions } from './db/connection'
 import { logOptions } from '../../shared/logging'
 import { routeLeaderboard } from './routes/leaderboard'
 import { routeItems } from './routes/items'
+import { routeHistory } from './routes/history'
 
 dotenv.config()
 
@@ -56,6 +57,7 @@ app.register(fastifyPostgres, {
 
 app.register(routeLeaderboard, { prefix: '/api/v1' })
 app.register(routeItems, { prefix: '/api/v1' })
+app.register(routeHistory, { prefix: '/api/v1' })
 
 app.get(
     '/',
