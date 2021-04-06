@@ -29,13 +29,16 @@ CREATE TABLE IF NOT EXISTS leaderboards
 CREATE TABLE IF NOT EXISTS history
 (
     id uuid DEFAULT uuid_generate_v4(),
-    player VARCHAR(255) UNIQUE NOT NULL,
+    player VARCHAR(255) NOT NULL,
     CONSTRAINT fk_player FOREIGN KEY (player) REFERENCES players (username),
 
     experience INT NOT NULL,
 
     /* Meta Data */
-    created_on TIMESTAMP DEFAULT now() NOT NULL
+    created_on TIMESTAMP DEFAULT CURRENT_DATE NOT NULL,
+
+    /* Composite Primary Key */
+    PRIMARY KEY (player, created_on)
 );
 
 CREATE TABLE IF NOT EXISTS types
