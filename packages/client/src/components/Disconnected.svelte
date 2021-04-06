@@ -11,8 +11,4 @@
         font-size: 16pt;
         text-align: center;
     }
-
-    .hidden {
-        display: none;
-    }
 </style>
