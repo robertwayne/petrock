@@ -9,7 +9,6 @@ type HistoryRequest = FastifyRequest<{
 export const routeHistory = async (app: FastifyInstance): Promise<void> => {
     app.get('/history', {}, async (request: HistoryRequest) => {
         const client = await app.pg.connect()
-        console.log('REQUESTTTTTTTTTTTTTTTTTTTTTTTTTTT')
 
         const { rows } = await client.query(
             `
@@ -23,6 +22,6 @@ export const routeHistory = async (app: FastifyInstance): Promise<void> => {
 
         client.release()
 
-        return rows
+        return rows[0]
     })
 }
