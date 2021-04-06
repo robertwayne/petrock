@@ -4,7 +4,7 @@
     import { preloadData } from '../preload'
     import type { Player } from '../../../shared/types'
     import { tickRate, url } from '../constants'
-    import Disconnected from './Disconnected.svelte'
+    import PageHeader from './PageHeader.svelte'
 
     // we do this to avoid large CLS (Cumulative Layout Shift) issues on initial page load
     $leaderboard = preloadData
@@ -105,13 +105,7 @@
 </script>
 
 <div id="wrapper">
-    <h1>Leaderboards</h1>
-    <Disconnected error_label='LOST CONNECTION'/>
-    <span id="subheader">This page updates in real time.</span>
-    <span id="subheader-2"
-        >Beta: Daily/Weekly/Monthly values may not be 100% accurate<br />as I am currently modifying database queries
-        often.</span
-    >
+    <PageHeader header='Leaderboards' subheader='This page updates in real-time.' />
     <table id="leaderboard">
         <thead>
             <tr>
@@ -187,24 +181,6 @@
         padding-right: 14px;
     }
 
-    #subheader {
-        font-style: italic;
-        color: var(--theme-primary-text);
-        opacity: 0.6;
-        margin-top: -4px;
-        height: max-content;
-    }
-
-    #subheader-2 {
-        font-style: italic;
-        color: var(--theme-primary-text);
-        opacity: 0.6;
-        padding: 0 0 4% 0;
-        margin-top: -4px;
-        text-align: center;
-        height: max-content;
-    }
-
     #wrapper {
         display: flex;
         flex-direction: column;
@@ -212,14 +188,6 @@
         align-items: center;
         width: 100%;
         overflow: hidden;
-    }
-
-    h1 {
-        display: flex;
-        justify-content: center;
-        font-size: 36pt;
-        padding: 1% 0 0 0;
-        height: max-content;
     }
 
     #leaderboard {

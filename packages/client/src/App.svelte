@@ -67,9 +67,8 @@
         grid-template-areas:
             'nav'
             'main'
-            'bottom-nav';
+            'footer';
         height: 100vh;
-        overflow: none;
     }
 
     .top-nav {
@@ -78,32 +77,34 @@
     }
 
     .bottom-nav {
-        grid-area: bottom-nav;
+        grid-area: footer;
         position: fixed;
         bottom: 0;
         width: 100%;
-        max-height: 100px;
     }
 
     footer {
-        display: none;
+        grid-area: footer;
+        visibility: hidden;
     }
 
     @media (min-width: 720px) {
         .container {
-            grid-template-rows:
+            display: grid;
+            grid-template-rows: 35px auto 100px;
+            grid-template-areas:
                 'nav'
                 'main'
                 'footer';
-        }
-
-        footer {
-            grid-area: footer;
-            max-height: 100px;
+            height: 100vh;
         }
 
         .bottom-nav {
-            display: none;
+            visibility: hidden;
+        }
+
+        footer {
+            visibility: visible;
         }
     }
 </style>

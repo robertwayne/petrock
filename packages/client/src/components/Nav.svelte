@@ -6,7 +6,6 @@
     <div id="wrapper">
         <div class="left"><a href="#/">Pet<span class="logo-highlight">Rock</span></a></div>
         <div class="right">
-            <span id="header-small" class="right">Leaderboards</span>
             <ul id="main-menu">
                 <li class="menu">
                     <span id="header">Tools<i class="icofont-caret-down" /></span>
