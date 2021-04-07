@@ -53,7 +53,7 @@ import { writable } from 'svelte/store';
             // }
         }
 
-        $expPerHour = Math.floor(($expThisSession / sessionDuration) * 3600)
+        $expPerHour = Math.floor(Math.min(0, ($expThisSession / sessionDuration) * 3600))
     }
 
     onMount(async () => {
