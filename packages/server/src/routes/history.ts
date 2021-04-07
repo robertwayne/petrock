@@ -6,6 +6,7 @@ type HistoryRequest = FastifyRequest<{
     }
 }>
 
+/** Returns a specific players' experience from the history table. */
 export const routeHistory = async (app: FastifyInstance): Promise<void> => {
     app.get('/history', {}, async (request: HistoryRequest) => {
         const client = await app.pg.connect()

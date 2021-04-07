@@ -7,6 +7,7 @@ type LeaderboardRequest = FastifyRequest<{
     }
 }>
 
+/** Returns a the leaderboard table sorted & ordered based on query params. */
 export const routeLeaderboard = async (app: FastifyInstance): Promise<void> => {
     app.get('/leaderboards', {}, async (request: LeaderboardRequest) => {
         const client = await app.pg.connect()

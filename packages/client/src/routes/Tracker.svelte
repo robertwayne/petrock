@@ -1,13 +1,12 @@
 <script lang="ts">
+    import PageHeader from '../components/PageHeader.svelte'
+    import { onMount } from 'svelte'
     import { url } from '../constants'
     import { expPreviousExperience } from '../stores'
-
-    import { onMount } from 'svelte'
-    import PageHeader from '../components/PageHeader.svelte'
-    import type { RawPlayerData } from '../../../shared/types'
     import { expPerHour, expThisSession } from '../stores'
     import { showDisconnectHeader } from '../errorHandlers'
-import { writable } from 'svelte/store';
+    import type { RawPlayerData } from '../../../shared/types'
+
 
     $: username = ''
     $: expInterval = 0
@@ -130,6 +129,8 @@ import { writable } from 'svelte/store';
         font-size: 18pt;
     }
 
+    /* We mark these global to prevent Svelte from 
+    complaining about unassigned CSS tags. */
     :global(.tracker-active) {
         border: 3px solid var(--theme-primary-green) !important;
         font-style: italic;

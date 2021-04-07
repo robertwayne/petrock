@@ -1,3 +1,39 @@
+*,
+html,
+body {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 1.5;
+    background-color: var(--theme-primary);
+    color: var(--theme-primary-text);
+    font-family: var(--font-primary);
+}
+
+main {
+    grid-area: main;
+    padding: 0;
+    height: 100%;
+}
+
+@media (min-width: 720px) {
+    main {
+        padding: 0 10% 5% 10%;
+    }
+}
+
 .hidden {
     display: none;
+}
+
+a {
+    text-decoration: underline dotted var(--theme-primary-lighter) 1px;
+    color: inherit;
+}
+
+a:hover {
+    color: var(--theme-primary-accent);
+    font-weight: bold;
 }

@@ -1,14 +1,16 @@
 <script lang="ts">
+    import PageHeader from './PageHeader.svelte'
     import { onDestroy, onMount } from 'svelte'
     import { leaderboard, sortBy, orderBy, updateTimer } from '../stores'
     import { preloadData } from '../preload'
-    import type { Player } from '../../../shared/types'
     import { tickRate, url } from '../constants'
-    import PageHeader from './PageHeader.svelte'
+    import type { Player } from '../../../shared/types'
 
-    // we do this to avoid large CLS (Cumulative Layout Shift) issues on initial page load
+
+    // preset to avoid CLS
     $leaderboard = preloadData
 
+    /** Fetches current leaderboard data, maps it to players, and pushes it to a reactive array. */
     async function getLeaderboardData() {
         let response: Response | undefined
 
@@ -25,9 +27,9 @@
 
         const data: Array<Player> = await response.json()
 
-        let _leaderboard: Array<Player> = []
+        let tmp_leaderboard: Array<Player> = []
         for (let i = 0; i < 100; i++) {
-            let _player: Player = {
+            let player: Player = {
                 place: i + 1,
                 username: data[i].username,
                 online: data[i].online,
@@ -36,9 +38,9 @@
                 weekly_experience: data[i].weekly_experience,
                 monthly_experience: data[i].monthly_experience,
             }
-            _leaderboard.push(_player)
+            tmp_leaderboard.push(player)
         }
-        $leaderboard = _leaderboard
+        $leaderboard = tmp_leaderboard
     }
 
     onMount(
@@ -53,6 +55,9 @@
         $updateTimer = 0
     })
 
+    /** Toggles caret icons between up and down, across table headers, based
+     * on the current state.
+    */
     function setCaretState(el: HTMLElement) {
         let cls = el.classList
 
@@ -73,6 +78,7 @@
         }
     }
 
+    /** Requests a sorted copy of the leaderboard data from the API. */
     async function sort(column: string): Promise<void> {
         clearInterval($updateTimer)
 

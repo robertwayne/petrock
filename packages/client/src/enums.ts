@@ -1,3 +1,4 @@
+/** Represents the lookup table values for the slots table. */
 export enum ItemSlot {
     HEAD = 1,
     BODY = 2,
@@ -9,6 +10,7 @@ export enum ItemSlot {
     HAIR_DYE = 8,
 }
 
+/** Represents the lookup table values for the type table. */
 export enum ItemType {
     EQUIPMENT = 1,
     COSMETIC = 2,

@@ -19,6 +19,16 @@
         height: max-content;
     }
 
+    @media (min-width: 720px) {
+        h1 {
+            display: flex;
+            justify-content: center;
+            font-size: 36pt;
+            padding: 1% 0 0 0;
+            height: max-content;
+        }
+    }
+
     #page-subheader {
         display: flex;
         justify-content: center;
@@ -28,15 +38,5 @@
         margin-top: -4px;
         height: max-content;
         padding: 0 0 4% 0;
-    }
-
-    @media (min-width: 720px) {
-        h1 {
-            display: flex;
-            justify-content: center;
-            font-size: 36pt;
-            padding: 1% 0 0 0;
-            height: max-content;
-        }
     }
 </style>

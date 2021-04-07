@@ -4,7 +4,7 @@
 
 <nav>
     <div id="wrapper">
-        <div class="left"><a href="#/">Pet<span class="logo-highlight">Rock</span></a></div>
+        <div class="left"><a href="#/">Pet<span id="logo-highlight">Rock</span></a></div>
         <div class="right">
             <ul id="main-menu">
                 <li class="menu">
@@ -144,7 +144,7 @@
         display: none;
     }
 
-    .logo-highlight {
+    #logo-highlight {
         color: var(--theme-primary-accent);
     }
 

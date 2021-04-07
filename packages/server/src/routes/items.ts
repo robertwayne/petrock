@@ -12,6 +12,7 @@ type ItemsRequest = FastifyRequest<{
     }
 }>
 
+/** Returns items based on query params from the items table. */
 export const routeItems = async (app: FastifyInstance): Promise<void> => {
     app.get('/items', {}, async (request: ItemsRequest) => {
         const client = await app.pg.connect()

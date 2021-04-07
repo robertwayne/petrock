@@ -1,5 +1,4 @@
-// This is used to avoid CLS (Cumulative Laushout Shift) during initial page render.
-// This is dummy data pulled from the database, but will align the leaderboard tables.
+// This is used to avoid CLS (Cumulative Laushout Shift) during initial page render. This is dummy data pulled from the database, but will align the leaderboard tables.
 export const preloadData = [
     {
         place: 1,

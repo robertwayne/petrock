@@ -21,27 +21,6 @@
 </div>
 
 <style>
-    #not-implemented-warning {
-        color: rgb(199, 45, 45);
-        font-weight: bold;
-    }
-
-    #wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    h1 {
-        display: flex;
-        justify-content: center;
-        font-size: 36pt;
-        padding: 1% 0 0 0;
-        height: max-content;
-    }
-
     form {
         display: flex;
         flex-direction: column;
@@ -71,12 +50,12 @@
         box-shadow: 0 0 0 3px var(--theme-primary-text);
     }
 
-    #name {
-        width: 100%;
-    }
-
     label {
         padding: 0 10px 0 0;
+    }
+
+    #name {
+        width: 100%;
     }
 
     #level-range {
@@ -86,5 +65,18 @@
 
     #level-range span {
         padding: 5px 0 0 10px;
+    }
+
+    #not-implemented-warning {
+        color: rgb(199, 45, 45);
+        font-weight: bold;
+    }
+
+    #wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
     }
 </style>

@@ -9,12 +9,6 @@
 </div>
 
 <style>
-    #wrapper div {
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
-    }
-
     div a {
         font-weight: bold;
         padding: 0 5px;
@@ -33,6 +27,12 @@
         justify-content: center;
         background-color: var(--theme-primary-shadow);
         padding: 20px 0;
+    }
+    
+    #wrapper div {
+    display: flex;
+        justify-content: center;
+        overflow: hidden;
     }
 
     #notice {
