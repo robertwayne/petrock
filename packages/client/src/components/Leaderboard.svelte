@@ -140,7 +140,7 @@
                     <td>{player.place}</td>
                     <td id={player.online ? 'username' : ''}>
                         <span class={player.online ? ' online-marker' : ''}>
-                            <span class="tooltip">{player.username} is online!</span>
+                            <span class="tooltip">Online!</span>
                         </span>{player.username}</td
                     >
                     <td>{player.total_experience?.toLocaleString()}</td>
@@ -165,27 +165,36 @@
     }
 
     .tooltip {
-        visibility: hidden;
-        width: 120px;
+        display: none;
+        width: max-content;
         background-color: var(--theme-primary-accent);
         color: var(--theme-primary-shadow);
         font-weight: bold;
         font-size: 12pt;
         text-align: center;
-        padding: 2px;
+        padding: 0 6px;
         border-radius: 6px;
         position: absolute;
         z-index: 2;
         top: -20px;
         right: 0px;
-        opacity: 0;
-        overflow: hidden;
     }
 
     .online-marker:hover .tooltip {
-        transition: 0.15s ease-in-out;
-        opacity: 1;
-        visibility: visible;
+        display: revert;
+        animation: fade_in_display 0.250s;
+    }
+
+    @keyframes fade_in_display {
+        0% {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
 
     #username {
@@ -198,7 +207,6 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        overflow: hidden;
     }
 
     #leaderboard {
@@ -242,7 +250,6 @@
         font-size: 14pt;
         border-spacing: 0;
         border-collapse: collapse;
-        overflow: hidden;
     }
 
     @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -253,7 +260,6 @@
         td,
         tr {
             display: block;
-            overflow: hidden;
         }
 
         thead tr {
