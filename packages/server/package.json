@@ -1,21 +1,21 @@
 {
     "name": "@petrock/server",
     "version": "0.1.0",
-    "description": "Leaderboard analytics & game database for RetroMMO.",
-    "author": "Rob Wagner <rob@robwagner.dev>",
-    "license": "MIT",
     "private": true,
+    "description": "Leaderboard analytics & game database for RetroMMO.",
+    "license": "MIT",
+    "author": "Rob Wagner <rob@robwagner.dev>",
     "scripts": {
         "dev": "tsnd --respawn ./src/server.ts",
-        "start": "ts-node ./src/server.ts --transpile-only",
+        "lint": "eslint src/",
         "service-runner": "ts-node ./src/db/serviceRunner.ts --transpile-only",
-        "lint": "eslint src/"
+        "start": "ts-node ./src/server.ts --transpile-only"
     },
     "dependencies": {
-        "@types/node-fetch": "^2.5.8",
+        "@types/node-fetch": "^2.5.10",
         "@types/pg": "^7.14.11",
         "dotenv": "^8.2.0",
-        "fastify": "3.14.1",
+        "fastify": "3.14.2",
         "fastify-cors": "5.2.0",
         "fastify-esso": "1.2.2",
         "fastify-formbody": "5.0.0",
@@ -24,16 +24,16 @@
         "fastify-static": "4.0.1",
         "node-fetch": "^2.6.1",
         "node-postgres": "^0.6.2",
-        "pg": "8.5.1",
+        "pg": "8.6.0",
         "pino": "^6.11.2"
     },
     "devDependencies": {
         "@types/node": "14.14.37",
-        "@typescript-eslint/eslint-plugin": "^4.20.0",
-        "@typescript-eslint/parser": "^4.20.0",
-        "eslint": "^7.23.0",
+        "@typescript-eslint/eslint-plugin": "^4.22.0",
+        "@typescript-eslint/parser": "^4.22.0",
+        "eslint": "^7.24.0",
         "pino-pretty": "^4.7.1",
         "ts-node-dev": "1.1.6",
-        "typescript": "4.2.3"
+        "typescript": "4.2.4"
     }
 }

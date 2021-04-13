@@ -1,33 +1,33 @@
 {
     "name": "petrock",
     "version": "0.1.0",
-    "description": "Leaderboard analytics & game database for RetroMMO.",
-    "author": "Rob Wagner <rob@robwagner.dev",
-    "license": "MIT",
     "private": true,
-    "scripts": {
-        "clean-pm2": "pm2 delete ecosystem.config.js",
-        "production": "pm2 start ecosystem.config.js --env production",
-        "dev": "pm2 start ecosystem.config.js",
-        "start": "yarn workspace @petrock/client start",
-        "build": "yarn workspace @petrock/client build",
-        "start-webserver": "yarn workspace @petrock/server start",
-        "start-service-runner": "yarn workspace @petrock/server service-runner",
-        "lint": "yarn workspace @petrock/client lint && yarn workspace @petrock/server lint",
-        "boostrap": "lerna bootstrap",
-        "update": "yarn upgrade-interactive",
-        "format": "prettier --write packages/"
-    },
-    "devDependencies": {
-        "@types/prettier": "^2.2.1",
-        "eslint": "^7.23.0",
-        "lerna": "4.0.0",
-        "prettier": "^2.2.1"
-    },
+    "description": "Leaderboard analytics & game database for RetroMMO.",
+    "license": "MIT",
+    "author": "Rob Wagner <rob@robwagner.dev",
     "workspaces": [
         "packages/*"
     ],
+    "scripts": {
+        "boostrap": "lerna bootstrap",
+        "build": "yarn workspace @petrock/client build",
+        "clean-pm2": "pm2 delete ecosystem.config.js",
+        "dev": "pm2 start ecosystem.config.js",
+        "format": "prettier --write packages/",
+        "lint": "yarn workspace @petrock/client lint && yarn workspace @petrock/server lint",
+        "production": "pm2 start ecosystem.config.js --env production",
+        "start": "yarn workspace @petrock/client start",
+        "start-service-runner": "yarn workspace @petrock/server service-runner",
+        "start-webserver": "yarn workspace @petrock/server start",
+        "update": "yarn upgrade-interactive"
+    },
     "dependencies": {
-        "@types/pino": "^6.3.6"
+        "@types/pino": "^6.3.7"
+    },
+    "devDependencies": {
+        "@types/prettier": "^2.2.3",
+        "eslint": "^7.24.0",
+        "lerna": "4.0.0",
+        "prettier": "^2.2.1"
     }
 }
