@@ -325,7 +325,6 @@
     .username {
         display: inline-block;
         position: relative;
-        padding-right: 14px;
     }
 
     #wrapper {
