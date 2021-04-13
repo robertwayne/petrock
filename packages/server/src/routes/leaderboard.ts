@@ -52,6 +52,7 @@ export const routeLeaderboard = async (app: FastifyInstance): Promise<void> => {
                 p.username, p.online, p.experience, h.experience AS daily_experience
             FROM history h
             INNER JOIN players p ON (h.player = p.username)
+            WHERE h.created_on = CURRENT_DATE
             ORDER BY ${sortBy} ${sortAsc}, p.experience DESC, h.player ASC;
             `
         )
