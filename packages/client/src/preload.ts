@@ -11,7 +11,7 @@ for (let i = 0; i < 100; i++) {
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
-        last_modified: ''
+        last_modified: '',
     }
     preloadData.push(player)
 }

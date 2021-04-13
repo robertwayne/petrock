@@ -45,9 +45,8 @@ export const routeHistory = async (app: FastifyInstance): Promise<void> => {
             )
 
             client.release()
-            
-            return {yesterdays_experience: rows[1].experience, ...rows[0]}
 
+            return { yesterdays_experience: rows[1].experience, ...rows[0] }
         } else {
             const { rows } = await client.query(
                 `
