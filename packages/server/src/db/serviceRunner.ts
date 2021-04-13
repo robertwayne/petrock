@@ -39,15 +39,17 @@ const executeQueries = async (client: PoolClient, player: Player, diff: number):
     try {
         await client.query({
             name: 'add-user',
-            text: `INSERT INTO players (username, online)
-        VALUES ($1, $2) 
+            text: `INSERT INTO players (username, experience, rank, online)
+        VALUES ($1, $2, $3, $4) 
         ON CONFLICT ON CONSTRAINT players_pkey
         DO UPDATE
         SET
-            online = $2
+            experience = $2,
+            rank = $3,
+            online = $4
         WHERE players.username = $1;
         `,
-            values: [player.username, player.online],
+            values: [player.username, player.total_experience, player.place, player.online],
         })
 
         await client.query({
