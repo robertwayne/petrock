@@ -49,7 +49,7 @@ const executeQueries = async (client: PoolClient, player: Player, diff: number):
             online = $4
         WHERE players.username = $1;
         `,
-            values: [player.username, player.total_experience, player.place, player.online],
+            values: [player.username, player.experience, player.place, player.online],
         })
 
         await client.query({
@@ -99,13 +99,13 @@ const updateDatabase = async (client: PoolClient) => {
         const _player: Player = {
             username: player.username,
             online: onlinePlayers.some((s) => s === player.username),
-            total_experience: Number(player.experience),
+            experience: Number(player.experience),
         }
 
         let experience_diff = 0
         if (current_leaderboards[index] != null) {
             const tmp_player: Player = current_leaderboards[index]
-            experience_diff = _player.total_experience - tmp_player.total_experience
+            experience_diff = _player.experience - tmp_player.experience
 
             if (experience_diff !== 0) {
                 logger.info(`${_player.username} gained ${experience_diff} experience.`)
