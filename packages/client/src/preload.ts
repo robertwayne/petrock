@@ -7,10 +7,11 @@ for (let i = 0; i < 100; i++) {
     let player: Player = {
         place: i + 1,
         username: '',
-        total_experience: 0,
+        experience: 0,
         daily_experience: 0,
         weekly_experience: 0,
         monthly_experience: 0,
+        last_modified: ''
     }
     preloadData.push(player)
 }
