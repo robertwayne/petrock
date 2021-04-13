@@ -155,6 +155,27 @@ AS $BODY$
 $BODY$
 LANGUAGE 'sql';
 
+CREATE OR REPLACE FUNCTION get_current_month_experience(username TEXT)
+RETURNS TABLE(experience BIGINT)
+AS $BODY$
+    SELECT SUM (h.experience)
+    FROM history h
+    WHERE h.player = username
+    AND h.created_on >= DATE_TRUNC('month', CURRENT_DATE)
+$BODY$
+LANGUAGE 'sql';
+
+CREATE OR REPLACE FUNCTION get_current_week_experience(username TEXT)
+RETURNS TABLE(experience BIGINT)
+AS $BODY$
+    SELECT SUM (h.experience)
+    FROM history h
+    WHERE h.player = username
+    AND h.created_on >= DATE_TRUNC('week', CURRENT_DATE) - INTERVAL '1 day'
+    AND h.created_on < NOW()
+$BODY$
+LANGUAGE 'sql';
+
 INSERT INTO types (id, name)
 VALUES
 (1, 'Equipment'),
