@@ -4,7 +4,6 @@ import dotenv from 'dotenv'
 import { pool } from './connection'
 import { logOptions } from '../../../shared/logging'
 import { PoolClient } from 'node-postgres'
-import { currentTimestampAsISO } from '../helpers'
 import type { Player, RawPlayerData } from '../../../shared/types'
 
 dotenv.config()
