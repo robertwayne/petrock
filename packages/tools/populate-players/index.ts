@@ -1,6 +1,6 @@
 import nodeFetch from 'node-fetch'
-import { pool } from '../server/src/db/connection'
-import type { Player, RawPlayerData } from '../shared/types'
+import { pool } from '../../server/src/db/connection'
+import type { Player, RawPlayerData } from '../../shared/types'
 import { PoolClient } from 'node-postgres'
 
 const runner = async (): Promise<void> => {

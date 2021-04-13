@@ -31,6 +31,7 @@ module.exports = {
     env: {
       NODE_ENV: 'development',
       RETRO_API_ONLINE: 'https://play.retro-mmo.com/players.json',
+      RETRO_API_PLAYERS: 'https://play.retro-mmo.com/users/',
       RETRO_API_LEADERBOARDS: 'https://play.retro-mmo.com/leaderboards.json',
       TICK_RATE: 30000,
       SERVER_PORT: 3000,

@@ -1,15 +1,41 @@
 <script lang="ts">
-    import { onDestroy, onMount } from 'svelte'
-    import { leaderboard, sortBy, orderBy, updateTimer } from '../stores'
-    import { preloadData } from '../preload'
-    import type { Player } from '../../../shared/types'
-    import { tickRate, url } from '../constants'
     import PageHeader from './PageHeader.svelte'
+    import { onDestroy, onMount } from 'svelte'
+    import { leaderboard, sortBy, orderBy, updateTimer, loadedPlayer } from '../stores'
+    import { preloadData } from '../preload'
+    import { tickRate, url } from '../constants'
+    import { relativeTimeFromDates } from '../time'
+    import type { Player } from '../../../shared/types'
 
-    // we do this to avoid large CLS (Cumulative Layout Shift) issues on initial page load
+    // preset to avoid CLS
     $leaderboard = preloadData
 
-    async function getLeaderboardData() {
+    $: loadingPlayerTimeout = 0
+
+    const loadPlayerData = async (username: string) => {
+        loadingPlayerTimeout = setTimeout(async () => {
+            let response: Response | undefined
+            try {
+                response = await fetch(`${url}/api/v1/history?username=${username}&tooltip=true`)
+            } catch (err) {
+                return
+            }
+
+            if (!response) return
+
+            const data: Player = await response.json()
+
+            $loadedPlayer = data
+        }, 500)
+    }
+
+    const clearLoadedPlayerData = async () => {
+        $loadedPlayer = undefined
+        clearTimeout(loadingPlayerTimeout)
+    }
+
+    /** Fetches current leaderboard data, maps it to players, and pushes it to a reactive array. */
+    const getLeaderboardData = async () => {
         let response: Response | undefined
 
         try {
@@ -25,20 +51,21 @@
 
         const data: Array<Player> = await response.json()
 
-        let _leaderboard: Array<Player> = []
+        let tmp_leaderboard: Array<Player> = []
         for (let i = 0; i < 100; i++) {
-            let _player: Player = {
+            let player: Player = {
                 place: i + 1,
                 username: data[i].username,
                 online: data[i].online,
-                total_experience: data[i].total_experience,
-                daily_experience: data[i].daily_experience,
-                weekly_experience: data[i].weekly_experience,
-                monthly_experience: data[i].monthly_experience,
+                experience: data[i].experience,
+                daily_experience: data[i].daily_experience || 0,
+                weekly_experience: data[i].weekly_experience || 0,
+                monthly_experience: data[i].monthly_experience || 0,
+                last_modified: relativeTimeFromDates(new Date(data[i].last_modified)),
             }
-            _leaderboard.push(_player)
+            tmp_leaderboard.push(player)
         }
-        $leaderboard = _leaderboard
+        $leaderboard = tmp_leaderboard
     }
 
     onMount(
@@ -48,11 +75,16 @@
         }
     )
 
-    onDestroy(async (): Promise<void> => {
-        clearInterval($updateTimer)
-        $updateTimer = 0
-    })
+    onDestroy(
+        async (): Promise<void> => {
+            clearInterval($updateTimer)
+            $updateTimer = 0
+        }
+    )
 
+    /** Toggles caret icons between up and down, across table headers, based
+     * on the current state.
+     */
     function setCaretState(el: HTMLElement) {
         let cls = el.classList
 
@@ -73,6 +105,7 @@
         }
     }
 
+    /** Requests a sorted copy of the leaderboard data from the API. */
     async function sort(column: string): Promise<void> {
         clearInterval($updateTimer)
 
@@ -129,15 +162,59 @@
             </tr>
         </thead>
         <tbody>
-            {#each $leaderboard as player}
+            {#each $leaderboard as player, i}
                 <tr id="place-{String(player.place)}">
                     <td>{player.place}</td>
-                    <td id={player.online ? 'username' : ''}>
-                        <span class={player.online ? ' online-marker' : ''}>
-                            <span class="tooltip">{player.username} is online!</span>
-                        </span>{player.username}</td
-                    >
-                    <td>{player.total_experience?.toLocaleString()}</td>
+                    <td class="username-cell {player.online ? 'is-online' : ''}">
+                        <div class={player.online ? ' online-marker' : ''}>
+                            <div class="online-tooltip">Online!</div>
+                        </div>
+                        <div
+                            on:mouseleave={() => clearLoadedPlayerData()}
+                            on:mouseenter={() => loadPlayerData(player.username)}
+                            id="username"
+                            class="username"
+                        >
+                            {player.username}
+                            <div id="profile-tooltip" class="profile-tooltip">
+                                <div class="profile-inner">
+                                    <div class="strong">{player.username}</div>
+
+                                    <hr />
+
+                                    {#if $loadedPlayer !== undefined}
+                                        <div>
+                                            {#if i > 0}
+                                                Next Rank: {(
+                                                    $leaderboard[i - 1].experience - player.experience
+                                                ).toLocaleString()}
+                                            {/if}
+                                        </div>
+                                        <div>
+                                            Yesterday: {Number($loadedPlayer.yesterdays_experience)?.toLocaleString()}
+                                        </div>
+                                        <div>
+                                            Last Week: {Number($loadedPlayer.last_weeks_experience)?.toLocaleString()}
+                                        </div>
+                                        <div>
+                                            Last Month: {Number($loadedPlayer.last_months_experience)?.toLocaleString()}
+                                        </div>
+                                    {:else}
+                                        <div>Loading data...</div>
+                                    {/if}
+
+                                    <div id="last-seen">
+                                        {#if player.online}
+                                            Online now!
+                                        {:else}
+                                            Last seen {player.last_modified}
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{player.experience?.toLocaleString()}</td>
                     <td>{player.daily_experience?.toLocaleString()}</td>
                     <td>{player.weekly_experience?.toLocaleString()}</td>
                     <td>{player.monthly_experience?.toLocaleString()}</td>
@@ -154,35 +231,100 @@
         background-color: var(--theme-primary-green);
         border-radius: 50%;
         display: inline-block;
-        margin: 0 8px 2px 0;
+        margin: 0 2px 2px 0;
         position: relative;
     }
 
-    .tooltip {
-        visibility: hidden;
-        width: 120px;
+    .online-tooltip {
+        display: none;
+        width: max-content;
         background-color: var(--theme-primary-accent);
         color: var(--theme-primary-shadow);
         font-weight: bold;
         font-size: 12pt;
         text-align: center;
-        padding: 2px;
+        padding: 0 6px;
         border-radius: 6px;
         position: absolute;
         z-index: 2;
         top: -20px;
         right: 0px;
-        opacity: 0;
-        overflow: hidden;
     }
 
-    .online-marker:hover .tooltip {
-        transition: 0.15s ease-in-out;
-        opacity: 1;
-        visibility: visible;
+    .is-online {
+        padding-right: 14px;
     }
 
-    #username {
+    .profile-tooltip {
+        display: none;
+        width: 250px;
+        height: max-content;
+        background-color: rgba(var(--theme-primary-shadow-rgb), 0.9);
+        color: var(--theme-primary-text);
+        font-weight: bold;
+        font-size: 12pt;
+        text-align: center;
+        padding: 0 6px;
+        border: 1px solid var(--theme-primary-text);
+        border-radius: 6px;
+        position: absolute;
+        z-index: 2;
+        top: 100%;
+        left: 0;
+    }
+
+    .profile-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2px;
+    }
+
+    .profile-inner hr {
+        display: flex;
+        align-self: center;
+        border: none;
+        width: 90%;
+        border-bottom: 1px solid var(--theme-primary-text);
+        opacity: 0.5;
+        margin-bottom: 4px;
+    }
+
+    #last-seen {
+        color: var(--theme-primary-lighter);
+        padding-top: 4px;
+        font-size: 10pt;
+    }
+
+    @keyframes fade_in_display {
+        0% {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @media (min-width: 720px) {
+        .username:hover .profile-tooltip {
+            display: revert;
+            animation-name: fade_in_display;
+            animation-duration: 250ms;
+            animation-fill-mode: forwards;
+        }
+
+        .online-marker:hover .online-tooltip {
+            display: revert;
+            animation: fade_in_display 250ms;
+        }
+    }
+
+    .username {
+        display: inline-block;
+        position: relative;
         padding-right: 14px;
     }
 
@@ -192,7 +334,6 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        overflow: hidden;
     }
 
     #leaderboard {
@@ -236,7 +377,6 @@
         font-size: 14pt;
         border-spacing: 0;
         border-collapse: collapse;
-        overflow: hidden;
     }
 
     @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -247,7 +387,6 @@
         td,
         tr {
             display: block;
-            overflow: hidden;
         }
 
         thead tr {

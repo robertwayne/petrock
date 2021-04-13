@@ -1,11 +1,12 @@
 <script lang="ts">
+    import Disconnected from './Disconnected.svelte'
     import { onMount } from 'svelte'
     import { url } from '../constants'
-    import type { Item } from '../../../shared/types'
     import { ItemSlot, ItemType } from '../enums'
     import { items } from '../stores'
-    import Disconnected from './Disconnected.svelte'
+    import type { Item } from '../../../shared/types'
 
+    /** Maps an items' slot integer to a human-friendly string.*/
     const getSlot = (slot: unknown) => {
         switch (slot) {
             case ItemSlot.HEAD: {
@@ -38,6 +39,7 @@
         }
     }
 
+    /** Maps an items' type integer to a human-friendly string. */
     const getType = (itemType: unknown) => {
         switch (itemType) {
             case ItemType.EQUIPMENT: {
@@ -67,6 +69,9 @@
         }
     }
 
+    /** Fetches items from the API, maps them to an array of Item objects, 
+     *  and places them into a reactive element.
+    */
     async function getItemList() {
         let response: Response | undefined
 

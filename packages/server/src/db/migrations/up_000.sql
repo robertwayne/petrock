@@ -5,7 +5,13 @@ CREATE TABLE IF NOT EXISTS players
 (
     id uuid DEFAULT uuid_generate_v4 (),
     username VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL,
-    online BOOLEAN DEFAULT false NOT NULL
+    online BOOLEAN DEFAULT false NOT NULL,
+    experience INT DEFAULT 0 NOT NULL,  /* We track total experience here because we don't have a complete history. */
+    rank INT,
+
+    /* Meta Data */
+    created_on TIMESTAMP DEFAULT now() NOT NULL,
+    last_modified TIMESTAMP DEFAULT now() NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS leaderboards
@@ -30,12 +36,13 @@ CREATE TABLE IF NOT EXISTS history
 (
     id uuid DEFAULT uuid_generate_v4(),
     player VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_player FOREIGN KEY (player) REFERENCES players (username),
+--     CONSTRAINT fk_player FOREIGN KEY (player) REFERENCES players (username),
 
     experience INT NOT NULL,
 
     /* Meta Data */
     created_on TIMESTAMP DEFAULT CURRENT_DATE NOT NULL,
+    last_modified TIMESTAMP DEFAULT now() NOT NULL,
 
     /* Composite Primary Key */
     PRIMARY KEY (player, created_on)
@@ -87,6 +94,87 @@ CREATE TABLE IF NOT EXISTS items
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL
 );
+
+CREATE FUNCTION player_update()
+RETURNS TRIGGER
+LANGUAGE 'plpgsql'
+AS $$
+BEGIN
+    IF OLD.online = NEW.online THEN
+        NEW.last_modified = OLD.last_modified;
+    ELSE
+        NEW.last_modified = now();
+    END IF;
+    RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER on_update_trigger
+BEFORE INSERT OR UPDATE ON players
+FOR EACH ROW
+EXECUTE PROCEDURE player_update();
+
+CREATE FUNCTION history_update()
+RETURNS TRIGGER
+LANGUAGE 'plpgsql'
+AS $$
+BEGIN
+    IF OLD.experience = NEW.experience THEN
+        NEW.last_modified = OLD.last_modified;
+    ELSE
+        NEW.last_modified = now();
+    END IF;
+    RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER on_update_history
+BEFORE INSERT OR UPDATE ON history
+FOR EACH ROW
+EXECUTE PROCEDURE history_update();
+
+CREATE OR REPLACE FUNCTION get_last_week_experience(username TEXT)
+RETURNS TABLE(experience BIGINT)
+AS $BODY$
+    SELECT SUM (h.experience)
+    FROM history h
+    WHERE h.player = username
+    AND h.created_on BETWEEN NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER-7
+    AND NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER;
+$BODY$
+LANGUAGE 'sql';
+
+CREATE OR REPLACE FUNCTION get_last_month_experience(username TEXT)
+RETURNS TABLE(experience BIGINT)
+AS $BODY$
+    SELECT SUM (h.experience)
+    FROM history h
+    WHERE h.player = username
+    AND h.created_on >= DATE_TRUNC('month', NOW()) - INTERVAL '1 month'
+    AND h.created_on < DATE_TRUNC('month', NOW())
+$BODY$
+LANGUAGE 'sql';
+
+CREATE OR REPLACE FUNCTION get_current_month_experience(username TEXT)
+RETURNS TABLE(experience BIGINT)
+AS $BODY$
+    SELECT SUM (h.experience)
+    FROM history h
+    WHERE h.player = username
+    AND h.created_on >= DATE_TRUNC('month', CURRENT_DATE)
+$BODY$
+LANGUAGE 'sql';
+
+CREATE OR REPLACE FUNCTION get_current_week_experience(username TEXT)
+RETURNS TABLE(experience BIGINT)
+AS $BODY$
+    SELECT SUM (h.experience)
+    FROM history h
+    WHERE h.player = username
+    AND h.created_on >= DATE_TRUNC('week', CURRENT_DATE) - INTERVAL '1 day'
+    AND h.created_on < NOW()
+$BODY$
+LANGUAGE 'sql';
 
 INSERT INTO types (id, name)
 VALUES

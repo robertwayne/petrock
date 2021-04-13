@@ -7,6 +7,7 @@ type LeaderboardRequest = FastifyRequest<{
     }
 }>
 
+/** Returns a the leaderboard table sorted & ordered based on query params. */
 export const routeLeaderboard = async (app: FastifyInstance): Promise<void> => {
     app.get('/leaderboards', {}, async (request: LeaderboardRequest) => {
         const client = await app.pg.connect()
@@ -27,7 +28,7 @@ export const routeLeaderboard = async (app: FastifyInstance): Promise<void> => {
             }
             case 'total':
             default: {
-                sortBy = 'total_experience'
+                sortBy = 'experience'
                 break
             }
         }
@@ -48,11 +49,14 @@ export const routeLeaderboard = async (app: FastifyInstance): Promise<void> => {
         const { rows } = await client.query(
             `
             SELECT 
-                p.username, p.online, lb.total_experience, lb.daily_experience, lb.weekly_experience, 
-                lb.monthly_experience
-            FROM leaderboards lb
-            INNER JOIN players p ON (lb.player = p.username)
-            ORDER BY ${sortBy} ${sortAsc}, lb.total_experience DESC, lb.player ASC;
+                p.username, p.online, p.experience, p.last_modified, h.experience AS daily_experience,
+                w.experience AS weekly_experience, m.experience AS monthly_experience
+            FROM history h
+            INNER JOIN players p ON (h.player = p.username)
+            CROSS JOIN LATERAL get_current_week_experience(p.username) w
+            CROSS JOIN LATERAL get_current_month_experience(p.username) m
+            WHERE h.created_on = CURRENT_DATE
+            ORDER BY ${sortBy} ${sortAsc}, p.experience DESC, h.player ASC;
             `
         )
 
