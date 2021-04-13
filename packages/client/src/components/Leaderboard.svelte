@@ -1,18 +1,21 @@
 <script lang="ts">
     import PageHeader from './PageHeader.svelte'
     import { onDestroy, onMount } from 'svelte'
-    import { leaderboard, sortBy, orderBy, updateTimer, loadedPlayer } from '../stores'
     import { preloadData } from '../preload'
     import { tickRate, url } from '../constants'
     import { relativeTimeFromDates } from '../time'
     import type { Player } from '../../../shared/types'
 
-    // preset to avoid CLS
-    $leaderboard = preloadData
-
-    $: loadingPlayerTimeout = 0
+    let loadedPlayer: Player | undefined = undefined
+    let leaderboard: Array<Player> = preloadData
+    let sortBy: string = 'exp'
+    let orderBy: boolean = true
+    let updateTimer: number = 0
+    let loadingPlayerTimeout: number = 0
 
     const loadPlayerData = async (username: string) => {
+        loadedPlayer = undefined
+
         loadingPlayerTimeout = setTimeout(async () => {
             let response: Response | undefined
             try {
@@ -23,14 +26,17 @@
 
             if (!response) return
 
+            const indexedDbRequest = window.indexedDB.open('petrock')
+            console.log(indexedDbRequest)
+
             const data: Player = await response.json()
 
-            $loadedPlayer = data
+            loadedPlayer = data
         }, 500)
     }
 
     const clearLoadedPlayerData = async () => {
-        $loadedPlayer = undefined
+        loadedPlayer = undefined
         clearTimeout(loadingPlayerTimeout)
     }
 
@@ -39,11 +45,11 @@
         let response: Response | undefined
 
         try {
-            response = await fetch(`${url}/api/v1/leaderboards?sort=${$sortBy}&order=${$orderBy ? 'desc' : 'asc'}`)
+            response = await fetch(`${url}/api/v1/leaderboards?sort=${sortBy}&order=${orderBy ? 'desc' : 'asc'}`)
         } catch (err) {
             const subheader: HTMLElement = document.getElementById('disconnect-error') as HTMLElement
             subheader.classList.remove('hidden')
-            clearInterval($updateTimer)
+            clearInterval(updateTimer)
             return
         }
 
@@ -65,20 +71,21 @@
             }
             tmp_leaderboard.push(player)
         }
-        $leaderboard = tmp_leaderboard
+
+        leaderboard = tmp_leaderboard
     }
 
     onMount(
         async (): Promise<void> => {
             await getLeaderboardData()
-            $updateTimer = setInterval(getLeaderboardData, tickRate)
+            updateTimer = setInterval(getLeaderboardData, tickRate)
         }
     )
 
     onDestroy(
         async (): Promise<void> => {
-            clearInterval($updateTimer)
-            $updateTimer = 0
+            clearInterval(updateTimer)
+            updateTimer = 0
         }
     )
 
@@ -107,7 +114,7 @@
 
     /** Requests a sorted copy of the leaderboard data from the API. */
     async function sort(column: string): Promise<void> {
-        clearInterval($updateTimer)
+        clearInterval(updateTimer)
 
         const setCaret = (el: HTMLElement) => {
             setCaretState(el)
@@ -135,10 +142,10 @@
                 break
             }
         }
-        $sortBy = column
-        $orderBy = !$orderBy
+        sortBy = column
+        orderBy = !orderBy
         await getLeaderboardData()
-        $updateTimer = setInterval(getLeaderboardData, tickRate)
+        updateTimer = setInterval(getLeaderboardData, tickRate)
     }
 </script>
 
@@ -162,7 +169,7 @@
             </tr>
         </thead>
         <tbody>
-            {#each $leaderboard as player, i}
+            {#each leaderboard as player, i}
                 <tr id="place-{String(player.place)}">
                     <td>{player.place}</td>
                     <td class="username-cell {player.online ? 'is-online' : ''}">
@@ -182,22 +189,22 @@
 
                                     <hr />
 
-                                    {#if $loadedPlayer !== undefined}
+                                    {#if loadedPlayer !== undefined}
                                         <div>
                                             {#if i > 0}
                                                 Next Rank: {(
-                                                    $leaderboard[i - 1].experience - player.experience
+                                                    leaderboard[i - 1].experience - player.experience
                                                 ).toLocaleString()}
                                             {/if}
                                         </div>
                                         <div>
-                                            Yesterday: {Number($loadedPlayer.yesterdays_experience)?.toLocaleString()}
+                                            Yesterday: {Number(loadedPlayer.yesterdays_experience)?.toLocaleString()}
                                         </div>
                                         <div>
-                                            Last Week: {Number($loadedPlayer.last_weeks_experience)?.toLocaleString()}
+                                            Last Week: {Number(loadedPlayer.last_weeks_experience)?.toLocaleString()}
                                         </div>
                                         <div>
-                                            Last Month: {Number($loadedPlayer.last_months_experience)?.toLocaleString()}
+                                            Last Month: {Number(loadedPlayer.last_months_experience)?.toLocaleString()}
                                         </div>
                                     {:else}
                                         <div>Loading data...</div>
