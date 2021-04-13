@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS history
 
     /* Meta Data */
     created_on TIMESTAMP DEFAULT CURRENT_DATE NOT NULL,
+    last_modified TIMESTAMP DEFAULT now() NOT NULL,
 
     /* Composite Primary Key */
     PRIMARY KEY (player, created_on)
@@ -91,6 +92,44 @@ CREATE TABLE IF NOT EXISTS items
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL
 );
+
+CREATE FUNCTION player_update()
+RETURNS TRIGGER
+LANGUAGE 'plpgsql'
+AS $$
+BEGIN
+    IF OLD.online = NEW.online THEN
+        NEW.last_modified = OLD.last_modified;
+    ELSE
+        NEW.last_modified = now();
+    END IF;
+    RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER on_update_trigger
+BEFORE INSERT OR UPDATE ON players
+FOR EACH ROW
+EXECUTE PROCEDURE player_update();
+
+CREATE FUNCTION history_update()
+RETURNS TRIGGER
+LANGUAGE 'plpgsql'
+AS $$
+BEGIN
+    IF OLD.experience = NEW.experience THEN
+        NEW.last_modified = OLD.last_modified;
+    ELSE
+        NEW.last_modified = now();
+    END IF;
+    RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER on_update_history
+BEFORE INSERT OR UPDATE ON history
+FOR EACH ROW
+EXECUTE PROCEDURE history_update();
 
 INSERT INTO types (id, name)
 VALUES
