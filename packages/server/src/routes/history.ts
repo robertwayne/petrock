@@ -42,9 +42,9 @@ export const routeHistory = async (app: FastifyInstance): Promise<void> => {
                 `,
                 [request.query.username]
             )
-    
+
             client.release()
-    
+
             return rows
         }
     })
