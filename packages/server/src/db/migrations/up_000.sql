@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS history
 (
     id uuid DEFAULT uuid_generate_v4(),
     player VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_player FOREIGN KEY (player) REFERENCES players (username),
+--     CONSTRAINT fk_player FOREIGN KEY (player) REFERENCES players (username),
 
     experience INT NOT NULL,
 
@@ -132,6 +132,28 @@ CREATE TRIGGER on_update_history
 BEFORE INSERT OR UPDATE ON history
 FOR EACH ROW
 EXECUTE PROCEDURE history_update();
+
+CREATE OR REPLACE FUNCTION get_last_week_experience(username TEXT)
+RETURNS TABLE(experience BIGINT)
+AS $BODY$
+    SELECT SUM (h.experience)
+    FROM history h
+    WHERE h.player = username
+    AND h.created_on BETWEEN NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER-7
+    AND NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER;
+$BODY$
+LANGUAGE 'sql';
+
+CREATE OR REPLACE FUNCTION get_last_month_experience(username TEXT)
+RETURNS TABLE(experience BIGINT)
+AS $BODY$
+    SELECT SUM (h.experience)
+    FROM history h
+    WHERE h.player = username
+    AND h.created_on >= DATE_TRUNC('month', NOW()) - INTERVAL '1 month'
+    AND h.created_on < DATE_TRUNC('month', NOW())
+$BODY$
+LANGUAGE 'sql';
 
 INSERT INTO types (id, name)
 VALUES
