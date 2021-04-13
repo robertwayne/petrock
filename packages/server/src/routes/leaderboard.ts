@@ -49,7 +49,7 @@ export const routeLeaderboard = async (app: FastifyInstance): Promise<void> => {
         const { rows } = await client.query(
             `
             SELECT 
-                p.username, p.online, p.experience, h.experience AS daily_experience
+                p.username, p.online, p.experience, p.last_modified, h.experience AS daily_experience
             FROM history h
             INNER JOIN players p ON (h.player = p.username)
             WHERE h.created_on = CURRENT_DATE
