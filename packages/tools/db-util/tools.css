@@ -1,0 +1,25 @@
+*,
+html,
+body {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 10px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.stats input {
+    width: 40px;
+    height: 30px;
+}
