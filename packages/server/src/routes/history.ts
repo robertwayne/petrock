@@ -24,8 +24,10 @@ export const routeHistory = async (app: FastifyInstance): Promise<void> => {
 
         client.release()
 
-        return rows.length > 0 ? rows[0] : {
-            error: 'No results found.'
-        }
+        return rows.length > 0
+            ? rows[0]
+            : {
+                  error: 'No results found.',
+              }
     })
 }
