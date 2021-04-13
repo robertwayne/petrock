@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS players
     id uuid DEFAULT uuid_generate_v4 (),
     username VARCHAR(255) UNIQUE PRIMARY KEY NOT NULL,
     online BOOLEAN DEFAULT false NOT NULL,
+    experience INT DEFAULT 0 NOT NULL,  /* We track total experience here because we don't have a complete history. */
+    rank INT,
 
     /* Meta Data */
     created_on TIMESTAMP DEFAULT now() NOT NULL,
