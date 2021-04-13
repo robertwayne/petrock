@@ -2,10 +2,12 @@ export interface Player {
     username: string
     place?: number
     online?: boolean
-    total_experience?: number
+    experience?: number
     daily_experience?: number
     weekly_experience?: number
     monthly_experience?: number
+    created_on?: string | Date
+    last_modified?: string
 }
 
 export interface RawPlayerData {
