@@ -28,7 +28,7 @@ export const routeLeaderboard = async (app: FastifyInstance): Promise<void> => {
             }
             case 'total':
             default: {
-                sortBy = 'total_experience'
+                sortBy = 'experience'
                 break
             }
         }
@@ -49,11 +49,10 @@ export const routeLeaderboard = async (app: FastifyInstance): Promise<void> => {
         const { rows } = await client.query(
             `
             SELECT 
-                p.username, p.online, lb.total_experience, lb.daily_experience, lb.weekly_experience, 
-                lb.monthly_experience
-            FROM leaderboards lb
-            INNER JOIN players p ON (lb.player = p.username)
-            ORDER BY ${sortBy} ${sortAsc}, lb.total_experience DESC, lb.player ASC;
+                p.username, p.online, p.experience, h.experience AS daily_experience
+            FROM history h
+            INNER JOIN players p ON (h.player = p.username)
+            ORDER BY ${sortBy} ${sortAsc}, p.experience DESC, h.player ASC;
             `
         )
 
