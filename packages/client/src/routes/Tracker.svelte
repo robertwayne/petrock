@@ -56,7 +56,6 @@
     }
 
     onMount(async () => {
-        console.log(sessionDuration)
         document.getElementById('start-button')?.addEventListener('click', (e) => {
             const input: HTMLInputElement = document.getElementById('username-input') as HTMLInputElement
             username = input.value

@@ -26,7 +26,6 @@
             const data: Player = await response.json()
 
             $loadedPlayer = data
-            console.log($loadedPlayer)
         }, 500)
     }
 
