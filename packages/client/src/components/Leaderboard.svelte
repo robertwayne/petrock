@@ -169,8 +169,8 @@
             </tr>
         </thead>
         <tbody>
-            {#each leaderboard as player, i}
-                <tr id="place-{String(player.place)}">
+            {#each stores.leaderboard as player, i}
+                <tr>
                     <td>{player.place}</td>
                     <td class="username-cell {player.online ? 'is-online' : ''}">
                         <div class={player.online ? ' online-marker' : ''}>
@@ -358,23 +358,17 @@
         padding: 6px 4px;
     }
 
-    #top-scores {
-        display: flex;
-        justify-content: center;
-        padding: 3% 0;
-    }
-
-    #place-1 {
+    tbody > tr:nth-child(1) {
         font-weight: bold;
         color: #d8b041;
     }
 
-    #place-2 {
+    tbody > tr:nth-child(2) {
         font-weight: bold;
         color: #727271;
     }
 
-    #place-3 {
+    tbody > tr:nth-child(3) {
         font-weight: bold;
         color: #8b633c;
     }
