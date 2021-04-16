@@ -84,9 +84,9 @@
                 username: data[i].username,
                 online: data[i].online,
                 experience: data[i].experience,
-                daily_experience: data[i].daily_experience || 0,
-                weekly_experience: data[i].weekly_experience || 0,
-                monthly_experience: data[i].monthly_experience || 0,
+                daily_experience: data[i].daily_experience,
+                weekly_experience: data[i].weekly_experience,
+                monthly_experience: data[i].monthly_experience,
                 last_modified: relativeTimeFromDates(new Date(data[i].last_modified!)),
             }
             tmp_leaderboard.push(player)
@@ -220,13 +220,13 @@
                                             {/if}
                                         </div>
                                         <div>
-                                            Yesterday: {Number(stores.player.yesterdays_experience)?.toLocaleString()}
+                                            Yesterday: {stores.player.yesterdays_experience?.toLocaleString()}
                                         </div>
                                         <div>
-                                            Last Week: {Number(stores.player.last_weeks_experience)?.toLocaleString()}
+                                            Last Week: {stores.player.last_weeks_experience?.toLocaleString()}
                                         </div>
                                         <div>
-                                            Last Month: {Number(stores.player.last_months_experience)?.toLocaleString()}
+                                            Last Month: {stores.player.last_months_experience?.toLocaleString()}
                                         </div>
                                     {:else}
                                         <div>Loading data...</div>
