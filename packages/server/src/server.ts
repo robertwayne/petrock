@@ -68,7 +68,7 @@ app.get(
 
 const start = async () => {
     try {
-        await app.listen(process.env.SERVER_PORT)
+        await app.listen(process.env.SERVER_PORT || 3000)
     } catch (err) {
         app.log.error(err)
         process.exit(1)
