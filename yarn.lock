@@ -3020,6 +3020,11 @@ iconv-lite@^0.6.2:
   dependencies:
     safer-buffer ">= 2.1.2 < 3.0.0"
 
+idb-keyval@^5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/idb-keyval/-/idb-keyval-5.0.5.tgz#1b02984dcf42ad4aa290bf9f10935b485419df34"
+  integrity sha512-cqi65rrjhgPExI9vmSU7VcYEbHCUfIBY+9YUWxyr0PyGizptFgGFnvZQ0w+tqOXk1lUcGCZGVLfabf7QnR2S0g==
+
 ignore-walk@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/ignore-walk/-/ignore-walk-3.0.3.tgz#017e2447184bfeade7c238e4aefdd1e8f95b1e37"

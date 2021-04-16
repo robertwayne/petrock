@@ -4,6 +4,7 @@
     import { preloadData } from '../preload'
     import { tickRate, url } from '../constants'
     import { relativeTimeFromDates } from '../time'
+    import { get, set } from 'idb-keyval'
     import type { Player } from '../../../shared/types'
 
     interface LeaderboardComponentStore {
@@ -17,7 +18,7 @@
 
     const stores: LeaderboardComponentStore = {
         player: undefined,
-        leaderboard: preloadData,
+        leaderboard: [],
         sortBy: 'exp',
         orderBy: true,
         updateTimer: 0,
@@ -45,9 +46,6 @@
             }
 
             if (!response) return
-
-            const indexedDbRequest = window.indexedDB.open('petrock')
-            console.log(indexedDbRequest)
 
             const data: Player = await response.json()
 
@@ -92,11 +90,19 @@
             tmp_leaderboard.push(player)
         }
 
+        set('leaderboard', tmp_leaderboard)
         stores.leaderboard = tmp_leaderboard
     }
 
     onMount(
         async (): Promise<void> => {
+            let data = await get('leaderboard')
+            if (data) {
+                stores.leaderboard = data
+            } else {
+                stores.leaderboard = preloadData
+            }
+
             await getLeaderboardData()
             stores.updateTimer = setInterval(getLeaderboardData, tickRate)
         }
