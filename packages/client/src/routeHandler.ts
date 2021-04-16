@@ -5,7 +5,7 @@ export const routes = {
     '/': Home,
     '/leaderboard': Home,
     '/players/:username': wrap({
-        asyncComponent: () => import('./routes/Profile.svelte')
+        asyncComponent: () => import('./routes/Profile.svelte'),
     }),
     '/items': wrap({
         asyncComponent: () => import('./routes/Items.svelte'),
