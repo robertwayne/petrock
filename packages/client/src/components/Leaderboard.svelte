@@ -34,22 +34,29 @@
     }
 
     const loadPlayerData = async (username: string) => {
-        clearLoadedPlayerData()
+        let data = await get('player')
 
-        stores.fetchDataDelay = setTimeout(async () => {
-            let response: Response | undefined
-            try {
-                response = await fetch(`${url}/api/v1/history?username=${username}&tooltip=true`)
-            } catch (err) {
-                return
-            }
-
-            if (!response) return
-
-            const data: Player = await response.json()
-
+        if (data?.player === username) {
             stores.player = data
-        }, 500)
+        } else {
+            clearLoadedPlayerData()
+
+            stores.fetchDataDelay = setTimeout(async () => {
+                let response: Response | undefined
+                try {
+                    response = await fetch(`${url}/api/v1/history?username=${username}&tooltip=true`)
+                } catch (err) {
+                    return
+                }
+
+                if (!response) return
+
+                const data: Player = await response.json()
+
+                set('player', data)
+                stores.player = data
+            }, 500)
+        }
     }
 
     const clearLoadedPlayerData = async () => {
