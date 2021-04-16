@@ -11,7 +11,7 @@ dotenv.config()
 const logger = pino(logOptions)
 const current_leaderboards: Array<Player> = []
 
-/** 
+/**
  * Starts a continuous database runner on an interval. Collects data from the
  * RetroMMO API and ingests it into the PetRock database.
  */
@@ -61,7 +61,7 @@ const executeQueries = async (client: PoolClient, player: Player, diff: number):
 }
 
 /**
- * Fetches the online players and the leaderboards from play.retro-mmo.com 
+ * Fetches the online players and the leaderboards from play.retro-mmo.com
  * and loops through the returned objects, calling executeQueries on them.
  */
 const fetchDataFromAPI = async (client: PoolClient) => {

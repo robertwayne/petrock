@@ -1,5 +1,5 @@
 import { Writable, writable } from 'svelte/store'
-import type { Player, Item } from '../../shared/types'
+import type { Item } from '../../shared/types'
 
 export const items: Writable<Array<Item>> = writable([])
 
