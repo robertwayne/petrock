@@ -22,7 +22,7 @@
         sortBy: 'exp',
         orderBy: true,
         updateTimer: 0,
-        fetchDataDelay: 0 
+        fetchDataDelay: 0,
     }
 
     const getExperienceToNextRank = async (player: Player, currentRank: number) => {
@@ -31,11 +31,10 @@
         } else {
             return 0
         }
-
     }
 
     const loadPlayerData = async (username: string) => {
-        stores.player = undefined
+        clearLoadedPlayerData()
 
         stores.fetchDataDelay = setTimeout(async () => {
             let response: Response | undefined
@@ -63,7 +62,9 @@
         let response: Response | undefined
 
         try {
-            response = await fetch(`${url}/api/v1/leaderboards?sort=${stores.sortBy}&order=${stores.orderBy ? 'desc' : 'asc'}`)
+            response = await fetch(
+                `${url}/api/v1/leaderboards?sort=${stores.sortBy}&order=${stores.orderBy ? 'desc' : 'asc'}`
+            )
         } catch (err) {
             const subheader: HTMLElement = document.getElementById('disconnect-error') as HTMLElement
             subheader.classList.remove('hidden')
@@ -220,8 +221,8 @@
                                             {#if i > 0}
                                                 {#await getExperienceToNextRank(player, i)}
                                                     Calculating...
-                                                {:then exp} 
-                                                    Next Rank: {exp.toLocaleString()} 
+                                                {:then exp}
+                                                    Next Rank: {exp.toLocaleString()}
                                                 {/await}
                                             {/if}
                                         </div>
