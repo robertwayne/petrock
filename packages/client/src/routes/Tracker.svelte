@@ -5,6 +5,7 @@
     import { expPreviousExperience } from '../stores'
     import { expPerHour, expThisSession } from '../stores'
     import { showDisconnectHeader } from '../errorHandlers'
+    import {fade} from 'svelte/transition'
     import type { RawPlayerData } from '../../../shared/types'
 
 
@@ -87,7 +88,7 @@
 
 <div>
     <PageHeader header="Experience Tracker" subheader="Easily track your experience per hour!" />
-    <div class="wrapper">
+    <div class="wrapper" in:fade="{{duration: 500}}">
         <form>
             <label for="text" />
             <input

@@ -5,6 +5,7 @@
     import { tickRate, url } from '../constants'
     import { relativeTimeFromDates } from '../time'
     import { get, set } from 'idb-keyval'
+    import {fade} from 'svelte/transition'
     import type { Player } from '../../../shared/types'
 
     interface LeaderboardComponentStore {
@@ -183,7 +184,7 @@
     }
 </script>
 
-<div id="wrapper">
+<div id="wrapper" in:fade="{{duration: 500}}">
     <PageHeader header="Leaderboards" subheader="This page updates in real-time." />
     <table id="leaderboard">
         <thead>
