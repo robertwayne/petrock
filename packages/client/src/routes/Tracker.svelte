@@ -8,10 +8,10 @@
     import type { RawPlayerData } from '../../../shared/types'
 
 
-    $: username = ''
-    $: expInterval = 0
-    $: sessionDuration = 0
-    $: sessionLog = []
+    let username = ''
+    let expInterval = 0
+    let sessionDuration = 0
+    let sessionLog: Array<string> = []
     let requestTimer = 0
     let sessionLogUpdated = false
 

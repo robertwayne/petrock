@@ -6,17 +6,37 @@
     import { relativeTimeFromDates } from '../time'
     import type { Player } from '../../../shared/types'
 
-    let loadedPlayer: Player | undefined = undefined
-    let leaderboard: Array<Player> = preloadData
-    let sortBy: string = 'exp'
-    let orderBy: boolean = true
-    let updateTimer: number = 0
-    let loadingPlayerTimeout: number = 0
+    interface LeaderboardComponentStore {
+        player: Player | undefined
+        leaderboard: Array<Player>
+        sortBy: string
+        orderBy: boolean
+        updateTimer: number
+        fetchDataDelay: number
+    }
+
+    const stores: LeaderboardComponentStore = {
+        player: undefined,
+        leaderboard: preloadData,
+        sortBy: 'exp',
+        orderBy: true,
+        updateTimer: 0,
+        fetchDataDelay: 0 
+    }
+
+    const getExperienceToNextRank = async (player: Player, currentRank: number) => {
+        if (stores.leaderboard && player) {
+            return stores.leaderboard[currentRank - 1].experience! - player.experience!
+        } else {
+            return 0
+        }
+
+    }
 
     const loadPlayerData = async (username: string) => {
-        loadedPlayer = undefined
+        stores.player = undefined
 
-        loadingPlayerTimeout = setTimeout(async () => {
+        stores.fetchDataDelay = setTimeout(async () => {
             let response: Response | undefined
             try {
                 response = await fetch(`${url}/api/v1/history?username=${username}&tooltip=true`)
@@ -31,13 +51,13 @@
 
             const data: Player = await response.json()
 
-            loadedPlayer = data
+            stores.player = data
         }, 500)
     }
 
     const clearLoadedPlayerData = async () => {
-        loadedPlayer = undefined
-        clearTimeout(loadingPlayerTimeout)
+        stores.player = undefined
+        clearTimeout(stores.fetchDataDelay)
     }
 
     /** Fetches current leaderboard data, maps it to players, and pushes it to a reactive array. */
@@ -45,11 +65,11 @@
         let response: Response | undefined
 
         try {
-            response = await fetch(`${url}/api/v1/leaderboards?sort=${sortBy}&order=${orderBy ? 'desc' : 'asc'}`)
+            response = await fetch(`${url}/api/v1/leaderboards?sort=${stores.sortBy}&order=${stores.orderBy ? 'desc' : 'asc'}`)
         } catch (err) {
             const subheader: HTMLElement = document.getElementById('disconnect-error') as HTMLElement
             subheader.classList.remove('hidden')
-            clearInterval(updateTimer)
+            clearInterval(stores.updateTimer)
             return
         }
 
@@ -67,25 +87,25 @@
                 daily_experience: data[i].daily_experience || 0,
                 weekly_experience: data[i].weekly_experience || 0,
                 monthly_experience: data[i].monthly_experience || 0,
-                last_modified: relativeTimeFromDates(new Date(data[i].last_modified)),
+                last_modified: relativeTimeFromDates(new Date(data[i].last_modified!)),
             }
             tmp_leaderboard.push(player)
         }
 
-        leaderboard = tmp_leaderboard
+        stores.leaderboard = tmp_leaderboard
     }
 
     onMount(
         async (): Promise<void> => {
             await getLeaderboardData()
-            updateTimer = setInterval(getLeaderboardData, tickRate)
+            stores.updateTimer = setInterval(getLeaderboardData, tickRate)
         }
     )
 
     onDestroy(
         async (): Promise<void> => {
-            clearInterval(updateTimer)
-            updateTimer = 0
+            clearInterval(stores.updateTimer)
+            stores.updateTimer = 0
         }
     )
 
@@ -114,7 +134,7 @@
 
     /** Requests a sorted copy of the leaderboard data from the API. */
     async function sort(column: string): Promise<void> {
-        clearInterval(updateTimer)
+        clearInterval(stores.updateTimer)
 
         const setCaret = (el: HTMLElement) => {
             setCaretState(el)
@@ -142,10 +162,10 @@
                 break
             }
         }
-        sortBy = column
-        orderBy = !orderBy
+        stores.sortBy = column
+        stores.orderBy = !stores.orderBy
         await getLeaderboardData()
-        updateTimer = setInterval(getLeaderboardData, tickRate)
+        stores.updateTimer = setInterval(getLeaderboardData, tickRate)
     }
 </script>
 
@@ -189,22 +209,24 @@
 
                                     <hr />
 
-                                    {#if loadedPlayer !== undefined}
+                                    {#if stores.player !== undefined}
                                         <div>
                                             {#if i > 0}
-                                                Next Rank: {(
-                                                    leaderboard[i - 1].experience - player.experience
-                                                ).toLocaleString()}
+                                                {#await getExperienceToNextRank(player, i)}
+                                                    Calculating...
+                                                {:then exp} 
+                                                    Next Rank: {exp.toLocaleString()} 
+                                                {/await}
                                             {/if}
                                         </div>
                                         <div>
-                                            Yesterday: {Number(loadedPlayer.yesterdays_experience)?.toLocaleString()}
+                                            Yesterday: {Number(stores.player.yesterdays_experience)?.toLocaleString()}
                                         </div>
                                         <div>
-                                            Last Week: {Number(loadedPlayer.last_weeks_experience)?.toLocaleString()}
+                                            Last Week: {Number(stores.player.last_weeks_experience)?.toLocaleString()}
                                         </div>
                                         <div>
-                                            Last Month: {Number(loadedPlayer.last_months_experience)?.toLocaleString()}
+                                            Last Month: {Number(stores.player.last_months_experience)?.toLocaleString()}
                                         </div>
                                     {:else}
                                         <div>Loading data...</div>
