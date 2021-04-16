@@ -136,7 +136,7 @@ EXECUTE PROCEDURE history_update();
 CREATE OR REPLACE FUNCTION get_last_week_experience(username TEXT)
 RETURNS TABLE(experience INT)
 AS $BODY$
-    SELECT SUM (h.experience)
+    SELECT COALESCE(SUM (h.experience), 0)
     FROM history h
     WHERE h.player = username
     AND h.created_on BETWEEN NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER-7
@@ -147,7 +147,7 @@ LANGUAGE 'sql';
 CREATE OR REPLACE FUNCTION get_last_month_experience(username TEXT)
 RETURNS TABLE(experience INT)
 AS $BODY$
-    SELECT SUM (h.experience)
+    SELECT COALESCE(SUM (h.experience), 0)
     FROM history h
     WHERE h.player = username
     AND h.created_on >= DATE_TRUNC('month', NOW()) - INTERVAL '1 month'
@@ -158,7 +158,7 @@ LANGUAGE 'sql';
 CREATE OR REPLACE FUNCTION get_current_month_experience(username TEXT)
 RETURNS TABLE(experience INT)
 AS $BODY$
-    SELECT SUM (h.experience)
+    SELECT COALESCE(SUM (h.experience), 0)
     FROM history h
     WHERE h.player = username
     AND h.created_on >= DATE_TRUNC('month', CURRENT_DATE)
@@ -168,7 +168,7 @@ LANGUAGE 'sql';
 CREATE OR REPLACE FUNCTION get_current_week_experience(username TEXT)
 RETURNS TABLE(experience INT)
 AS $BODY$
-    SELECT SUM (h.experience)
+    SELECT COALESCE(SUM (h.experience), 0)
     FROM history h
     WHERE h.player = username
     AND h.created_on >= DATE_TRUNC('week', CURRENT_DATE) - INTERVAL '1 day'
