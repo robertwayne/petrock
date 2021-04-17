@@ -16,5 +16,5 @@ module.exports = {
     env: {
         API_BASE_URL: 'https://petrock.gg',
         TICK_RATE: 5000,
-    },
+    }
 }
