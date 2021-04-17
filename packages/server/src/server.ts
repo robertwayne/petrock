@@ -29,6 +29,7 @@ if (process.env.NODE_ENV === 'development') {
         contentSecurityPolicy: {
             directives: {
                 'default-src': '*',
+                'style-src': ["'self'", 'fonts.googleapis.com', "'unsafe-inline'"],
             },
         },
     })

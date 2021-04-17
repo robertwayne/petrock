@@ -6,10 +6,10 @@
     "license": "MIT",
     "author": "Rob Wagner <rob@robwagner.dev>",
     "scripts": {
-        "dev": "tsnd --respawn ./src/server.ts",
+        "start": "tsnd ./src/server.ts --transpile-only",
+        "dev": "NODE_ENV=development tsnd --respawn ./src/server.ts",
         "lint": "eslint src/",
-        "service-runner": "ts-node ./src/db/serviceRunner.ts --transpile-only",
-        "start": "ts-node ./src/server.ts --transpile-only"
+        "service-runner": "ts-node ./src/db/serviceRunner.ts --transpile-only"
     },
     "dependencies": {
         "@types/node-fetch": "^2.5.10",

@@ -19,6 +19,7 @@
         "start": "yarn workspace @petrock/client start",
         "start-service-runner": "yarn workspace @petrock/server service-runner",
         "start-webserver": "yarn workspace @petrock/server start",
+        "dev-webserver": "yarn workspace @petrock/server dev",
         "update": "yarn upgrade-interactive"
     },
     "dependencies": {
