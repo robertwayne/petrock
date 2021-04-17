@@ -15,19 +15,6 @@
 </nav>
 
 <style>
-    #header {
-        font-size: 100%;
-        font-family: inherit;
-        border: 0;
-        padding: 0;
-    }
-
-    #header:hover {
-        cursor: default;
-        font-weight: bold;
-        color: var(--theme-primary-accent);
-    }
-
     #main-menu {
         padding-right: 20px;
     }
@@ -41,7 +28,7 @@
         padding: 0 10px;
     }
 
-    .dropdown {
+    /* .dropdown {
         background-color: var(--theme-primary-shadow);
         position: absolute;
         padding: 3px;
@@ -62,7 +49,7 @@
     .menu:hover .dropdown {
         visibility: visible;
         border: none;
-    }
+    } */
 
     nav {
         grid-area: nav;
@@ -151,18 +138,13 @@
         list-style: none;
     }
 
-    #header:hover i {
-        font-weight: bold;
-        color: var(--theme-primary-accent);
-    }
-
-    i {
+    /* i {
         position: inline-block;
         height: max-content;
         padding: 6px 3px;
         font-size: 14pt;
         color: var(--theme-primary-text);
-    }
+    } */
 
     a {
         text-decoration: none;

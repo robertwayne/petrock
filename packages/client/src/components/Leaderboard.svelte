@@ -184,8 +184,8 @@
     }
 </script>
 
+<PageHeader header="Leaderboards" subheader="This page updates in real-time." />
 <div id="wrapper" in:fade="{{duration: 500}}">
-    <PageHeader header="Leaderboards" subheader="This page updates in real-time." />
     <table id="leaderboard">
         <thead>
             <tr>

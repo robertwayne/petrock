@@ -5,27 +5,24 @@
 </script>
 
 <div>
-    <h1>{header}</h1>
+    <span id="page-header">{header}</span>
     <Disconnected error_label="LOST CONNECTION" />
     <span id="page-subheader">{subheader}</span>
 </div>
 
 <style>
-    h1 {
+    #page-header {
         display: flex;
         justify-content: center;
         font-size: 30pt;
+        font-weight: bold;
         padding: 1% 0 0 0;
         height: max-content;
     }
 
     @media (min-width: 720px) {
-        h1 {
-            display: flex;
-            justify-content: center;
+        #page-header {
             font-size: 36pt;
-            padding: 1% 0 0 0;
-            height: max-content;
         }
     }
 
