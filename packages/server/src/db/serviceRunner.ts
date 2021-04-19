@@ -11,30 +11,17 @@ dotenv.config()
 const logger = pino(logOptions)
 const current_leaderboards: Array<Player> = []
 
-/** Starts a continuous database runner on an interval. Collects data from the
+/**
+ * Starts a continuous database runner on an interval. Collects data from the
  * RetroMMO API and ingests it into the PetRock database.
  */
 const runner = async (): Promise<void> => {
     const client: PoolClient = await pool.connect()
-    await updateDatabase(client)
-    setInterval(updateDatabase, Number(10000), client)
+    await fetchDataFromAPI(client)
+    setInterval(fetchDataFromAPI, Number(10000), client)
 }
 
-/** Returns an array of player names that are currently online. */
-const getOnlinePlayers = async (): Promise<Array<string>> => {
-    let response = undefined
-
-    try {
-        response = await nodeFetch('https://play.retro-mmo.com/players.json')
-    } catch (err) {
-        logger.error(`Error fetching online players from RetroMMO API.`)
-        return
-    }
-
-    return await response.json()
-}
-
-/** Executes a set of queries for updating players and history tables.. */
+/** Executes a set of queries for updating players and history tables. */
 const executeQueries = async (client: PoolClient, player: Player, diff: number): Promise<void> => {
     try {
         await client.query({
@@ -73,7 +60,11 @@ const executeQueries = async (client: PoolClient, player: Player, diff: number):
     }
 }
 
-const updateDatabase = async (client: PoolClient) => {
+/**
+ * Fetches the online players and the leaderboards from play.retro-mmo.com
+ * and loops through the returned objects, calling executeQueries on them.
+ */
+const fetchDataFromAPI = async (client: PoolClient) => {
     logger.info('Checking for updates...')
 
     let responsePlayers = undefined

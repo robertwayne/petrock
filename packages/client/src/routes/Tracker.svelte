@@ -5,13 +5,14 @@
     import { expPreviousExperience } from '../stores'
     import { expPerHour, expThisSession } from '../stores'
     import { showDisconnectHeader } from '../errorHandlers'
+    import {fade} from 'svelte/transition'
     import type { RawPlayerData } from '../../../shared/types'
 
 
-    $: username = ''
-    $: expInterval = 0
-    $: sessionDuration = 0
-    $: sessionLog = []
+    let username = ''
+    let expInterval = 0
+    let sessionDuration = 0
+    let sessionLog: Array<string> = []
     let requestTimer = 0
     let sessionLogUpdated = false
 
@@ -87,7 +88,7 @@
 
 <div>
     <PageHeader header="Experience Tracker" subheader="Easily track your experience per hour!" />
-    <div class="wrapper">
+    <div class="wrapper" in:fade="{{duration: 500}}">
         <form>
             <label for="text" />
             <input

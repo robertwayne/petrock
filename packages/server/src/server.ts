@@ -24,11 +24,17 @@ app.register(fastifyStatic, {
     root: path.resolve('../client/build'),
 })
 
+// We need the hash for svelte transitions as they are dynamically inlined.
 if (process.env.NODE_ENV === 'development') {
     app.register(fastifyHelmet, {
         contentSecurityPolicy: {
             directives: {
                 'default-src': '*',
+                'style-src': [
+                    "'self'",
+                    'fonts.googleapis.com',
+                    "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
+                ],
             },
         },
     })
@@ -40,7 +46,11 @@ if (process.env.NODE_ENV === 'development') {
                 'font-src': ["'self'", 'fonts.gstatic.com', 'data:'],
                 'object-src': ["'none'"],
                 'style-src': ["'self'", 'fonts.googleapis.com'],
-                'style-src-elem': ["'self'", 'fonts.googleapis.com'],
+                'style-src-elem': [
+                    "'self'",
+                    'fonts.googleapis.com',
+                    "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
+                ],
                 'connect-src': ["'self'", 'https://*'],
             },
         },
@@ -68,7 +78,7 @@ app.get(
 
 const start = async () => {
     try {
-        await app.listen(process.env.SERVER_PORT)
+        await app.listen(process.env.SERVER_PORT || 3000)
     } catch (err) {
         app.log.error(err)
         process.exit(1)

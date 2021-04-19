@@ -1,37 +1,68 @@
 <script lang="ts">
     import PageHeader from './PageHeader.svelte'
     import { onDestroy, onMount } from 'svelte'
-    import { leaderboard, sortBy, orderBy, updateTimer, loadedPlayer } from '../stores'
     import { preloadData } from '../preload'
     import { tickRate, url } from '../constants'
     import { relativeTimeFromDates } from '../time'
+    import { get, set } from 'idb-keyval'
+    import {fade} from 'svelte/transition'
     import type { Player } from '../../../shared/types'
 
-    // preset to avoid CLS
-    $leaderboard = preloadData
+    interface LeaderboardComponentStore {
+        player: Player | undefined
+        leaderboard: Array<Player>
+        sortBy: string
+        orderBy: boolean
+        updateTimer: number
+        fetchDataDelay: number
+    }
 
-    $: loadingPlayerTimeout = 0
+    const stores: LeaderboardComponentStore = {
+        player: undefined,
+        leaderboard: [],
+        sortBy: 'exp',
+        orderBy: true,
+        updateTimer: 0,
+        fetchDataDelay: 0
+    }
+
+    const getExperienceToNextRank = async (player: Player, currentRank: number) => {
+        if (stores.leaderboard && player) {
+            return stores.leaderboard[currentRank - 1].experience! - player.experience!
+        } else {
+            return 0
+        }
+    }
 
     const loadPlayerData = async (username: string) => {
-        loadingPlayerTimeout = setTimeout(async () => {
-            let response: Response | undefined
-            try {
-                response = await fetch(`${url}/api/v1/history?username=${username}&tooltip=true`)
-            } catch (err) {
-                return
-            }
+        let data = await get('player')
 
-            if (!response) return
+        if (data?.player === username) {
+            stores.player = data
+        } else {
+            clearLoadedPlayerData()
 
-            const data: Player = await response.json()
+            stores.fetchDataDelay = setTimeout(async () => {
+                let response: Response | undefined
+                try {
+                    response = await fetch(`${url}/api/v1/history?username=${username}&tooltip=true`)
+                } catch (err) {
+                    return
+                }
 
-            $loadedPlayer = data
-        }, 500)
+                if (!response) return
+
+                const data: Player = await response.json()
+
+                set('player', data)
+                stores.player = data
+            }, 500)
+        }
     }
 
     const clearLoadedPlayerData = async () => {
-        $loadedPlayer = undefined
-        clearTimeout(loadingPlayerTimeout)
+        stores.player = undefined
+        clearTimeout(stores.fetchDataDelay)
     }
 
     /** Fetches current leaderboard data, maps it to players, and pushes it to a reactive array. */
@@ -39,11 +70,13 @@
         let response: Response | undefined
 
         try {
-            response = await fetch(`${url}/api/v1/leaderboards?sort=${$sortBy}&order=${$orderBy ? 'desc' : 'asc'}`)
+            response = await fetch(
+                `${url}/api/v1/leaderboards?sort=${stores.sortBy}&order=${stores.orderBy ? 'desc' : 'asc'}`
+            )
         } catch (err) {
             const subheader: HTMLElement = document.getElementById('disconnect-error') as HTMLElement
             subheader.classList.remove('hidden')
-            clearInterval($updateTimer)
+            clearInterval(stores.updateTimer)
             return
         }
 
@@ -58,27 +91,36 @@
                 username: data[i].username,
                 online: data[i].online,
                 experience: data[i].experience,
-                daily_experience: data[i].daily_experience || 0,
-                weekly_experience: data[i].weekly_experience || 0,
-                monthly_experience: data[i].monthly_experience || 0,
-                last_modified: relativeTimeFromDates(new Date(data[i].last_modified)),
+                daily_experience: data[i].daily_experience,
+                weekly_experience: data[i].weekly_experience,
+                monthly_experience: data[i].monthly_experience,
+                last_modified: relativeTimeFromDates(new Date(data[i].last_modified!)),
             }
             tmp_leaderboard.push(player)
         }
-        $leaderboard = tmp_leaderboard
+
+        set('leaderboard', tmp_leaderboard)
+        stores.leaderboard = tmp_leaderboard
     }
 
     onMount(
         async (): Promise<void> => {
+            let data = await get('leaderboard')
+            if (data) {
+                stores.leaderboard = data
+            } else {
+                stores.leaderboard = preloadData
+            }
+
             await getLeaderboardData()
-            $updateTimer = setInterval(getLeaderboardData, tickRate)
+            stores.updateTimer = setInterval(getLeaderboardData, tickRate)
         }
     )
 
     onDestroy(
         async (): Promise<void> => {
-            clearInterval($updateTimer)
-            $updateTimer = 0
+            clearInterval(stores.updateTimer)
+            stores.updateTimer = 0
         }
     )
 
@@ -107,7 +149,7 @@
 
     /** Requests a sorted copy of the leaderboard data from the API. */
     async function sort(column: string): Promise<void> {
-        clearInterval($updateTimer)
+        clearInterval(stores.updateTimer)
 
         const setCaret = (el: HTMLElement) => {
             setCaretState(el)
@@ -135,15 +177,15 @@
                 break
             }
         }
-        $sortBy = column
-        $orderBy = !$orderBy
+        stores.sortBy = column
+        stores.orderBy = !stores.orderBy
         await getLeaderboardData()
-        $updateTimer = setInterval(getLeaderboardData, tickRate)
+        stores.updateTimer = setInterval(getLeaderboardData, tickRate)
     }
 </script>
 
-<div id="wrapper">
-    <PageHeader header="Leaderboards" subheader="This page updates in real-time." />
+<PageHeader header="Leaderboards" subheader="This page updates in real-time." />
+<div id="wrapper" in:fade="{{duration: 500}}">
     <table id="leaderboard">
         <thead>
             <tr>
@@ -162,8 +204,8 @@
             </tr>
         </thead>
         <tbody>
-            {#each $leaderboard as player, i}
-                <tr id="place-{String(player.place)}">
+            {#each stores.leaderboard as player, i}
+                <tr>
                     <td>{player.place}</td>
                     <td class="username-cell {player.online ? 'is-online' : ''}">
                         <div class={player.online ? ' online-marker' : ''}>
@@ -182,22 +224,24 @@
 
                                     <hr />
 
-                                    {#if $loadedPlayer !== undefined}
+                                    {#if stores.player !== undefined}
                                         <div>
                                             {#if i > 0}
-                                                Next Rank: {(
-                                                    $leaderboard[i - 1].experience - player.experience
-                                                ).toLocaleString()}
+                                                {#await getExperienceToNextRank(player, i)}
+                                                    Calculating...
+                                                {:then exp}
+                                                    Next Rank: {exp.toLocaleString()}
+                                                {/await}
                                             {/if}
                                         </div>
                                         <div>
-                                            Yesterday: {Number($loadedPlayer.yesterdays_experience)?.toLocaleString()}
+                                            Yesterday: {stores.player.yesterdays_experience?.toLocaleString()}
                                         </div>
                                         <div>
-                                            Last Week: {Number($loadedPlayer.last_weeks_experience)?.toLocaleString()}
+                                            Last Week: {stores.player.last_weeks_experience?.toLocaleString()}
                                         </div>
                                         <div>
-                                            Last Month: {Number($loadedPlayer.last_months_experience)?.toLocaleString()}
+                                            Last Month: {stores.player.last_months_experience?.toLocaleString()}
                                         </div>
                                     {:else}
                                         <div>Loading data...</div>
@@ -325,7 +369,6 @@
     .username {
         display: inline-block;
         position: relative;
-        padding-right: 14px;
     }
 
     #wrapper {
@@ -352,23 +395,17 @@
         padding: 6px 4px;
     }
 
-    #top-scores {
-        display: flex;
-        justify-content: center;
-        padding: 3% 0;
-    }
-
-    #place-1 {
+    tbody > tr:nth-child(1) {
         font-weight: bold;
         color: #d8b041;
     }
 
-    #place-2 {
+    tbody > tr:nth-child(2) {
         font-weight: bold;
         color: #727271;
     }
 
-    #place-3 {
+    tbody > tr:nth-child(3) {
         font-weight: bold;
         color: #8b633c;
     }

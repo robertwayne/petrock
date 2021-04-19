@@ -4,7 +4,7 @@ import type { Player } from '../../shared/types'
 export const preloadData: Array<Player> = []
 
 for (let i = 0; i < 100; i++) {
-    let player: Player = {
+    const player: Player = {
         place: i + 1,
         username: '',
         experience: 0,

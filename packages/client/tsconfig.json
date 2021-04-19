@@ -1,5 +1,5 @@
 {
-    "include": ["src", "packages/client/types/index.d.ts", "types/index.d.ts"],
+    "include": ["src/**/*"],
     "compilerOptions": {
         "types": ["svelte", "snowpack-env"],
         "module": "esnext",
@@ -17,13 +17,15 @@
         /* noEmit - Snowpack builds (emits) files, not tsc. */
         "noEmit": true,
         /* Additional Options */
-        "strict": true,
+        "strict": false,
+        "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
         "useDefineForClassFields": true,
         "allowSyntheticDefaultImports": true,
-        "importsNotUsedAsValues": "error"
+        "importsNotUsedAsValues": "error",
+        "isolatedModules": true
     },
     "extends": "@tsconfig/svelte/tsconfig.json"
 }

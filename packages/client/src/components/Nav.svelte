@@ -6,44 +6,15 @@
     <div id="wrapper">
         <div class="left"><a href="#/">Pet<span id="logo-highlight">Rock</span></a></div>
         <div class="right">
-            <ul id="main-menu">
-                <li class="menu">
-                    <span id="header">Tools<i class="icofont-caret-down" /></span>
-                    <ul class="dropdown">
-                        <li><a href="/" use:link>Leaderboards</a></li>
-                        <li><a href="/tracker" use:link>XP Tracker</a></li>
-                    </ul>
-                </li>
-                <li class="menu">
-                    <span id="header" href="#/">Database<i class="icofont-caret-down" /></span>
-                    <ul class="dropdown">
-                        <li><a href="/classes" use:link>Classes</a></li>
-                        <li><a href="/events" use:link>Events</a></li>
-                        <li><a href="/items" use:link>Items</a></li>
-                        <li><a href="/monsters" use:link>Monsters</a></li>
-                        <li><a href="/skills" use:link>Skills</a></li>
-                        <li><a href="/zones" use:link>Zones</a></li>
-                    </ul>
-                </li>
+            <ul id="main-menu" class="menu">
+                <li><a href="/" use:link>Leaderboards</a></li>
+                <li><a href="/tracker" use:link>XP Tracker</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <style>
-    #header {
-        font-size: 100%;
-        font-family: inherit;
-        border: 0;
-        padding: 0;
-    }
-
-    #header:hover {
-        cursor: default;
-        font-weight: bold;
-        color: var(--theme-primary-accent);
-    }
-
     #main-menu {
         padding-right: 20px;
     }
@@ -53,7 +24,11 @@
         overflow: hidden;
     }
 
-    .dropdown {
+    .menu li {
+        padding: 0 10px;
+    }
+
+    /* .dropdown {
         background-color: var(--theme-primary-shadow);
         position: absolute;
         padding: 3px;
@@ -74,7 +49,7 @@
     .menu:hover .dropdown {
         visibility: visible;
         border: none;
-    }
+    } */
 
     nav {
         grid-area: nav;
@@ -163,18 +138,13 @@
         list-style: none;
     }
 
-    #header:hover i {
-        font-weight: bold;
-        color: var(--theme-primary-accent);
-    }
-
-    i {
+    /* i {
         position: inline-block;
         height: max-content;
         padding: 6px 3px;
         font-size: 14pt;
         color: var(--theme-primary-text);
-    }
+    } */
 
     a {
         text-decoration: none;
