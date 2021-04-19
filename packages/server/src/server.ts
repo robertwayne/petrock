@@ -25,37 +25,26 @@ app.register(fastifyStatic, {
 })
 
 // We need the hash for svelte transitions as they are dynamically inlined.
-if (process.env.NODE_ENV === 'development') {
-    app.register(fastifyHelmet, {
-        contentSecurityPolicy: {
-            directives: {
-                'default-src': '*',
-                'style-src': [
-                    "'self'",
-                    'fonts.googleapis.com',
-                    "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
-                ],
-            },
+app.register(fastifyHelmet, {
+    contentSecurityPolicy: {
+        directives: {
+            'default-src': ["'none'"],
+            'img-src': ["'self'"],
+            'manifest-src': ["'self'"],
+            'font-src': ["'self'", 'fonts.gstatic.com', 'data:'],
+            'object-src': ["'none'"],
+            'style-src': ["'self'", 'fonts.googleapis.com'],
+            'script-src': ["'self'"],
+            'script-src-elem': ["'self'"],
+            'style-src-elem': [
+                "'self'",
+                'fonts.googleapis.com',
+                "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
+            ],
+            'connect-src': ["'self'", 'https://*'],
         },
-    })
-} else {
-    app.register(fastifyHelmet, {
-        contentSecurityPolicy: {
-            directives: {
-                'default-src': ["'self'"],
-                'font-src': ["'self'", 'fonts.gstatic.com', 'data:'],
-                'object-src': ["'none'"],
-                'style-src': ["'self'", 'fonts.googleapis.com'],
-                'style-src-elem': [
-                    "'self'",
-                    'fonts.googleapis.com',
-                    "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
-                ],
-                'connect-src': ["'self'", 'https://*'],
-            },
-        },
-    })
-}
+    },
+})
 
 app.register(fastifyCors, {
     origin: process.env.NODE_ENV === 'production' ? 'https://petrock.gg' : '*',
