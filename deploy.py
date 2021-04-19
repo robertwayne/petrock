@@ -51,12 +51,13 @@ def deploy():
     complete = multi_run_and_check([
         ['Fetching latest code...', 'git pull --ff-only'],
         ['Updating dependencies...', 'yarn'],
-        ['Updating config files...', f'cp $HOME/petrock_configs/ecosystem.config.{color}.js $HOME/projects/petrock/ecosystem.config.js'],
-        ['Building client...', 'rm -rf packages/client/build && yarn build'],
+        ['Updating config files...', f'cp $HOME/petrock_configs/ecosystem.config.{color}.js $HOME/petrock/ecosystem.config.js'],
+        [None, f'cp $HOME/petrock_configs/constants.{color}.ts $HOME/petrock/packages/client/src/constants.ts'],
+        ['Building client...', 'rm -rf $HOME/petrock/packages/client/build && yarn build'],
         [f'Starting processes...', 'pm2 start ecosystem.config.js --env production'],
-        # ['Swapping nginx ports...', f'cp $HOME/petrock_configs/nginx.config.{color} /etc/nginx/sites-available/petrock.gg'],
-        # [None, 'systemctl restart nginx'],
-        [None, f'pm2 stop service-runner-{opposite_color.get(color)} && pm2 stop web-server-{opposite_color.get(color)}'],
+        ['Swapping nginx ports...', f'cp $HOME/petrock_configs/nginx.config.{color} /etc/nginx/sites-available/petrock.gg'],
+        [None, 'systemctl restart nginx'],
+        ['Stopping old processes...', f'pm2 stop service-runner-{opposite_color.get(color)} && pm2 stop web-server-{opposite_color.get(color)}'],
     ], verbose=args.verbose)
         
     if complete == 0:
