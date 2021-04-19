@@ -30,7 +30,11 @@ if (process.env.NODE_ENV === 'development') {
         contentSecurityPolicy: {
             directives: {
                 'default-src': '*',
-                'style-src': ["'self'", 'fonts.googleapis.com', "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='"],
+                'style-src': [
+                    "'self'",
+                    'fonts.googleapis.com',
+                    "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
+                ],
             },
         },
     })
@@ -42,7 +46,11 @@ if (process.env.NODE_ENV === 'development') {
                 'font-src': ["'self'", 'fonts.gstatic.com', 'data:'],
                 'object-src': ["'none'"],
                 'style-src': ["'self'", 'fonts.googleapis.com'],
-                'style-src-elem': ["'self'", 'fonts.googleapis.com', "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='"],
+                'style-src-elem': [
+                    "'self'",
+                    'fonts.googleapis.com',
+                    "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
+                ],
                 'connect-src': ["'self'", 'https://*'],
             },
         },

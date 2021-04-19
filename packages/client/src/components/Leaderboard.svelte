@@ -23,7 +23,7 @@
         sortBy: 'exp',
         orderBy: true,
         updateTimer: 0,
-        fetchDataDelay: 0,
+        fetchDataDelay: 0
     }
 
     const getExperienceToNextRank = async (player: Player, currentRank: number) => {
