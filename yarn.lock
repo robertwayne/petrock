@@ -1636,11 +1636,6 @@ cli-cursor@^3.1.0:
   dependencies:
     restore-cursor "^3.1.0"
 
-cli-spinners@^2.5.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-2.6.0.tgz#36c7dc98fb6a9a76bd6238ec3f77e2425627e939"
-  integrity sha512-t+4/y50K/+4xcCRosKkA7W4gTr1MySvLV0q+PxmG7FJ5g+66ChKurYjxBCjHggHH3HA5Hh9cy+lcUGWDqVH+4Q==
-
 cli-width@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-3.0.0.tgz#a2f48437a2caa9a22436e794bf071ec9e61cedf6"
@@ -2200,10 +2195,10 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-esbuild@^0.9.3:
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.9.7.tgz#ea0d639cbe4b88ec25fbed4d6ff00c8d788ef70b"
-  integrity sha512-VtUf6aQ89VTmMLKrWHYG50uByMF4JQlVysb8dmg6cOgW8JnFCipmz7p+HNBl+RR3LLCuBxFGVauAe2wfnF9bLg==
+esbuild@^0.8.7:
+  version "0.8.57"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.57.tgz#a42d02bc2b57c70bcd0ef897fe244766bb6dd926"
+  integrity sha512-j02SFrUwFTRUqiY0Kjplwjm1psuzO1d6AjaXKuOR9hrY0HuPsT6sV42B6myW34h1q4CRy+Y3g4RU/cGJeI/nNA==
 
 escalade@^3.1.1:
   version "3.1.1"
@@ -2560,11 +2555,6 @@ fastq@^1.6.0, fastq@^1.6.1:
   dependencies:
     reusify "^1.0.4"
 
-fdir@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/fdir/-/fdir-5.0.0.tgz#a40b5d9adfb530daeca55558e8ad87ec14a44769"
-  integrity sha512-cteqwWMA43lEmgwOg5HSdvhVFD39vHjQDhZkRMlKmeoNPtSSgUw1nUypydiY2upMdGiBFBZvNBDbnoBh0yCzaQ==
-
 figures@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-3.2.0.tgz#625c18bd293c604dc4a8ddb2febf0c88341746af"
@@ -2708,11 +2698,6 @@ fsevents@^2.2.0, fsevents@~2.3.1:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
-
-fsevents@~2.1.2:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.1.3.tgz#fb738703ae8d2f9fe900c33836ddebee8b97f23e"
-  integrity sha512-Auw9a4AxqWpa9GUfj370BMPzzyncfBABW8Mab7BGWBYDj4Isgq+cDKtx0i6u9jcX9pQDnswsaaOTgTmA5pEjuQ==
 
 function-bind@^1.1.1:
   version "1.1.1"
@@ -4340,7 +4325,7 @@ packet-reader@1.0.0:
   resolved "https://registry.yarnpkg.com/packet-reader/-/packet-reader-1.0.0.tgz#9238e5480dedabacfe1fe3f2771063f164157d74"
   integrity sha512-HAKu/fG3HpHFO0AA8WE8q2g+gBJaZ9MG7fcKk+IJPLTGAD6Psw4443l+9DGRbOIh3/aXr7Phy0TjilYivJo5XQ==
 
-pacote@^11.2.6, pacote@^11.3.1:
+pacote@^11.2.6:
   version "11.3.1"
   resolved "https://registry.yarnpkg.com/pacote/-/pacote-11.3.1.tgz#6ce95dd230db475cbd8789fd1f986bec51b4bf7c"
   integrity sha512-TymtwoAG12cczsJIrwI/euOQKtjrQHlD0k0oyt9QSmZGpqa+KdlxKdWR/YUjYizkixaVyztxt/Wsfo8bL3A6Fg==
@@ -4531,7 +4516,7 @@ pgpass@1.x:
   dependencies:
     split2 "^3.1.1"
 
-picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.2, picomatch@^2.2.3:
+picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.3.tgz#465547f359ccc206d3c48e46a1bcb89bf7ee619d"
   integrity sha512-KpELjfwcCDUb9PeigTs2mBJzXUPzAuP2oPcA989He8Rte0+YUAjw1JVedDhuTKPkHjSYzMN3npC9luThGYEKdg==
@@ -5055,12 +5040,12 @@ rollup-pluginutils@^2.8.2:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@~2.37.1:
-  version "2.37.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.37.1.tgz#aa7aadffd75c80393f9314f9857e851b0ffd34e7"
-  integrity sha512-V3ojEeyGeSdrMSuhP3diBb06P+qV4gKQeanbDv+Qh/BZbhdZ7kHV0xAt8Yjk4GFshq/WjO7R4c7DFM20AwTFVQ==
+rollup@^2.34.0:
+  version "2.45.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.45.2.tgz#8fb85917c9f35605720e92328f3ccbfba6f78b48"
+  integrity sha512-kRRU7wXzFHUzBIv0GfoFFIN3m9oteY4uAsKllIpQDId5cfnkWF2J130l+27dzDju0E6MScKiV0ZM5Bw8m4blYQ==
   optionalDependencies:
-    fsevents "~2.1.2"
+    fsevents "~2.3.1"
 
 run-async@^2.4.0:
   version "2.4.1"
@@ -5235,20 +5220,16 @@ smart-buffer@^4.1.0:
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.1.0.tgz#91605c25d91652f4661ea69ccf45f1b331ca21ba"
   integrity sha512-iVICrxOzCynf/SNaBQCw34eM9jROU/s5rzIhpOvzhzuYHfJR/DhZfDkXiZSgKXfgv26HT3Yni3AV/DGw0cGnnw==
 
-snowpack@3.3.3:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-3.3.3.tgz#016f815cf9bb3fa1dc152212ca0fa1ecb785cee4"
-  integrity sha512-ASPyveGfzAbhyp1k5XmLtZoS0J6PpY8jArGm6JLM8ztuB4AWA2z1Qg/QiTOIguOhZN0QKKUe6slkYfSWteIzFA==
+snowpack@3.0.13:
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-3.0.13.tgz#25e6434b186d916f69b0bae6325bda4f1451c035"
+  integrity sha512-USTcpfJ68rbuFvUygw+3n9qS1CC/tGsr/JNVc6FNk0ZRfGBE4OmB+Mmk5nWtdxi546GeCr/GvveJenYLen/WpA==
   dependencies:
-    cli-spinners "^2.5.0"
     default-browser-id "^2.0.0"
-    esbuild "^0.9.3"
-    fdir "^5.0.0"
+    esbuild "^0.8.7"
     open "^7.0.4"
-    pacote "^11.3.1"
-    picomatch "^2.2.2"
     resolve "^1.20.0"
-    rollup "~2.37.1"
+    rollup "^2.34.0"
   optionalDependencies:
     fsevents "^2.2.0"
 
