@@ -1,5 +1,5 @@
 {
-    "include": ["src", "packages/client/types/index.d.ts", "types/index.d.ts"],
+    "include": ["packages/client/types/index.d.ts"],
     "compilerOptions": {
         "types": ["svelte", "snowpack-env"],
         "module": "esnext",
