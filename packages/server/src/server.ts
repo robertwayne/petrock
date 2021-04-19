@@ -42,6 +42,9 @@ app.register(fastifyHelmet, {
                 "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
             ],
             'connect-src': ["'self'", 'https://*'],
+            'form-action': ["'self'"],
+            'base-uri': ["'self'"],
+            'frame-ancestors': ["'none'"],
         },
     },
 })
