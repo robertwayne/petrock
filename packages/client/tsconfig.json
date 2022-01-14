@@ -25,7 +25,8 @@
         "useDefineForClassFields": true,
         "allowSyntheticDefaultImports": true,
         "importsNotUsedAsValues": "error",
-        "isolatedModules": true
+        "isolatedModules": true,
+        "preserveValueImports": true
     },
     "extends": "@tsconfig/svelte/tsconfig.json"
 }
