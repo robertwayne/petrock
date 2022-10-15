@@ -12,7 +12,7 @@ historical data points such as:
 This branch *(dev)* is a WIP rewrite of many Petrock services:
 
 - The `service-runner` is being replaced with [petrock-ingest](https://github.com/robertwayne/petrock-ingest)
-- The API server will be replaced with [petrock-api](https://github.com/robertwayne/petrock-api) *(not up yet)*
+- The API server will be replaced with [petrock-api](https://github.com/robertwayne/petrock/tree/dev/server)
 
 ## License
 
