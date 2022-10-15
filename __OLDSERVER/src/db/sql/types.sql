@@ -1,6 +1,0 @@
-CREATE TYPE classes AS
-(
-    WR BOOLEAN,
-    WZ BOOLEAN,
-    CL BOOLEAN
-);
