@@ -5,7 +5,7 @@
     import Nav from "./components/Nav.svelte"
 
     const routes = {
-        "/": () => import("./routes/Leaderboard.svelte"),
+        "/": () => import("./routes/Leaderboards.svelte"),
         "/tracker": () => import("./routes/Tracker.svelte"),
     }
 </script>

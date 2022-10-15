@@ -1,8 +1,8 @@
 import { Player } from "./Player"
 
-export interface LeaderboardStore {
-    player: Player | undefined
-    leaderboard: Array<Player>
+export interface Leaderboard {
+    targetPlayer: Player | undefined
+    data: Array<Player>
     sortBy: string
     orderBy: boolean
     updateTimer?: number

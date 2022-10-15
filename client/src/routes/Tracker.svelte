@@ -1,11 +1,11 @@
 <script lang="ts">
-    import PageHeader from "../components/PageHeader.svelte"
     import { onMount } from "svelte"
-    import { url } from "../constants"
     import { expPreviousExperience } from "../stores"
     import { expPerHour, expThisSession } from "../stores"
     import { fade } from "svelte/transition"
-    import type { RawPlayerData } from "../../../packages/shared/types"
+    import { RawPlayerData } from "../interfaces/RawPlayerData"
+
+    const url = import.meta.env.API_URL
 
     let username = ""
     let expInterval: NodeJS.Timer
@@ -92,10 +92,15 @@
 </script>
 
 <div>
-    <PageHeader
-        header="Experience Tracker"
-        subheader="Easily track your experience per hour!"
-    />
+    <div
+        class="h-max-content flex w-full flex-col items-center justify-center pt-4"
+    >
+        <h2 class="text-bold text-5xl">Experience Tracker</h2>
+        <span id="subheader" class="pb-8 italic"
+            >Easily track your experience per hour!</span
+        >
+    </div>
+
     <div class="wrapper" in:fade={{ duration: 500 }}>
         <form>
             <label for="text" />
