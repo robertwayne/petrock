@@ -1,0 +1,3 @@
+imports_granularity = "Crate"
+reorder_imports = true
+use_small_heuristics = "Max"

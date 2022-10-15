@@ -1,9 +1,22 @@
-.snowpack
+# Directories
+dist
 build
+target
 node_modules
-.idea
-packages/server/.env
+
+# Yarn v2 (Zero-Installs)
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Files
+.log
 .env
-.venv
-venv/
-logs/
+
+# User Settings
+.vscode
+.idea

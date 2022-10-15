@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="./tools.css" />
+        <title>DB Add Items</title>
+    </head>
+    <body>
+        <h1>Add Item</h1>
+        <form>
+            <div class="row">
+                <label for="name">Name: </label>
+                <input id="name" type="text" />
+            </div>
+
+            <div class="row">
+                <label for="desc">Description</label>
+                <textarea></textarea>
+            </div>
+
+            <div class="row">
+                Warrior <input type="checkbox" /> Wizard
+                <input type="checkbox" /> Cleric <input type="checkbox" />
+            </div>
+
+            <div class="row">
+                <label for="item-type">Type</label>
+                <select id="item-type" name="item-type" size="1">
+                    <option value="equipment">Equipment</option>
+                    <option value="consumable">Consumable</option>
+                    <option value="cosmetic">Cosmetic</option>
+                    <option value="misc">Misc</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <label for="item-slot">Slot</label>
+                <select id="item-type" name="item-type" size="1">
+                    <option value="head">Head</option>
+                    <option value="body">Body</option>
+                    <option value="main-hand">Main Hand</option>
+                    <option value="off-hand">Off-Hand</option>
+                    <option value="mask">Mask</option>
+                    <option value="outfit">Outfit</option>
+                    <option value="clothes-dye">Clothes Dye</option>
+                    <option value="hair-dye">Hair Dye</option>
+                </select>
+            </div>
+
+            <div class="stats">
+                <div class="row">
+                    <div>Str: <input type="number" /></div>
+                    <div>Def: <input type="number" /></div>
+                    <div>Wis: <input type="number" /></div>
+                </div>
+
+                <div class="row">
+                    <div>Int: <input type="number" /></div>
+                    <div>Agi: <input type="number" /></div>
+                    <div>Lck: <input type="number" /></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="can-sell">Can Sell</label>
+                <input type="checkbox" />
+            </div>
+
+            <div class="row">
+                <label for="sell-price">Sell Price</label>
+                <input type="number" />
+            </div>
+        </form>
+        <script></script>
+    </body>
+</html>

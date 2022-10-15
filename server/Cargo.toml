@@ -1,0 +1,16 @@
+[package]
+name = "server"
+authors = ["Rob Wagner <rob@sombia.com>"]
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+dotenvy = "0.15"
+rocket = { version = "0.5.0-rc.2", features = ["json", "secrets"] }
+sqlx = { version = "0.6", features = ["runtime-tokio-rustls", "postgres"] }
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = true
