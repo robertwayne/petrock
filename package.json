@@ -5,9 +5,6 @@
     "description": "Leaderboard analytics & game database for RetroMMO.",
     "license": "MIT",
     "author": "Rob Wagner <rob@robwagner.dev",
-    "workspaces": [
-        "packages/*"
-    ],
     "scripts": {
         "boostrap": "lerna bootstrap",
         "build": "yarn workspace @petrock/client build",

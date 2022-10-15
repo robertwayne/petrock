@@ -1,16 +1,14 @@
 <script lang="ts">
-    import PageHeader from '../components/PageHeader.svelte'
-    import { onMount } from 'svelte'
-    import { url } from '../constants'
-    import { expPreviousExperience } from '../stores'
-    import { expPerHour, expThisSession } from '../stores'
-    import { showDisconnectHeader } from '../errorHandlers'
-    import {fade} from 'svelte/transition'
-    import type { RawPlayerData } from '../../../shared/types'
+    import PageHeader from "../components/PageHeader.svelte"
+    import { onMount } from "svelte"
+    import { url } from "../constants"
+    import { expPreviousExperience } from "../stores"
+    import { expPerHour, expThisSession } from "../stores"
+    import { fade } from "svelte/transition"
+    import type { RawPlayerData } from "../../../shared/types"
 
-
-    let username = ''
-    let expInterval = 0
+    let username = ""
+    let expInterval: NodeJS.Timer
     let sessionDuration = 0
     let sessionLog: Array<string> = []
     let requestTimer = 0
@@ -29,8 +27,9 @@
         try {
             response = await fetch(`${url}/api/v1/history?username=${username}`)
         } catch (err) {
-            await showDisconnectHeader()
-            document.getElementById('username-input')?.classList.add('tracker-error')
+            document
+                .getElementById("username-input")
+                ?.classList.add("tracker-error")
             clearInterval(expInterval)
             return
         }
@@ -46,36 +45,42 @@
         if ($expPreviousExperience != data.experience) {
             const diff = data.experience - $expPreviousExperience
             $expThisSession = diff
-            
+
             // if ($expThisSession != diff) {
             //     sessionLog = [...sessionLog, `+${diff}xp`]
             //     sessionLogUpdated = true
             // }
         }
 
-        $expPerHour = Math.floor(Math.min(0, ($expThisSession / sessionDuration) * 3600))
+        $expPerHour = Math.floor(
+            Math.min(0, ($expThisSession / sessionDuration) * 3600)
+        )
     }
 
     onMount(async () => {
-        document.getElementById('start-button')?.addEventListener('click', (e) => {
-            const input: HTMLInputElement = document.getElementById('username-input') as HTMLInputElement
-            username = input.value
+        document
+            .getElementById("start-button")
+            ?.addEventListener("click", (e) => {
+                const input: HTMLInputElement = document.getElementById(
+                    "username-input"
+                ) as HTMLInputElement
+                username = input.value
 
-            if (username.length < 3) return
+                if (username.length < 3) return
 
-            expInterval = setInterval(loadPlayer, 1000)
+                expInterval = setInterval(loadPlayer, 1000)
 
-            input.blur()
-            input.disabled = true
-            input.value = `Tracking ${input.value}...`
-            input.classList.add('tracker-active')
-        })
+                input.blur()
+                input.disabled = true
+                input.value = `Tracking ${input.value}...`
+                input.classList.add("tracker-active")
+            })
 
-        document.getElementById('new-session-button')
-        document.getElementById('save-session-button')
-        document.getElementById('load-previous-session-button')
+        document.getElementById("new-session-button")
+        document.getElementById("save-session-button")
+        document.getElementById("load-previous-session-button")
 
-        document.addEventListener('submit', (e) => {
+        document.addEventListener("submit", (e) => {
             e.preventDefault()
         })
 
@@ -87,8 +92,11 @@
 </script>
 
 <div>
-    <PageHeader header="Experience Tracker" subheader="Easily track your experience per hour!" />
-    <div class="wrapper" in:fade="{{duration: 500}}">
+    <PageHeader
+        header="Experience Tracker"
+        subheader="Easily track your experience per hour!"
+    />
+    <div class="wrapper" in:fade={{ duration: 500 }}>
         <form>
             <label for="text" />
             <input
@@ -108,10 +116,16 @@
             <button id="save-button" disabled>Save Session</button>
             <button id="previous-button" disabled>Previous Session</button>
         </div>
-        <div class="data-labels">XP Per Hour: {$expPerHour.toLocaleString()}</div>
-        <div class="data-labels">Total XP Gained: {$expThisSession.toLocaleString()}</div>
         <div class="data-labels">
-            Session Length: {new Date(sessionDuration * 1000).toISOString().substr(11, 8)}
+            XP Per Hour: {$expPerHour.toLocaleString()}
+        </div>
+        <div class="data-labels">
+            Total XP Gained: {$expThisSession.toLocaleString()}
+        </div>
+        <div class="data-labels">
+            Session Length: {new Date(sessionDuration * 1000)
+                .toISOString()
+                .substr(11, 8)}
         </div>
         <div id="log">{sessionLog}</div>
     </div>
@@ -152,18 +166,6 @@
 
     #start-button {
         width: 30%;
-    }
-
-    #save-button {
-        
-    }
-
-    #new-button {
-
-    }
-
-    #load-button {
-
     }
 
     button:hover {

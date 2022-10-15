@@ -1,45 +1,25 @@
-<div id="wrapper">
-    <div>
-        <a href="https://github.com/robertwayne/petrock" target="_blank" rel="noopener">GitHub</a>
-        -
-        <a href="https://retro-mmo.com" target="_blank" rel=noopener>RetroMMO</a>
-    </div>
-    <div>(c) 2021 <span id="name">&nbsp;Rob Wagner</span></div>
-    <div id="notice">petrock.gg is not affiliated with RetroMMO.</div>
-</div>
+<footer class="flex flex-col justify-center py-[20px] text-center">
+    <ul class="flex flex-row justify-center">
+        <li class="px-1 font-bold hover:text-blue-500 hover:duration-300">
+            <a
+                href="https://github.com/robertwayne/petrock"
+                target="_blank"
+                rel="noopener">GitHub</a
+            >
+        </li>
+        ::
+        <li class="px-1 font-bold hover:text-blue-500 hover:duration-300">
+            <a href="https://retro-mmo.com" target="_blank" rel="noopener"
+                >RetroMMO</a
+            >
+        </li>
+    </ul>
+    <div>© {new Date().getFullYear()} Rob Wagner</div>
+    <div class="text-s italic">petrock.gg is not affiliated with RetroMMO.</div>
+</footer>
 
 <style>
-    div a {
-        font-weight: bold;
-        padding: 0 5px;
-        color: var(--theme-primary-accent);
-        text-decoration: none;
-    }
-
-    div a:hover {
-        color: var(--theme-primary-text);
-    }
-
-    #wrapper {
-        grid-area: footer;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+    footer {
         background-color: var(--theme-primary-shadow);
-        padding: 20px 0;
-    }
-    
-    #wrapper div {
-    display: flex;
-        justify-content: center;
-        overflow: hidden;
-    }
-
-    #notice {
-        font-style: italic;
-    }
-
-    #name {
-        font-weight: bold;
     }
 </style>

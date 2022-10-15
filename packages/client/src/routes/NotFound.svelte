@@ -1,42 +1,15 @@
-<script>
-    import { pop } from 'svelte-spa-router'
+<script lang="ts">
+    import { navigate } from "svelte-navigator"
 </script>
 
-<div>
-    <h1>Uh oh!</h1>
-    <p>That page doesn't seem to exist!</p>
-    <br />
-    <p><button on:click={pop}>...go back</button></p>
+<div class="flex flex-col items-center">
+    <h1 class="pt-4 text-2xl font-bold">404 Not Found</h1>
+    <p class="p-4">The page you're looking for doesn't exist!</p>
+
+    <button on:click={() => navigate("/", { replace: true })}
+        ><span
+            class="font-bold underline hover:text-blue-500 hover:duration-300"
+            >Go Home</span
+        ></button
+    >
 </div>
-
-<style>
-    div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        padding-top: 10%;
-    }
-    p {
-        display: flex;
-        justify-content: center;
-        font-size: 16pt;
-    }
-
-    button {
-        background: none;
-        border: none;
-        font-size: 16pt;
-    }
-
-    p > button {
-        text-decoration: none;
-        color: var(--theme-primary-accent);
-    }
-
-    p > button:hover {
-        font-weight: bold;
-        cursor: pointer;
-        text-decoration: underline;
-    }
-</style>

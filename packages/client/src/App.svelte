@@ -1,73 +1,31 @@
-<script>
-    import '/static/css/themes.css'
-    import '/static/css/global.css'
-    import Router from 'svelte-spa-router'
-    import Nav from './components/Nav.svelte'
-    import Footer from './components/Footer.svelte'
-    import BottomNav from './components/BottomNav.svelte'
-    import { routes } from './routeHandler'
+<script lang="ts">
+    import { Router } from "svelte-navigator"
+    import LazyRoute from "./components/LazyRoute.svelte"
+    import Footer from "./components/Footer.svelte"
+    import Nav from "./components/Nav.svelte"
+
+    const routes = {
+        "/": () => import("./routes/Leaderboard.svelte"),
+        "/tracker": () => import("./routes/Tracker.svelte"),
+    }
 </script>
 
-<div id="container">
-    <nav id="top-nav">
+<div id="app" class="flex h-full w-full flex-col">
+    <Router primary={false}>
         <Nav />
-    </nav>
-    <main>
-        <Router {routes} />
+    </Router>
+
+    <main class="flex w-full flex-grow justify-center">
+        <Router>
+            {#each Object.entries(routes) as [path, component]}
+                <LazyRoute {path} {component}>Loading...</LazyRoute>
+            {/each}
+            <LazyRoute
+                path="*"
+                component={() => import("./routes/NotFound.svelte")}
+            />
+        </Router>
     </main>
-    <nav id="bottom-nav">
-        <BottomNav />
-    </nav>
-    <footer>
-        <Footer />
-    </footer>
+
+    <Footer />
 </div>
-
-<style>
-    #container {
-        display: grid;
-        grid-template-rows: 35px auto 100px;
-        grid-template-areas:
-            'nav'
-            'main'
-            'footer';
-        height: 100vh;
-    }
-
-    #top-nav {
-        grid-area: nav;
-        max-height: 35px;
-    }
-
-    #bottom-nav {
-        grid-area: footer;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
-
-    footer {
-        grid-area: footer;
-        visibility: hidden;
-    }
-
-    @media (min-width: 720px) {
-        #container {
-            display: grid;
-            grid-template-rows: 35px auto 100px;
-            grid-template-areas:
-                'nav'
-                'main'
-                'footer';
-            height: 100vh;
-        }
-
-        #bottom-nav {
-            visibility: hidden;
-        }
-
-        footer {
-            visibility: visible;
-        }
-    }
-</style>
