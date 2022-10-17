@@ -5,6 +5,6 @@ export interface Leaderboard {
     data: Array<Player>
     sortBy: string
     orderBy: boolean
-    updateTimer?: number
-    fetchDataDelay?: number
+    updateTimer?: NodeJS.Timer
+    fetchDataDelay?: NodeJS.Timer
 }

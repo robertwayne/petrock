@@ -8,8 +8,8 @@ export const leaderboard = writable<Leaderboard>({
     data: [],
     sortBy: "exp",
     orderBy: true,
-    updateTimer: 0,
-    fetchDataDelay: 0,
+    updateTimer: undefined,
+    fetchDataDelay: undefined,
 })
 
 // Experience Tracker
