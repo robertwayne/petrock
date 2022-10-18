@@ -9,6 +9,7 @@ import { set } from "idb-keyval"
 /** Fetches current leaderboard data, maps it to players, and pushes it to
  * an array. */
 export const getLeaderboardData = async (page: number = 1): Promise<number> => {
+    console.log("CALLED")
     const leaderboardStore = get(leaderboard)
 
     let response
@@ -32,18 +33,18 @@ export const getLeaderboardData = async (page: number = 1): Promise<number> => {
     const players: Array<Player> = data
     const temporaryLeaderboard: Array<Player> = []
 
-    for (let i = 0; i < 100; i++) {
-        const player: Player = {
+    for (const [i, player] of players.entries()) {
+        const entry: Player = {
             place: i + 1,
-            username: players[i].username,
-            online: players[i].online,
-            experience: players[i].experience,
-            dailyExperience: players[i].dailyExperience,
-            weeklyExperience: players[i].weeklyExperience,
-            monthlyExperience: players[i].monthlyExperience,
-            lastModified: relativeTimeFromDates(new Date(players[i].lastModified || 0)),
+            username: player.username,
+            online: player.online,
+            experience: player.experience,
+            dailyExperience: player.dailyExperience,
+            weeklyExperience: player.weeklyExperience,
+            monthlyExperience: player.monthlyExperience,
+            lastModified: relativeTimeFromDates(new Date(player.lastModified || 0)),
         }
-        temporaryLeaderboard.push(player)
+        temporaryLeaderboard.push(entry)
     }
 
     set("leaderboard", temporaryLeaderboard)
