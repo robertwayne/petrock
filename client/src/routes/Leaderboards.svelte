@@ -34,7 +34,7 @@
     </div>
 
     <div
-        class="flex w-full flex-col justify-center text-center md:w-[80%]"
+        class="flex w-full flex-col justify-center pb-10 text-center md:w-[80%]"
         in:fade={{ duration: 500 }}
     >
         <table>
