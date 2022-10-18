@@ -1,0 +1,57 @@
+<script lang="ts">
+    import { onMount } from "svelte"
+    import { ChangeLogEntry } from "../interfaces/ChangeLogEntry"
+    import { API_URL } from "../utils/constants"
+    import { displayChangeLog } from "../stores"
+
+    let changeLog: Array<ChangeLogEntry> = [
+        {
+            version: "0.0.0",
+            date: new Date(),
+            changes: ["No changes to display."],
+        },
+    ]
+
+    onMount(async () => {
+        const response = await fetch(`${API_URL}/changelog`)
+
+        if (response.ok) {
+            changeLog = await response.json()
+        }
+    })
+</script>
+
+<div id="changelog" class="absolute right-4 top-12 rounded pb-2 md:w-[400px]">
+    <div class="mb-1 flex h-full justify-between">
+        <span class="pt-2 pl-2 text-lg font-bold underline">Change Log</span>
+        <button
+            class="btn pr-2 text-2xl"
+            on:click={() => ($displayChangeLog = false)}>✕</button
+        >
+    </div>
+
+    {#each changeLog as entry}
+        <div class="entry pl-2">
+            <div class="italic">
+                {entry.date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                })}
+            </div>
+            <div class="pl-8">
+                <ul class="list-disc">
+                    {#each entry.changes as change}
+                        <li>{change}</li>
+                    {/each}
+                </ul>
+            </div>
+        </div>
+    {/each}
+</div>
+
+<style>
+    #changelog {
+        background-color: var(--theme-primary-shadow);
+    }
+</style>

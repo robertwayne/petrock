@@ -1,5 +1,7 @@
 <script lang="ts">
     import { Link } from "svelte-navigator"
+    import ChangeLog from "./ChangeLog.svelte"
+    import { displayChangeLog } from "../stores"
 </script>
 
 <nav class="font-[14pt] mb-2 flex h-full max-h-9 flex-row px-2 py-1">
@@ -21,9 +23,15 @@
             </button>
         </li>
         <li class="px-3">
-            <button class="btn">Change Log</button>
+            <button class="btn" on:click={() => ($displayChangeLog = true)}
+                >Change Log</button
+            >
         </li>
     </ul>
+
+    {#if $displayChangeLog}
+        <ChangeLog />
+    {/if}
 </nav>
 
 <style>

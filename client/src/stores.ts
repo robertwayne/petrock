@@ -12,6 +12,8 @@ export const leaderboard = writable<Leaderboard>({
     fetchDataDelay: undefined,
 })
 
+export const displayChangeLog = writable<boolean>(false)
+
 // Experience Tracker
 export const expPerHour: Writable<number> = writable(0)
 export const expPreviousExperience: Writable<number> = writable(0)
