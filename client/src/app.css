@@ -36,19 +36,9 @@ body {
     font-family: var(--font-primary);
 }
 
-a {
-    text-decoration: underline dotted var(--theme-primary-lighter) 1px;
-    color: inherit;
-}
-
-a:hover {
+.btn:hover {
     color: var(--theme-primary-accent);
-    font-weight: bold;
-}
-
-.strong {
-    font-weight: bold;
-    font-size: 14pt;
+    transition: 300ms;
 }
 
 @tailwind base;
