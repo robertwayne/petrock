@@ -8,6 +8,9 @@
     import LeaderboardBody from "../components/LeaderboardBody.svelte"
     import { getLeaderboardData } from "../utils/getLeaderboardData"
     import { TICK_RATE } from "../utils/constants"
+    import { getOnlinePlayersList } from "../utils/getOnlinePlayersList"
+
+    let playersOnline: Array<string> = []
 
     onMount(async () => {
         const data = await get("leaderboard")
@@ -15,6 +18,8 @@
 
         await getLeaderboardData()
         $leaderboard.updateTimer = setInterval(getLeaderboardData, TICK_RATE)
+
+        playersOnline = await getOnlinePlayersList()
     })
 
     onDestroy(async () => {
@@ -25,12 +30,20 @@
 
 <div class="flex w-full flex-col items-center justify-center">
     <div
-        class="h-max-content flex w-full flex-col items-center justify-center pt-4"
+        class="h-max-content flex w-full flex-col items-center justify-center py-4"
     >
         <h2 class="text-bold text-5xl">Leaderboards</h2>
-        <span id="subheader" class="pb-8 italic"
+        <span id="subheader" class="italic"
             >This page updates in real time.</span
         >
+
+        {#if playersOnline.length === 0}
+            <span class="p-2">No players are currently online.</span>
+        {:else}
+            <span class="p-2"
+                >{playersOnline.length} players are currently online.</span
+            >
+        {/if}
     </div>
 
     <div
