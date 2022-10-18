@@ -12,20 +12,31 @@
 
     let playersOnline: Array<string> = []
     let showPlayersOnline = false
+    let page = 1
+
+    const getNextPage = async () => {
+        page = await getLeaderboardData(page)
+    }
+
+    const getPreviousPage = async () => {
+        if (page === 1) return
+        const previousPage = page--
+        const response = await getLeaderboardData(page)
+    }
 
     onMount(async () => {
         const data = await get("leaderboard")
         data ? ($leaderboard.data = data) : ($leaderboard.data = preloadData)
 
-        await getLeaderboardData()
-        $leaderboard.updateTimer = setInterval(getLeaderboardData, TICK_RATE)
+        // await getLeaderboardData()
+        // $leaderboard.updateTimer = setInterval(getLeaderboardData, TICK_RATE)
 
-        playersOnline = await getOnlinePlayersList()
+        // playersOnline = await getOnlinePlayersList()
     })
 
     onDestroy(async () => {
-        clearInterval($leaderboard.updateTimer)
-        $leaderboard.updateTimer = undefined
+        // clearInterval($leaderboard.updateTimer)
+        // $leaderboard.updateTimer = undefined
     })
 </script>
 
@@ -63,6 +74,14 @@
             <LeaderboardHeader />
             <LeaderboardBody />
         </table>
+
+        <div id="pagination" class="pt-4">
+            <button class="btn px-2" on:click={getPreviousPage}>
+                Previous
+            </button>
+            <span class="px-2">{page}</span>
+            <button class="btn px-2" on:click={getNextPage}> Next </button>
+        </div>
     </div>
 </div>
 
