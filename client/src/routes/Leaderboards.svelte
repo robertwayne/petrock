@@ -11,6 +11,7 @@
     import { getOnlinePlayersList } from "../utils/getOnlinePlayersList"
 
     let playersOnline: Array<string> = []
+    let showPlayersOnline = false
 
     onMount(async () => {
         const data = await get("leaderboard")
@@ -40,9 +41,17 @@
         {#if playersOnline.length === 0}
             <span class="p-2">No players are currently online.</span>
         {:else}
-            <span class="p-2"
-                >{playersOnline.length} players are currently online.</span
-            >
+            <span
+                class="relative cursor-default p-2"
+                on:mouseenter={() => (showPlayersOnline = true)}
+                on:mouseleave={() => (showPlayersOnline = false)}
+                >{playersOnline.length} players are currently online.
+                {#if showPlayersOnline}
+                    <div id="playersOnlineList" class="absolute p-2">
+                        {playersOnline.join(", ")}
+                    </div>
+                {/if}
+            </span>
         {/if}
     </div>
 
@@ -74,5 +83,14 @@
         font-size: 14pt;
         border-spacing: 0;
         border-collapse: collapse;
+    }
+
+    #playersOnlineList {
+        padding: 4px 6px;
+        background-color: var(--theme-primary-shadow);
+        border: 1px solid var(--theme-primary-text);
+        border-radius: 6px;
+        min-width: 200px;
+        max-width: 300px;
     }
 </style>
