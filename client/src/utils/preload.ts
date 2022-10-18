@@ -6,7 +6,7 @@ export const preloadData: Array<Player> = []
 for (let i = 0; i < 100; i++) {
     const player: Player = {
         place: i + 1,
-        username: "",
+        username: "Player",
         experience: 0,
         dailyExperience: 0,
         weeklyExperience: 0,
