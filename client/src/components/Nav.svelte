@@ -2,22 +2,26 @@
     import { Link } from "svelte-navigator"
 </script>
 
-<nav class="font-[14pt] flex h-full max-h-9 flex-row px-2 py-1">
-    <h1
-        id="logo"
-        class="max-content absolute top-[-3px] flex pl-2 text-[22pt] font-bold"
-    >
+<nav class="font-[14pt] mb-2 flex h-full max-h-9 flex-row px-2 py-1">
+    <h1 id="logo" class="max-content absolute top-[-3px] flex pl-2 text-[26pt]">
         <Link to="/">
             Pet<span id="logo-highlight">Rock</span></Link
         >
     </h1>
 
-    <ul class="flex grow flex-row justify-end text-xl">
-        <li class="px-4 hover:text-blue-500 hover:duration-300">
-            <Link to="/">Leaderboard</Link>
+    <ul class="invisible flex grow flex-row justify-end text-xl md:visible">
+        <li class="px-3">
+            <button class="btn">
+                <Link to="/">Leaderboard</Link>
+            </button>
         </li>
-        <li class="px-4 hover:text-blue-500 hover:duration-300">
-            <Link to="/tracker">XP Tracker</Link>
+        <li class="px-3">
+            <button class="btn">
+                <Link to="/tracker">XP Tracker</Link>
+            </button>
+        </li>
+        <li class="px-3">
+            <button class="btn">Change Log</button>
         </li>
     </ul>
 </nav>
@@ -38,7 +42,7 @@
         nav {
             background: linear-gradient(
                 15deg,
-                var(--theme-primary) 22%,
+                var(--theme-primary) 21%,
                 var(--theme-primary-shadow) 0
             );
         }
@@ -48,7 +52,27 @@
         nav {
             background: linear-gradient(
                 15deg,
-                var(--theme-primary) 15%,
+                var(--theme-primary) 17%,
+                var(--theme-primary-shadow) 0
+            );
+        }
+    }
+
+    @media (min-width: 2000px) {
+        nav {
+            background: linear-gradient(
+                15deg,
+                var(--theme-primary) 12%,
+                var(--theme-primary-shadow) 0
+            );
+        }
+    }
+
+    @media (min-width: 3000px) {
+        nav {
+            background: linear-gradient(
+                15deg,
+                var(--theme-primary) 8%,
                 var(--theme-primary-shadow) 0
             );
         }
