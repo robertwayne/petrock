@@ -9,6 +9,7 @@ anyhow = "1"
 dotenvy = "0.15"
 rocket = { version = "0.5.0-rc.2", features = ["json", "secrets"] }
 sqlx = { version = "0.6", features = ["runtime-tokio-rustls", "postgres"] }
+retrommo-fetch = "0.2"
 
 [profile.release]
 opt-level = 3
