@@ -1,6 +1,5 @@
 <script lang="ts">
     import { get, set } from "idb-keyval"
-    import { API_URL } from "../utils/constants"
     import { Player } from "../interfaces/Player"
     import { leaderboard } from "../stores"
 
@@ -21,7 +20,9 @@
 
         $leaderboard.fetchDataDelay = setTimeout(async () => {
             const response = await fetch(
-                `${API_URL}/history?username=${username}&tooltip=true`
+                `${
+                    import.meta.env.VITE_API_URL
+                }/history?username=${username}&tooltip=true`
             )
             if (!response) return
 

@@ -1,22 +1,21 @@
 <script lang="ts">
     import { onMount } from "svelte"
     import { ChangeLogEntry } from "../interfaces/ChangeLogEntry"
-    import { API_URL } from "../utils/constants"
     import { displayChangeLog } from "../stores"
 
-    let changeLog: Array<ChangeLogEntry> = [
-        {
-            version: "0.0.0",
-            date: new Date(),
-            changes: ["No changes to display."],
-        },
-    ]
+    let changeLog: Array<ChangeLogEntry> = []
 
     onMount(async () => {
-        const response = await fetch(`${API_URL}/changelog`)
+        let response
+        try {
+            response = await fetch(`${import.meta.env.VITE_API_URL}/changelog`)
+        } catch (error) {
+            return
+        }
 
-        if (response.ok) {
-            changeLog = await response.json()
+        let json = await response.json()
+        if (json) {
+            changeLog = json
         }
     })
 </script>
@@ -33,11 +32,7 @@
     {#each changeLog as entry}
         <div class="entry pl-2">
             <div class="italic">
-                {entry.date.toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                })}
+                {new Date(entry.date).toLocaleDateString()}
             </div>
             <div class="pl-8">
                 <ul class="list-disc">

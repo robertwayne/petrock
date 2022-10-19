@@ -7,7 +7,6 @@
     import LeaderboardHeader from "../components/LeaderboardHeader.svelte"
     import LeaderboardBody from "../components/LeaderboardBody.svelte"
     import { getLeaderboardData } from "../utils/getLeaderboardData"
-    import { TICK_RATE } from "../utils/constants"
     import { getOnlinePlayersList } from "../utils/getOnlinePlayersList"
 
     let playersOnline: Array<string> = []
@@ -29,7 +28,7 @@
         data ? ($leaderboard.data = data) : ($leaderboard.data = preloadData)
 
         // await getLeaderboardData()
-        // $leaderboard.updateTimer = setInterval(getLeaderboardData, TICK_RATE)
+        // $leaderboard.updateTimer = setInterval(getLeaderboardData, VITE_TICK_RATE)
 
         // playersOnline = await getOnlinePlayersList()
     })

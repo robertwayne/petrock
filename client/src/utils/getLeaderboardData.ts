@@ -1,4 +1,3 @@
-import { API_URL } from "./constants"
 import { Leaderboard } from "../interfaces/Leaderboard"
 import { Player } from "../interfaces/Player"
 import { get } from "svelte/store"
@@ -15,9 +14,9 @@ export const getLeaderboardData = async (page: number = 1): Promise<number> => {
     let response
     try {
         response = await fetch(
-            `${API_URL}/leaderboards?page=${page}&sort=${leaderboardStore.sortBy}&order=${
-                leaderboardStore.orderBy ? "desc" : "asc"
-            }`
+            `${import.meta.env.VITE_API_URL}/leaderboards?page=${page}&sort=${
+                leaderboardStore.sortBy
+            }&order=${leaderboardStore.orderBy ? "desc" : "asc"}`
         )
     } catch (error) {
         return page

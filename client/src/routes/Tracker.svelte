@@ -5,8 +5,6 @@
     import { fade } from "svelte/transition"
     import { RawPlayerData } from "../interfaces/RawPlayerData"
 
-    const url = import.meta.env.API_URL
-
     let username = ""
     let expInterval: NodeJS.Timer
     let sessionDuration = 0
@@ -25,7 +23,9 @@
         requestTimer = 0
 
         try {
-            response = await fetch(`${url}/api/v1/history?username=${username}`)
+            response = await fetch(
+                `${import.meta.env.VITE_API_URL}/history?username=${username}`
+            )
         } catch (err) {
             document
                 .getElementById("username-input")
