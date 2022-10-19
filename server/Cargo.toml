@@ -6,10 +6,20 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = [
+    "serde",
+    "clock",
+] }
 dotenvy = "0.15"
-rocket = { version = "0.5.0-rc.2", features = ["json", "secrets"] }
-sqlx = { version = "0.6", features = ["runtime-tokio-rustls", "postgres"] }
 retrommo-fetch = "0.2"
+rocket = { version = "0.5.0-rc.2", features = ["json", "secrets"] }
+serde = { version = "1.0", features = ["derive"] }
+sqlx = { version = "0.6", features = [
+    "runtime-tokio-rustls",
+    "postgres",
+    "chrono",
+] }
+tracing = "0.1"
 
 [profile.release]
 opt-level = 3
