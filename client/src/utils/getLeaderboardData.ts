@@ -10,7 +10,9 @@ import { set } from "idb-keyval"
 export const getLeaderboardData = async (page = 0): Promise<number> => {
     const leaderboardStore = get(leaderboard)
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/leaderboards?page=${page}`)
+    const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/leaderboards?page=${page}`
+    )
     if (!response) return 0
 
     const json = await response.json()
@@ -27,7 +29,9 @@ export const getLeaderboardData = async (page = 0): Promise<number> => {
                 dailyExperience: player.dailyExperience || 0,
                 weeklyExperience: player.weeklyExperience || 0,
                 monthlyExperience: player.monthlyExperience || 0,
-                lastModified: relativeTimeFromDates(new Date(player.lastModified || 0)),
+                lastModified: relativeTimeFromDates(
+                    new Date(player.lastModified || 0)
+                ),
             }
             temporaryLeaderboard.push(entry)
         }
