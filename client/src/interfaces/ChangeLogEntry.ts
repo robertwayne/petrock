@@ -1,5 +1,4 @@
 export interface ChangeLogEntry {
-    date: Date,
-    version: string,
+    date: Date
     changes: Array<string>
 }

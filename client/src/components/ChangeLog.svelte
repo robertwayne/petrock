@@ -14,7 +14,7 @@
         }
 
         let json = await response.json()
-        if (json) {
+        if (json && json.length > 0) {
             changeLog = json
         }
     })
@@ -29,20 +29,24 @@
         >
     </div>
 
-    {#each changeLog as entry}
-        <div class="entry pl-2">
-            <div class="italic">
-                {new Date(entry.date).toLocaleDateString()}
+    {#if changeLog.length > 0}
+        {#each changeLog as entry}
+            <div class="entry pl-2">
+                <div class="italic">
+                    {new Date(entry.date).toLocaleDateString()}
+                </div>
+                <div class="pl-8">
+                    <ul class="list-disc">
+                        {#each entry.changes as change}
+                            <li>{change}</li>
+                        {/each}
+                    </ul>
+                </div>
             </div>
-            <div class="pl-8">
-                <ul class="list-disc">
-                    {#each entry.changes as change}
-                        <li>{change}</li>
-                    {/each}
-                </ul>
-            </div>
-        </div>
-    {/each}
+        {/each}
+    {:else}
+        <div class="p-2 italic">No changes to display.</div>
+    {/if}
 </div>
 
 <style>

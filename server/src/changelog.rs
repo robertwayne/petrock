@@ -1,21 +1,34 @@
 use chrono::{DateTime, Utc};
-use rocket::{http::Status, serde::json::Json};
+use rocket::{http::Status, serde::json::Json, State};
 use serde::{Deserialize, Serialize};
+use sqlx::PgPool;
 
 #[derive(Serialize, Deserialize)]
 pub struct ChangeLogEntry {
     pub date: DateTime<Utc>,
-    pub version: String,
     pub changes: Vec<String>,
 }
 
 #[get("/changelog")]
-pub async fn get_changelog() -> Result<Json<Vec<ChangeLogEntry>>, Status> {
-    let change = ChangeLogEntry {
-        date: Utc::now(),
-        version: "0.1".to_string(),
-        changes: vec!["Added changelog".to_string()],
-    };
+pub async fn get_changelog(pg: &State<PgPool>) -> Result<Json<Vec<ChangeLogEntry>>, Status> {
+    let results = sqlx::query!(
+        r#"
+        SELECT
+            date,
+            changes
+        FROM changelog
+        ORDER BY date DESC
+        "#,
+    )
+    .fetch_all(&**pg)
+    .await
+    .map_err(|_| Status::InternalServerError)?;
 
-    Ok(Json(vec![change]))
+    let mut changes = Vec::new();
+    for result in results {
+        let entry = ChangeLogEntry { date: result.date, changes: result.changes };
+        changes.push(entry);
+    }
+
+    Ok(Json(changes))
 }
