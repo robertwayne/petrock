@@ -41,7 +41,7 @@
         await getLeaderboardData()
 
         $leaderboard.updateTimer = setInterval(
-            getLeaderboardData,
+            () => getLeaderboardData(page),
             import.meta.env.VITE_TICK_RATE
         )
 
