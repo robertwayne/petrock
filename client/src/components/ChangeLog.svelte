@@ -6,14 +6,12 @@
     let changeLog: Array<ChangeLogEntry> = []
 
     onMount(async () => {
-        let response
-        try {
-            response = await fetch(`${import.meta.env.VITE_API_URL}/changelog`)
-        } catch (error) {
-            return
-        }
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/changelog`
+        )
+        if (!response) return
 
-        let json = await response.json()
+        const json = await response.json()
         if (json && json.length > 0) {
             changeLog = json
         }

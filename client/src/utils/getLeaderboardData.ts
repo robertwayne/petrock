@@ -7,7 +7,7 @@ import { set } from "idb-keyval"
 
 /** Fetches current leaderboard data, maps it to players, and pushes it to
  * an array. */
-export const getLeaderboardData = async (page: number = 1): Promise<number> => {
+export const getLeaderboardData = async (page = 1): Promise<number> => {
     console.log("CALLED")
     const leaderboardStore = get(leaderboard)
 
