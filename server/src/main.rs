@@ -4,6 +4,7 @@
 extern crate rocket;
 
 mod cache;
+mod changelog;
 mod cors;
 mod csp;
 mod postgres;
@@ -20,8 +21,8 @@ use std::{
 };
 
 use crate::{
-    cache::CacheControl, cors::CrossOriginResourceSharing, csp::ContentSecurityPolicy,
-    postgres::Postgres,
+    cache::CacheControl, changelog::get_changelog, cors::CrossOriginResourceSharing,
+    csp::ContentSecurityPolicy, postgres::Postgres,
 };
 
 const DIST: &str = relative!("dist");
@@ -56,6 +57,7 @@ fn rocket() -> _ {
         .attach(CrossOriginResourceSharing::default())
         .attach(Postgres::default())
         .attach(Shield::default())
+        .mount("/api/v1", routes![get_changelog])
         .mount("/robots.txt", routes![robots])
         .mount("/assets", routes![static_files])
         .mount("/", routes![index])
