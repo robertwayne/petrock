@@ -5,7 +5,8 @@ export const preloadData: Array<Player> = []
 
 for (let i = 0; i < 100; i++) {
     const player: Player = {
-        place: i + 1,
+        rank: i + 1,
+        online: false,
         username: "Player",
         experience: 0,
         dailyExperience: 0,
