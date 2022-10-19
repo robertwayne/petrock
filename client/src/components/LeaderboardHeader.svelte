@@ -57,7 +57,7 @@
     }
 </script>
 
-<thead>
+<thead class="font-bold">
     <tr>
         <th>Rank</th>
         <th>Player</th>

@@ -5,13 +5,18 @@
 </script>
 
 <nav class="font-[14pt] mb-2 flex h-full max-h-9 flex-row px-2 py-1">
-    <h1 id="logo" class="max-content absolute top-[-3px] flex pl-2 text-[26pt]">
+    <h1
+        id="logo"
+        class="max-content absolute top-[-3px] flex pl-2 text-[26pt] font-bold"
+    >
         <Link to="/">
             Pet<span id="logo-highlight">Rock</span></Link
         >
     </h1>
 
-    <ul class="invisible flex grow flex-row justify-end text-xl md:visible">
+    <ul
+        class="invisible flex grow flex-row justify-end text-xl font-bold md:visible"
+    >
         <li class="px-3">
             <button class="btn">
                 <Link to="/">Leaderboard</Link>

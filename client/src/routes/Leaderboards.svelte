@@ -73,16 +73,16 @@
     <div
         class="h-max-content flex w-full flex-col items-center justify-center py-4"
     >
-        <h2 class="text-bold text-5xl">Leaderboards</h2>
+        <h2 class="text-5xl font-bold">Leaderboards</h2>
         <span id="subheader" class="italic"
             >This page updates in real time.</span
         >
 
         {#if playersOnline.length === 0}
-            <span class="p-2">No players are currently online.</span>
+            <span class="p-2 font-bold">No players are currently online.</span>
         {:else}
             <span
-                class="relative cursor-default p-2"
+                class="relative cursor-default p-2 font-bold"
                 on:mouseenter={() => (showPlayersOnline = true)}
                 on:mouseleave={() => (showPlayersOnline = false)}
                 >{playersOnline.length} players are currently online.
@@ -104,7 +104,7 @@
             <LeaderboardBody />
         </table>
 
-        <div id="pagination" class="pt-4">
+        <div id="pagination" class="pt-4 font-bold">
             <button class="btn px-2" on:click={getPreviousPage}>
                 Previous
             </button>

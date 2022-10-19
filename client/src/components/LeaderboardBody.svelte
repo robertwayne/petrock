@@ -215,4 +215,8 @@
         color: var(--theme-primary-lighter);
         font-size: 10pt;
     }
+
+    tr:nth-child(odd) {
+        background-color: var(--theme-primary-shadow);
+    }
 </style>
