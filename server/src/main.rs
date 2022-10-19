@@ -7,6 +7,8 @@ mod cache;
 mod changelog;
 mod cors;
 mod csp;
+mod leaderboard;
+mod online_list;
 mod postgres;
 
 use dotenvy::dotenv;
@@ -22,7 +24,8 @@ use std::{
 
 use crate::{
     cache::CacheControl, changelog::get_changelog, cors::CrossOriginResourceSharing,
-    csp::ContentSecurityPolicy, postgres::Postgres,
+    csp::ContentSecurityPolicy, leaderboard::get_leaderboard_page, online_list::get_online_players,
+    postgres::Postgres,
 };
 
 const DIST: &str = relative!("dist");
@@ -57,7 +60,7 @@ fn rocket() -> _ {
         .attach(CrossOriginResourceSharing::default())
         .attach(Postgres::default())
         .attach(Shield::default())
-        .mount("/api/v1", routes![get_changelog])
+        .mount("/api/v1", routes![get_changelog, get_leaderboard_page, get_online_players])
         .mount("/robots.txt", routes![robots])
         .mount("/assets", routes![static_files])
         .mount("/", routes![index])

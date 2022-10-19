@@ -27,15 +27,19 @@
         const data = await get("leaderboard")
         data ? ($leaderboard.data = data) : ($leaderboard.data = preloadData)
 
-        // await getLeaderboardData()
-        // $leaderboard.updateTimer = setInterval(getLeaderboardData, VITE_TICK_RATE)
+        await getLeaderboardData()
 
-        // playersOnline = await getOnlinePlayersList()
+        // $leaderboard.updateTimer = setInterval(
+        //     getLeaderboardData,
+        //     import.meta.env.VITE_TICK_RATE
+        // )
+
+        playersOnline = await getOnlinePlayersList()
     })
 
     onDestroy(async () => {
-        // clearInterval($leaderboard.updateTimer)
-        // $leaderboard.updateTimer = undefined
+        clearInterval($leaderboard.updateTimer)
+        $leaderboard.updateTimer = undefined
     })
 </script>
 

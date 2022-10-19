@@ -11,9 +11,9 @@
         )
         if (!response) return
 
-        const json = await response.json()
-        if (json && json.length > 0) {
-            changeLog = json
+        const json: { entries: Array<ChangeLogEntry> } = await response.json()
+        if (json && json.entries.length > 0) {
+            changeLog = json.entries
         }
     })
 </script>
