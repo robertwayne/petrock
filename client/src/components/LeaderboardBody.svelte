@@ -1,5 +1,6 @@
 <script lang="ts">
     import { get, set } from "idb-keyval"
+    import { afterUpdate } from "svelte"
     import { Player } from "../interfaces/Player"
     import { leaderboard } from "../stores"
 
@@ -116,19 +117,19 @@
 </tbody>
 
 <style>
-    tbody > tr:nth-child(1) {
+    :global(.rank1) {
+        color: #dbbb3a;
         font-weight: bold;
-        color: #d8b041;
     }
 
-    tbody > tr:nth-child(2) {
+    :global(.rank2) {
+        color: #b8b8b8;
         font-weight: bold;
-        color: #727271;
     }
 
-    tbody > tr:nth-child(3) {
+    :global(.rank3) {
+        color: #a67f4f;
         font-weight: bold;
-        color: #8b633c;
     }
 
     @media (min-width: 720px) {

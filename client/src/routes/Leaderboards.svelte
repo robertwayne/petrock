@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onDestroy, onMount } from "svelte"
+    import { afterUpdate, onDestroy, onMount } from "svelte"
     import { preloadData } from "../utils/preload"
     import { get } from "idb-keyval"
     import { fade } from "svelte/transition"
@@ -51,6 +51,21 @@
     onDestroy(async () => {
         clearInterval($leaderboard.updateTimer)
         $leaderboard.updateTimer = undefined
+    })
+
+    const colorizeTopRanks = () => {
+        for (let i = 0; i <= 3; i++) {
+            const element = document.querySelector(`tbody > tr:nth-child(${i})`)
+            if (page === 0) {
+                element?.classList.add(`rank${i}`)
+            } else {
+                element?.classList.remove(`rank${i}`)
+            }
+        }
+    }
+
+    afterUpdate(() => {
+        colorizeTopRanks()
     })
 </script>
 
