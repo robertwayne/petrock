@@ -1,8 +1,8 @@
 export interface Player {
     username: string
-    place?: number
-    online?: boolean
-    experience?: number
+    rank: number
+    online: boolean
+    experience: number
     dailyExperience?: number
     yesterdaysExperience?: number
     weeklyExperience?: number

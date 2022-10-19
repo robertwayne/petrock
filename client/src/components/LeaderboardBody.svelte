@@ -53,7 +53,7 @@
 <tbody>
     {#each $leaderboard.data as player, i}
         <tr>
-            <td>{player.place}</td>
+            <td>{player.rank}</td>
             <td class="username-cell {player.online ? 'is-online' : ''}">
                 <div class={player.online ? " online-marker" : ""}>
                     <div class="online-tooltip">Online!</div>
