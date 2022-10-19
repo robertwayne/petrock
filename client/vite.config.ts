@@ -16,6 +16,8 @@ export default ({ mode }) => {
         },
         server: {
             https: false,
+            port: 3000,
+            host: "127.0.0.1",
         },
         define: {
             "import.meta.vitest": false,
