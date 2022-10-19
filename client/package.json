@@ -15,7 +15,8 @@
         "tsc": "tsc --noEmit",
         "tsc:watch": "tsc --noEmit --watch",
         "test": "vitest run",
-        "test:watch": "vitest"
+        "test:watch": "vitest",
+        "check": "npm run lint:fix && npm run tsc && npm run fmt"
     },
     "dependencies": {
         "@tailwindcss/forms": "^0.5.3",
