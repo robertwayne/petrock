@@ -61,7 +61,7 @@ pub async fn get_leaderboard_page(
     for row in result {
         let entry = LeaderboardEntry {
             username: row.username,
-            rank: row.rank.unwrap_or(0),
+            rank: row.rank,
             online: row.online,
             last_modified: row.last_modified,
             experience: row.experience,
