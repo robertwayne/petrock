@@ -11,16 +11,27 @@
 
     let playersOnline: Array<string> = []
     let showPlayersOnline = false
-    let page = 1
+    let page = 0
+
+    const scrollToTop = () => {
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        })
+    }
 
     const getNextPage = async () => {
-        page = await getLeaderboardData(page)
+        const nextPage = page + 1
+        page = await getLeaderboardData(nextPage)
+        scrollToTop()
     }
 
     const getPreviousPage = async () => {
-        if (page === 1) return
-        const previousPage = page--
-        const response = await getLeaderboardData(page)
+        if (page === 0) return
+        const previousPage = page - 1
+        page = await getLeaderboardData(previousPage)
+        scrollToTop()
     }
 
     onMount(async () => {
@@ -29,10 +40,10 @@
 
         await getLeaderboardData()
 
-        // $leaderboard.updateTimer = setInterval(
-        //     getLeaderboardData,
-        //     import.meta.env.VITE_TICK_RATE
-        // )
+        $leaderboard.updateTimer = setInterval(
+            getLeaderboardData,
+            import.meta.env.VITE_TICK_RATE
+        )
 
         playersOnline = await getOnlinePlayersList()
     })
@@ -82,7 +93,7 @@
             <button class="btn px-2" on:click={getPreviousPage}>
                 Previous
             </button>
-            <span class="px-2">{page}</span>
+            <span class="px-2">{page + 1}</span>
             <button class="btn px-2" on:click={getNextPage}> Next </button>
         </div>
     </div>
