@@ -50,5 +50,6 @@
 <style>
     #changelog {
         background-color: var(--theme-primary-shadow);
+        border: 1px solid var(--theme-primary-lighter);
     }
 </style>
