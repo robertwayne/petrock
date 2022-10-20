@@ -20,6 +20,10 @@ This branch *(dev)* is a WIP rewrite of many Petrock services:
 
 This branch is hosted on the **[staging site](https://staging.petrock.gg)**.
 
+## Related
+
+See [retrommo-fetch](https://github.com/robertwayne/retrommo-fetch) for a Rust wrapper around the RetroMMO API.
+
 ## License
 
 Petrock source code is dual-licensed under either
