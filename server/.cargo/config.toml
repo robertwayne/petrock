@@ -14,4 +14,4 @@ rustflags = [
 ]
 
 [unstable]
-sparse-registry = true
+# sparse-registry = true
