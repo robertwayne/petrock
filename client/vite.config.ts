@@ -1,9 +1,11 @@
+import * as dotenv from "dotenv"
+
 import { defineConfig } from "vitest/config"
 import { svelte } from "@sveltejs/vite-plugin-svelte"
 
-export default ({ mode }) => {
-    require("dotenv").config(".env")
+dotenv.config()
 
+export default ({ mode }) => {
     return defineConfig({
         base: "/",
         plugins: [svelte()],

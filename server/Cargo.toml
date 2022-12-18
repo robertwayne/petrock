@@ -13,7 +13,7 @@ chrono = { version = "0.4", default-features = false, features = [
 dotenvy = "0.15"
 retrommo-fetch = "0.2"
 rocket = { version = "0.5.0-rc.2", features = ["json", "secrets"] }
-serde = { version = "1.0", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
 sqlx = { version = "0.6", features = [
     "runtime-tokio-rustls",
     "postgres",
